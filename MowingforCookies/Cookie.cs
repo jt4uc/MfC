@@ -17,7 +17,13 @@ namespace MowingforCookies
         public int fuel;
         public String type;
         public int x, y;
+        public Spot currentLocation;
 
+        public Cookie()
+        {
+            fuel = 5;
+            type = "chocolate chip";
+        }
 
         public Cookie(int x, int y)
         {
@@ -25,6 +31,14 @@ namespace MowingforCookies
             type = "chocolate chip";
             this.x = x;
             this.y = y;
+        }
+        public Cookie(Spot s)
+        {
+            fuel = 5; //positive fuel gain
+            type = "chocolate chip";
+            this.x = s.x;
+            this.y = s.y;
+            this.currentLocation = s;
         }
 
         public void LoadContent(ContentManager content)
@@ -40,6 +54,25 @@ namespace MowingforCookies
         {
 
         }
-
+        public void setX(int x){
+            this.x = x;
+        }
+        public void setY(int y){
+            this.y = y;
+        }
+        public void setType(String s)
+        {
+            this.type = s; 
+        }
+        public void setFuel(int f)
+        {
+            this.fuel = f;
+        }
+        public void setSpot(Spot s)
+        {
+            this.x = s.x;
+            this.y = s.y;
+            this.currentLocation = s;
+        }
     }
 }

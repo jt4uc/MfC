@@ -23,6 +23,7 @@ namespace MowingforCookies
         public int cookiesGained;
         public Obstacle ob;
         public Enemy e;
+        public Cookie c;
 
         //tileTexture: Texture2D
 
@@ -40,6 +41,7 @@ namespace MowingforCookies
             this.cookiesGained = cookiesGained;
             this.ob = ob;
             this.e = null;
+            this.c = null;
             this.canTraverse = true;
             if (ob.canTraverse == false)
             {
@@ -60,6 +62,7 @@ namespace MowingforCookies
             this.ob = null;
             this.e = null;
             this.canTraverse = true;
+            this.c = null;
 
             this.collisionBox = new Rectangle(x, y, cbWidth, cbHeight);
 
@@ -143,6 +146,9 @@ namespace MowingforCookies
         {
             return collisionBox;
         }
-
+        public void setCookie(Cookie c)
+        {
+            this.c = c;
+        }
     }
 }

@@ -71,6 +71,10 @@ namespace MowingforCookies
             patches2[3].setObstacle(test2);
             test2.setSpot(patches2[3]);
 
+            Cookie c1 = new Cookie();
+            patches2[30].setCookie(c1);
+            c1.setSpot(patches2[30]);
+
             gnome1 = new Enemy(patches2[15], 3);
             patches2[15].setEnemy(gnome1);
 
@@ -95,6 +99,10 @@ namespace MowingforCookies
                 if (s.ob != null)
                 {
                     s.ob.LoadContent(this.Content);
+                }
+                if (s.c != null)
+                {
+                    s.c.LoadContent(this.Content);
                 }
             }
             mower.LoadContent(this.Content);
@@ -152,6 +160,10 @@ namespace MowingforCookies
                 if (s.ob != null)
                 {
                     s.ob.Draw(spriteBatch);
+                }
+                if (s.c != null)
+                {
+                    s.c.Draw(spriteBatch);
                 }
             }
             mower.Draw(spriteBatch);
