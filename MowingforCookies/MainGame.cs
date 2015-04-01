@@ -26,6 +26,7 @@ namespace MowingforCookies
 
         Controls controls;
         List<Spot> patches2;
+        Spot[,] patches;
         Mower mower;
         Enemy gnome1;
 
@@ -50,33 +51,45 @@ namespace MowingforCookies
         {
 
             Window.Title = "TEST";
-           
-            patches2 = new List<Spot>();
 
-            for (int row = 100; row < 670; row += 55)
+            patches2 = new List<Spot>();
+            patches = new Spot[8, 8];
+            for (int row = 0; row < patches.GetLength(0); row++)
             {
-                for (int col = 50; col < 300; col += 55)
+                for (int col = 0; col < patches.GetLength(1); col++)
                 {
-                    Spot t = new Spot(row, col, false, 3, 3);
-                    patches2.Add(t);
+                    int rows = row * 55;
+                    int cols = col * 55;
+                    Spot testT = new Spot(rows, cols, false, 3, 3,row,col);
+                    patches[row, col] = testT;
 
                 }
             }
-            mower = new Mower(patches2[0], 0);
 
-            Obstacle test = new Obstacle("tree");
-            patches2[2].setObstacle(test);
-            test.setSpot(patches2[2]);
-            Obstacle test2 = new Obstacle("bush");
-            patches2[3].setObstacle(test2);
-            test2.setSpot(patches2[3]);
+            //for (int row = 100; row < 670; row += 55)
+            //{
+            //    for (int col = 50; col < 300; col += 55)
+            //    {
+            //        Spot t = new Spot(row, col, false, 3, 3);
+            //        patches2.Add(t);
 
-            Cookie c1 = new Cookie();
-            patches2[30].setCookie(c1);
-            c1.setSpot(patches2[30]);
+            //    }
+            //}
+            mower = new Mower(patches[0,1], 0);
 
-            gnome1 = new Enemy(patches2[15], 3);
-            patches2[15].setEnemy(gnome1);
+            //Obstacle test = new Obstacle("tree");
+            //patches2[2].setObstacle(test);
+            //test.setSpot(patches2[2]);
+            //Obstacle test2 = new Obstacle("bush");
+            //patches2[3].setObstacle(test2);
+            //test2.setSpot(patches2[3]);
+
+            //Cookie c1 = new Cookie();
+            //patches2[30].setCookie(c1);
+            //c1.setSpot(patches2[30]);
+
+            //gnome1 = new Enemy(patches2[15], 3);
+            //patches2[15].setEnemy(gnome1);
 
 
             base.Initialize();
@@ -93,7 +106,7 @@ namespace MowingforCookies
             spriteBatch = new SpriteBatch(GraphicsDevice);
             background = Content.Load<Texture2D>("white.png");
             patch = Content.Load<Texture2D>("Patch.png");
-            foreach (Spot s in patches2)
+            foreach (Spot s in patches)
             {
                 s.LoadContent(this.Content);
                 if (s.ob != null)
@@ -105,8 +118,9 @@ namespace MowingforCookies
                     s.c.LoadContent(this.Content);
                 }
             }
+
             mower.LoadContent(this.Content);
-            gnome1.LoadContent(this.Content);
+            //gnome1.LoadContent(this.Content);
 
         }
 
@@ -130,17 +144,19 @@ namespace MowingforCookies
             controls.Update();
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-            mower.Update(controls, patches2, gameTime);
-            gnome1.Update(mower, controls, patches2, gameTime);
+
+            mower.Update(controls, patches, gameTime);
+            //gnome1.Update(mower, controls, patches2, gameTime);
             base.Update(gameTime);
-            if (mower.alize == false)
-            {
-                Exit();
-            }
-            foreach (Spot s in patches2)
+            //if (mower.alize == false)
+            //{
+            //    Exit();
+            //}
+
+            foreach (Spot s in patches)
             {
                 s.Update(Content);
-            } 
+            }
         }
 
         /// <summary>
@@ -153,8 +169,7 @@ namespace MowingforCookies
             GraphicsDevice.Clear(Color.LimeGreen);
             spriteBatch.Begin();
             DrawBackground();
-
-            foreach (Spot s in patches2)
+            foreach (Spot s in patches)
             {
                 s.Draw(spriteBatch);
                 if (s.ob != null)
@@ -167,7 +182,7 @@ namespace MowingforCookies
                 }
             }
             mower.Draw(spriteBatch);
-            gnome1.Draw(spriteBatch);
+            //gnome1.Draw(spriteBatch);
 
 
 

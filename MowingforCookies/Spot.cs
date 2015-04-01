@@ -17,6 +17,8 @@ namespace MowingforCookies
     {
         public int x;
         public int y;
+        public int arrayRowX;
+        public int arrayColY;
         public bool isTraversed;
         public bool canTraverse;
         public int travelCost; //of cookies
@@ -25,6 +27,8 @@ namespace MowingforCookies
         public Enemy e;
         public Cookie c;
 
+
+
         //tileTexture: Texture2D
 
         private Rectangle collisionBox;
@@ -32,7 +36,7 @@ namespace MowingforCookies
         public int cbHeight = 50;
 
         public Spot(int x, int y, bool isTraversed, int travelCost, int cookiesGained
-            , Obstacle ob)
+            , int arrayRowX, int arrayColY, Obstacle ob)
         {
             this.x = x;
             this.y = y;
@@ -42,6 +46,8 @@ namespace MowingforCookies
             this.ob = ob;
             this.e = null;
             this.c = null;
+            this.arrayRowX = arrayRowX;
+            this.arrayColY = arrayColY;
             this.canTraverse = true;
             if (ob.canTraverse == false)
             {
@@ -52,7 +58,7 @@ namespace MowingforCookies
             this.collisionBox = new Rectangle(x, y, cbWidth, cbHeight);
 
         }
-        public Spot(int x, int y, bool isTraversed, int travelCost, int cookiesGained)
+        public Spot(int x, int y, bool isTraversed, int travelCost, int cookiesGained, int arrayRowX, int arrayColY)
         {
             this.x = x;
             this.y = y;
@@ -63,6 +69,8 @@ namespace MowingforCookies
             this.e = null;
             this.canTraverse = true;
             this.c = null;
+            this.arrayRowX = arrayRowX;
+            this.arrayColY = arrayColY;
 
             this.collisionBox = new Rectangle(x, y, cbWidth, cbHeight);
 
