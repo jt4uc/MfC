@@ -80,9 +80,12 @@ namespace MowingforCookies
             return this.isTraversed;
         }
 
-        public void Update()
+        public void Update(ContentManager content)
         {
-
+            if (this.isTraversed == true)
+            {
+                image = content.Load<Texture2D>("mowed grass.png");
+            }
         }
 
         public void traverseEffect(Obstacle o)

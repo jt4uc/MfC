@@ -129,6 +129,10 @@ namespace MowingforCookies
             {
                 Exit();
             }
+            foreach (Spot s in patches2)
+            {
+                s.Update(Content);
+            } 
         }
 
         /// <summary>

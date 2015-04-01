@@ -36,6 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Controls.cs" />
+    <Compile Include="Cookie.cs" />
     <Compile Include="Enemy.cs" />
     <Compile Include="Mower.cs" />
     <Compile Include="Obstacle.cs" />
@@ -70,6 +71,9 @@
     <Content Include="Content\bush.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\chocolate chip.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\gnome.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -84,6 +88,9 @@
     </Content>
     <Content Include="Content\MiniMower.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\mowed grass.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\MowingforCookiesBackground.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

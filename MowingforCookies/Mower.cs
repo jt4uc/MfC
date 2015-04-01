@@ -80,6 +80,16 @@ namespace MowingforCookies
 
         public void Update(Controls controls, List<Spot> patches, GameTime gameTime)
         {
+
+            foreach (Spot s in patches)
+            {
+                if (this.x == s.x && this.y == s.y && s.canTraverse == true)
+                {
+                    s.isTraversed = true;
+                }
+            }
+
+
             if (controls.onPress(Keys.Right, Buttons.DPadRight))
             {
                 dir = 1;
