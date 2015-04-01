@@ -58,8 +58,8 @@ namespace MowingforCookies
             {
                 for (int col = 0; col < patches.GetLength(1); col++)
                 {
-                    int rows = row * 55;
-                    int cols = col * 55;
+                    int rows = row * 50;
+                    int cols = col * 50;
                     Spot testT = new Spot(rows, cols, false, 3, 3,row,col);
                     patches[row, col] = testT;
 
