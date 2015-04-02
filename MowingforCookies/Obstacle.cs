@@ -17,22 +17,30 @@ namespace MowingforCookies
         public int x;
         public int y;
         public Boolean canTraverse;
+
+        public int arrayRowX;
+        public int arrayColY;
+
         //obstacleTexture: Texture2D
         //obstacleTextureMap: Animated Sprite
 
-        public Obstacle(String obstacleType)
-        {
-            this.obstacleType = obstacleType;
-            this.canTraverse = false;
-        }
-
-        public Obstacle(Spot currentLocation, String obstacleType)
+        public Obstacle(Spot currentLocation, String obstacleType, int arrayRowX, int arrayColY)
         {
             this.currentLocation = currentLocation;
             this.x = this.currentLocation.x;
             this.y = this.currentLocation.y;
             this.obstacleType = obstacleType;
-            this.canTraverse = false;
+
+            if (this.obstacleType.Equals("gravel"))
+            {
+                this.canTraverse = true;
+            }
+            else
+            {
+                this.canTraverse = false;
+            }
+            this.arrayColY = arrayColY;
+            this.arrayRowX = arrayRowX;
         }
 
         public void LoadContent(ContentManager content)
@@ -53,10 +61,7 @@ namespace MowingforCookies
             {
                 image = content.Load<Texture2D>("grandma.png");
             }
-            else if (obstacleType.Equals("water"))
-            {
-                image = content.Load<Texture2D>("water.png");
-            }
+
         }
 
         public void Draw(SpriteBatch sb)

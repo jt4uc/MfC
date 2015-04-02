@@ -29,6 +29,9 @@ namespace MowingforCookies
         Mower mower;
 
         List<Enemy> enemies;
+        List<Cookie> cookies;
+        List<Obstacle> obstacles;//?
+        
 
 
 
@@ -66,6 +69,8 @@ namespace MowingforCookies
             }
             mower = new Mower(patches[0,1], 0);
             enemies = new List<Enemy>();
+            cookies = new List<Cookie>();
+            obstacles = new List<Obstacle>();
 
             //Obstacle test = new Obstacle("tree");
             //patches2[2].setObstacle(test);
@@ -73,10 +78,24 @@ namespace MowingforCookies
             //Obstacle test2 = new Obstacle("bush");
             //patches2[3].setObstacle(test2);
             //test2.setSpot(patches2[3]);
+            Obstacle o1 = new Obstacle(patches[0,0],"tree",0,0);
+            Obstacle o2 = new Obstacle(patches[3,3],"gravel", 3, 3);
+            Obstacle o3 = new Obstacle(patches[7,7],"grandma", 7, 7);
+            obstacles.Add(o1);
+            obstacles.Add(o2);
+            obstacles.Add(o3);
+            foreach (Obstacle o in obstacles)
+            {
+                patches[o.arrayRowX, o.arrayColY].setObstacle(o);
+            }
 
-            //Cookie c1 = new Cookie();
-            //patches2[30].setCookie(c1);
-            //c1.setSpot(patches2[30]);
+
+            Cookie c1 = new Cookie(patches[4,0],4, 4);
+            cookies.Add(c1);
+            foreach (Cookie c in cookies)
+            {
+                patches[c.arrayRowX, c.arrayColY].setCookie(c);
+            }
             
 
             Enemy gnome1 = new Enemy(patches[4, 5], 3, 4,5);
@@ -122,6 +141,14 @@ namespace MowingforCookies
             foreach (Enemy e in enemies)
             {
                 e.LoadContent(this.Content);
+            }
+            foreach (Cookie c in cookies)
+            {
+                c.LoadContent(this.Content);
+            }
+            foreach (Obstacle o in obstacles)
+            {
+                o.LoadContent(this.Content);
             }
 
         }

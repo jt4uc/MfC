@@ -104,9 +104,6 @@
     <Content Include="Content\PlayerSquare.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\water.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Content\white.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

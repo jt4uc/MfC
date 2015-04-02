@@ -18,27 +18,17 @@ namespace MowingforCookies
         public String type;
         public int x, y;
         public Spot currentLocation;
+        public int arrayRowX, arrayColY;
 
-        public Cookie()
-        {
-            fuel = 5;
-            type = "chocolate chip";
-        }
-
-        public Cookie(int x, int y)
-        {
-            fuel = 5; //positive fuel gain
-            type = "chocolate chip";
-            this.x = x;
-            this.y = y;
-        }
-        public Cookie(Spot s)
+        public Cookie(Spot s, int arrayRowX, int arrayColY)
         {
             fuel = 5; //positive fuel gain
             type = "chocolate chip";
             this.x = s.x;
             this.y = s.y;
             this.currentLocation = s;
+            this.arrayColY = arrayColY;
+            this.arrayRowX = arrayRowX;
         }
 
         public void LoadContent(ContentManager content)
