@@ -21,20 +21,27 @@ namespace MowingforCookies
         //private Rectangle collisionBox;
         //public Animated Sprite?? mowerTextureMap
 
+        public String type;
+        public int arrayRowX;
+        public int arrayColY;
+
         //Content Manager?
-        public Enemy(Spot currentLocation, int cookies)
+        public Enemy(Spot currentLocation, int cookies, int arrayRowX, int arrayColY)
         {
 
             this.currentLocation = currentLocation;
             this.moveIndex = 0;
             this.x = currentLocation.x;
             this.y = currentLocation.y;
+            this.type = "gnome";
+            this.arrayColY = arrayColY;
+            this.arrayRowX = arrayRowX;
 
         }
 
         public void LoadContent(ContentManager content)
         {
-            image = content.Load<Texture2D>("gravel.png");
+            image = content.Load<Texture2D>("gnome.png");
         }
 
         public void Draw(SpriteBatch sb)
@@ -42,12 +49,17 @@ namespace MowingforCookies
             sb.Draw(image, new Rectangle(x, y, 48, 50), Color.White);
         }
 
-        public void Update(Mower mower, Controls controls, List<Spot> patches, GameTime gameTime)
+        public void Update(Mower mower, Controls controls, Spot[,] patches, GameTime gameTime)
         {
             Move(mower, patches);
         }
 
-        public void Move(Mower mower, List<Spot> patches)
+        public void setType(String s)
+        {
+            this.type = s;
+        }
+
+        public void Move(Mower mower, Spot[,] patches)
         {
             // for the beta
         }

@@ -25,10 +25,10 @@ namespace MowingforCookies
         int screenHeight;
 
         Controls controls;
-        List<Spot> patches2;
         Spot[,] patches;
         Mower mower;
-        Enemy gnome1;
+
+        List<Enemy> enemies;
 
 
 
@@ -52,7 +52,6 @@ namespace MowingforCookies
 
             Window.Title = "TEST";
 
-            patches2 = new List<Spot>();
             patches = new Spot[8, 8];
             for (int row = 0; row < patches.GetLength(0); row++)
             {
@@ -65,17 +64,8 @@ namespace MowingforCookies
 
                 }
             }
-
-            //for (int row = 100; row < 670; row += 55)
-            //{
-            //    for (int col = 50; col < 300; col += 55)
-            //    {
-            //        Spot t = new Spot(row, col, false, 3, 3);
-            //        patches2.Add(t);
-
-            //    }
-            //}
             mower = new Mower(patches[0,1], 0);
+            enemies = new List<Enemy>();
 
             //Obstacle test = new Obstacle("tree");
             //patches2[2].setObstacle(test);
@@ -87,9 +77,18 @@ namespace MowingforCookies
             //Cookie c1 = new Cookie();
             //patches2[30].setCookie(c1);
             //c1.setSpot(patches2[30]);
+            
 
-            //gnome1 = new Enemy(patches2[15], 3);
-            //patches2[15].setEnemy(gnome1);
+            Enemy gnome1 = new Enemy(patches[4, 5], 3, 4,5);
+            Enemy gnome2 = new Enemy(patches[7, 6], 3, 7,6);
+            Enemy gnome3 = new Enemy(patches[2, 1], 3, 2,1);
+            enemies.Add(gnome1);
+            enemies.Add(gnome2);
+            enemies.Add(gnome3);
+            foreach ( Enemy e in enemies){
+                patches[e.arrayRowX, e.arrayColY].setEnemy(e);
+            }
+            
 
 
             base.Initialize();
@@ -120,7 +119,10 @@ namespace MowingforCookies
             }
 
             mower.LoadContent(this.Content);
-            //gnome1.LoadContent(this.Content);
+            foreach (Enemy e in enemies)
+            {
+                e.LoadContent(this.Content);
+            }
 
         }
 
@@ -146,12 +148,16 @@ namespace MowingforCookies
                 Exit();
 
             mower.Update(controls, patches, gameTime);
-            //gnome1.Update(mower, controls, patches2, gameTime);
+            foreach (Enemy e in enemies)
+            {
+                e.Update(mower,controls,patches,gameTime);
+            }
+            
             base.Update(gameTime);
-            //if (mower.alize == false)
-            //{
-            //    Exit();
-            //}
+            if (mower.alize == false)
+            {
+                Exit();
+            }
 
             foreach (Spot s in patches)
             {
@@ -182,7 +188,10 @@ namespace MowingforCookies
                 }
             }
             mower.Draw(spriteBatch);
-            //gnome1.Draw(spriteBatch);
+            foreach (Enemy e in enemies)
+            {
+                e.Draw(spriteBatch);
+            }
 
 
 
