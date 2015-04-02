@@ -38,6 +38,7 @@ namespace MowingforCookies
 
         // for Tiled
         TmxMap map;
+        Texture2D[] tiles;
 
 
         
@@ -60,10 +61,16 @@ namespace MowingforCookies
 
             Window.Title = "TEST";
 
-            patches = new Spot[8, 8];
-            for (int row = 0; row < patches.GetLength(0); row++)
+            // Tiled Testing
+            map = new TmxMap("10x10test_tiled.tmx");
+            tiles = new Texture2D[map.Width * map.Height];
+
+
+            // makes Spots according to the map coordinates
+            patches = new Spot[map.Height, map.Width];
+            for (int row = 0; row < map.Height; row++)
             {
-                for (int col = 0; col < patches.GetLength(1); col++)
+                for (int col = 0; col < map.Width; col++)
                 {
                     int rows = row * 50;
                     int cols = col * 50;
@@ -72,17 +79,27 @@ namespace MowingforCookies
 
                 }
             }
-            mower = new Mower(patches[0,1], 0);
+
+            //patches = new Spot[8, 8];
+            //for (int row = 0; row < patches.GetLength(0); row++)
+            //{
+            //    for (int col = 0; col < patches.GetLength(1); col++)
+            //    {
+            //        int rows = row * 50;
+            //        int cols = col * 50;
+            //        Spot testT = new Spot(rows, cols, false, 3, 3, row, col);
+            //        patches[row, col] = testT;
+
+            //    }
+            //}
+
+
+            // hard coding Mowers, Obstacles, and Enemies
+            mower = new Mower(patches[0,1], 0); // current location represented by spot
             enemies = new List<Enemy>();
             cookies = new List<Cookie>();
             obstacles = new List<Obstacle>();
 
-            //Obstacle test = new Obstacle("tree");
-            //patches2[2].setObstacle(test);
-            //test.setSpot(patches2[2]);
-            //Obstacle test2 = new Obstacle("bush");
-            //patches2[3].setObstacle(test2);
-            //test2.setSpot(patches2[3]);
             Obstacle o1 = new Obstacle(patches[0,0],"tree",0,0);
             Obstacle o2 = new Obstacle(patches[3,3],"gravel", 3, 3);
             Obstacle o3 = new Obstacle(patches[7,7],"grandma", 7, 7);
@@ -101,7 +118,6 @@ namespace MowingforCookies
             {
                 patches[c.arrayRowX, c.arrayColY].setCookie(c);
             }
-            
 
             Enemy gnome1 = new Enemy(patches[4, 5], 3, 4,5);
             Enemy gnome2 = new Enemy(patches[7, 6], 3, 7,6);
