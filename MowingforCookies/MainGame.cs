@@ -32,12 +32,15 @@ namespace MowingforCookies
         List<Enemy> enemies;
         List<Cookie> cookies;
         List<Obstacle> obstacles;//?
-        
+
+
+        Texture2D patch;
+
         // for Tiled
         TmxMap map;
 
 
-        Texture2D patch;
+        
 
         public MainGame()
             : base()
@@ -183,7 +186,7 @@ namespace MowingforCookies
             }
             
             base.Update(gameTime);
-            if (mower.alize == false)
+            if (mower.alive == false)
             {
                 Exit();
             }
