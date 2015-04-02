@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.GamerServices;
+using TiledSharp;
 #endregion
 
 namespace MowingforCookies
@@ -32,7 +33,8 @@ namespace MowingforCookies
         List<Cookie> cookies;
         List<Obstacle> obstacles;//?
         
-
+        // for Tiled
+        TmxMap map;
 
 
         Texture2D patch;
