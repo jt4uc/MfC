@@ -24,6 +24,7 @@ namespace MowingforCookies
         public String type;
         public int arrayRowX;
         public int arrayColY;
+        public Boolean visible;
 
         //Content Manager?
         public Enemy(Spot currentLocation, int cookies, int arrayRowX, int arrayColY)
@@ -36,6 +37,7 @@ namespace MowingforCookies
             this.type = "gnome";
             this.arrayColY = arrayColY;
             this.arrayRowX = arrayRowX;
+            this.visible = false;
 
         }
 
@@ -51,6 +53,11 @@ namespace MowingforCookies
 
         public void Update(Mower mower, Controls controls, Spot[,] patches, GameTime gameTime)
         {
+            if (mower.arrayRowX > this.arrayRowX - 3 && mower.arrayRowX < this.arrayRowX + 3 && mower.arrayColY > this.arrayColY - 3 && mower.arrayColY < this.arrayColY + 3)
+            {
+                this.visible = true;
+            }
+
             Move(mower, patches);
         }
 

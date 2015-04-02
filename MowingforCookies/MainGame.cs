@@ -190,7 +190,10 @@ namespace MowingforCookies
             mower.Draw(spriteBatch);
             foreach (Enemy e in enemies)
             {
-                e.Draw(spriteBatch);
+                if (e.visible == true)
+                {
+                    e.Draw(spriteBatch);
+                }
             }
 
 
