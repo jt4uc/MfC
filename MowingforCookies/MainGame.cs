@@ -21,8 +21,8 @@ namespace MowingforCookies
 
         // for the background
         Texture2D background;
-        const int SCREENWIDTH = 1200;
-        const int SCREENHEIGHT = 900;
+        const int SCREENWIDTH = 500;
+        const int SCREENHEIGHT = 500;
 
         Controls controls;
         Spot[,] patches;
@@ -59,7 +59,7 @@ namespace MowingforCookies
 
             Window.Title = "TEST";
 
-            patches = new Spot[24, 18];
+            patches = new Spot[10, 10];
             for (int row = 0; row < patches.GetLength(0); row++)
             {
                 for (int col = 0; col < patches.GetLength(1); col++)
