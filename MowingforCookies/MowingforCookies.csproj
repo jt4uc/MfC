@@ -63,7 +63,7 @@
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="TiledSharp">
-      <HintPath>..\..\..\Downloads\TiledSharp\TiledSharp\bin\Debug\TiledSharp.dll</HintPath>
+      <HintPath>bin\WindowsGL\Debug\TiledSharp\TiledSharp\bin\Debug\TiledSharp.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
