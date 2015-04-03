@@ -22,8 +22,8 @@ namespace MowingforCookies
 
         // for the background
         Texture2D background;
-        int screenWidth;
-        int screenHeight;
+        const int SCREENWIDTH = 500;
+        const int SCREENHEIGHT = 500;
 
         Controls controls;
         Spot[,] patches;
@@ -48,6 +48,10 @@ namespace MowingforCookies
         {
             graphics = new GraphicsDeviceManager(this); /// default is 800x600
             Content.RootDirectory = "Content";
+
+            graphics.PreferredBackBufferWidth = SCREENWIDTH;  // set this value to the desired width of your window
+            graphics.PreferredBackBufferHeight = SCREENHEIGHT;   // set this value to the desired height of your window
+            graphics.ApplyChanges();
         }
 
         /// <summary>
@@ -61,16 +65,10 @@ namespace MowingforCookies
 
             Window.Title = "TEST";
 
-            // Tiled Testing
-            map = new TmxMap("10x10test_tiled.tmx");
-            tiles = new Texture2D[map.Width * map.Height];
-
-
-            // makes Spots according to the map coordinates
-            patches = new Spot[map.Height, map.Width];
-            for (int row = 0; row < map.Height; row++)
+            patches = new Spot[10, 10];
+            for (int row = 0; row < patches.GetLength(0); row++)
             {
-                for (int col = 0; col < map.Width; col++)
+                for (int col = 0; col < patches.GetLength(1); col++)
                 {
                     int rows = row * 50;
                     int cols = col * 50;
@@ -119,9 +117,14 @@ namespace MowingforCookies
                 patches[c.arrayRowX, c.arrayColY].setCookie(c);
             }
 
-            Enemy gnome1 = new Enemy(patches[4, 5], 3, 4,5);
-            Enemy gnome2 = new Enemy(patches[7, 6], 3, 7,6);
-            Enemy gnome3 = new Enemy(patches[2, 1], 3, 2,1);
+            
+            int [] kiddingMe = new int[] {1, 1, 1, 2, 2, 2}; //lol what is this?
+            int [] notCoolBro = new int[] {};
+
+
+            Enemy gnome1 = new Enemy(patches[4, 5], 3, 4,5, kiddingMe);
+            Enemy gnome2 = new Enemy(patches[7, 6], 3, 7,6, notCoolBro);
+            Enemy gnome3 = new Enemy(patches[2, 1], 3, 2,1, notCoolBro);
             enemies.Add(gnome1);
             enemies.Add(gnome2);
             enemies.Add(gnome3);
@@ -204,7 +207,7 @@ namespace MowingforCookies
             base.Update(gameTime);
             if (mower.alive == false)
             {
-                Exit();
+                //Exit();
             }
 
             foreach (Spot s in patches)
