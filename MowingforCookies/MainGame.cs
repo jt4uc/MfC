@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.GamerServices;
+using TiledSharp;
 #endregion
 
 namespace MowingforCookies
@@ -21,8 +22,8 @@ namespace MowingforCookies
 
         // for the background
         Texture2D background;
-        const int SCREENWIDTH = 1200;
-        const int SCREENHEIGHT = 900;
+        const int SCREENWIDTH = 500;
+        const int SCREENHEIGHT = 500;
 
         Controls controls;
         Spot[,] patches;
@@ -31,11 +32,16 @@ namespace MowingforCookies
         List<Enemy> enemies;
         List<Cookie> cookies;
         List<Obstacle> obstacles;//?
-        
-
 
 
         Texture2D patch;
+
+        // for Tiled
+        TmxMap map;
+        Texture2D[] tiles;
+
+
+        
 
         public MainGame()
             : base()
@@ -58,8 +64,14 @@ namespace MowingforCookies
         {
 
             Window.Title = "TEST";
+           // patches = new Spot[24, 18];
 
-            patches = new Spot[24, 18];
+            //Test Tiled
+            map = new TmxMap("10x10checkpoint_map.tmx");
+            // map.ObjectGroups[0].Objects.RemoveAt(0); // for when objects are removed
+
+            patches = new Spot[map.Height, map.Width];
+            System.Diagnostics.Debug.WriteLine("mapHeightWidth: " + map.Height + ", " + map.Width);
             for (int row = 0; row < patches.GetLength(0); row++)
             {
                 for (int col = 0; col < patches.GetLength(1); col++)
@@ -71,7 +83,23 @@ namespace MowingforCookies
 
                 }
             }
-            mower = new Mower(patches[0,1], 0);
+
+            //patches = new Spot[8, 8];
+            //for (int row = 0; row < patches.GetLength(0); row++)
+            //{
+            //    for (int col = 0; col < patches.GetLength(1); col++)
+            //    {
+            //        int rows = row * 50;
+            //        int cols = col * 50;
+            //        Spot testT = new Spot(rows, cols, false, 3, 3, row, col);
+            //        patches[row, col] = testT;
+
+            //    }
+            //}
+
+
+            // hard coding Mowers, Obstacles, and Enemies
+            mower = new Mower(patches[0,1], 0); // current location represented by spot
             enemies = new List<Enemy>();
             cookies = new List<Cookie>();
             obstacles = new List<Obstacle>();
@@ -84,26 +112,59 @@ namespace MowingforCookies
             //test2.setSpot(patches2[3]);
             
 
-            Obstacle o1 = new Obstacle(patches[0,0],"tree",0,0);
-            Obstacle o2 = new Obstacle(patches[3,3],"gravel", 3, 3);
-            Obstacle o3 = new Obstacle(patches[7,7],"grandma", 7, 7);
-            obstacles.Add(o1);
-            obstacles.Add(o2);
-            obstacles.Add(o3);
-            foreach (Obstacle o in obstacles)
+            //Obstacle o1 = new Obstacle(patches[0,0],"tree",0,0);
+            //Obstacle o2 = new Obstacle(patches[3,3],"gravel", 3, 3);
+            //Obstacle o3 = new Obstacle(patches[7,7],"grandma", 7, 7);
+            //obstacles.Add(o1);
+            //obstacles.Add(o2);
+            //obstacles.Add(o3);
+            //foreach (Obstacle o in obstacles)
+
+            int numTrees = map.ObjectGroups[0].Objects.Count; // assuming map.ObjectGroups[0] is the layer corresponding to trees
+            // can change to ObjectLayer Type later
+            for (int i = 0; i < numTrees; i++)
             {
-                patches[o.arrayRowX, o.arrayColY].setObstacle(o);
+                int x = (int)map.ObjectGroups[0].Objects[i].X/50; // divide by 50 because that's the size of the tile
+                int y = ((int)map.ObjectGroups[0].Objects[i].Y - 50) / 50; // -50, because apparently tiled goes by bottom left corner
+                System.Diagnostics.Debug.WriteLine("x, y: " + x + ", " + y);
+                Obstacle o = new Obstacle(patches[x, y], "tree", x, y);
+                obstacles.Add(o);
+                patches[x, y].setObstacle(o);
             }
 
+            int numGravel = map.ObjectGroups[1].Objects.Count; // assuming map.ObjectGroups[1] is the layer corresponding to gravel
+            // can change to ObjectLayer Type later
+            for (int i = 0; i < numGravel; i++)
+            {
+                int x = (int)map.ObjectGroups[1].Objects[i].X/50;
+                int y = ((int)map.ObjectGroups[1].Objects[i].Y - 50) / 50;
+                Obstacle o = new Obstacle(patches[x, y], "gravel", x, y);
+                obstacles.Add(o);
+                patches[x, y].setObstacle(o);
+            }
 
+            
+            //Obstacle o1 = new Obstacle(patches[0,0],"tree",0,0);
+            //Obstacle o2 = new Obstacle(patches[3,3],"gravel", 3, 3);
+            //Obstacle o3 = new Obstacle(patches[7,7],"grandma", 7, 7); // will be part of enemy class
+            //obstacles.Add(o1);
+            //obstacles.Add(o2);
+            //obstacles.Add(o3);
+            //foreach (Obstacle o in obstacles)
+            //{
+            //    patches[o.arrayRowX, o.arrayColY].setObstacle(o);
+            //}
+
+            // can convert this into Tiled stuff later
             Cookie c1 = new Cookie(patches[4,0],4, 4);
             cookies.Add(c1);
             foreach (Cookie c in cookies)
             {
                 patches[c.arrayRowX, c.arrayColY].setCookie(c);
             }
-            
-            int [] kiddingMe = new int[] {1, 1, 1, 2, 2, 2};
+
+            // will have to think of a way to import enemy information
+            int [] kiddingMe = new int[] {1, 1, 1, 2, 2, 2}; // gives enemies path to patrol
             int [] notCoolBro = new int[] {};
 
             Enemy gnome1 = new Enemy(patches[4, 5], 3, 4,5, kiddingMe);
@@ -189,7 +250,7 @@ namespace MowingforCookies
             }
             
             base.Update(gameTime);
-            if (mower.alize == false)
+            if (mower.alive == false)
             {
                 //Exit();
             }

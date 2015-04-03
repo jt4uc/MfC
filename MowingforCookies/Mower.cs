@@ -21,7 +21,7 @@ namespace MowingforCookies
         public Spot currentLocation;
         public int cookies;
         public Spot targetLocation;
-        public bool alize;
+        public bool alive;
         public double speed;
         public Texture2D mowerTexture;
         public Texture2D deadMower;
@@ -40,7 +40,7 @@ namespace MowingforCookies
             this.x = currentLocation.x;
             this.y = currentLocation.y;
             this.cookies = cookies;
-            this.alize = true;
+            this.alive = true;
             this.arrayRowX = currentLocation.arrayRowX;
             this.arrayColY = currentLocation.arrayColY;
 
@@ -106,7 +106,7 @@ namespace MowingforCookies
                 current_time++;
             }
 
-            if (!alize)
+            if (!alive)
             {
                 dir = 0;
             }
@@ -185,7 +185,7 @@ namespace MowingforCookies
             {
                 if (objectSpot.getEnemy() != null)
                 {
-                    alize = false;
+                    alive = false;
                     image = deadMower;
                     return true;
                 }
