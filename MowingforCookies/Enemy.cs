@@ -25,9 +25,13 @@ namespace MowingforCookies
         public int arrayRowX;
         public int arrayColY;
         public Boolean visible;
+        public int[] moveSequence;
+
+        public int currentTime = 0;
+        const int TIME_BETWEEN_MOVES = 30;
 
         //Content Manager?
-        public Enemy(Spot currentLocation, int cookies, int arrayRowX, int arrayColY)
+        public Enemy(Spot currentLocation, int cookies, int arrayRowX, int arrayColY, int[] sequence)
         {
 
             this.currentLocation = currentLocation;
@@ -38,6 +42,8 @@ namespace MowingforCookies
             this.arrayColY = arrayColY;
             this.arrayRowX = arrayRowX;
             this.visible = false;
+            this.moveSequence = sequence;
+
 
         }
 
@@ -58,7 +64,20 @@ namespace MowingforCookies
                 this.visible = true;
             }
 
-            Move(mower, patches);
+            if (this.visible)
+            {
+                if (currentTime >= TIME_BETWEEN_MOVES)
+                {
+                    Move(mower, patches);
+                    currentTime = 0;
+                }
+                else
+                {
+                    currentTime++;
+                }
+            }
+
+            //Move(mower, patches);
         }
 
         public void setType(String s)
@@ -68,7 +87,65 @@ namespace MowingforCookies
 
         public void Move(Mower mower, Spot[,] patches)
         {
-            // for the beta
+            int nextDir;
+            if (moveSequence.Length == 0)
+            {
+                nextDir = 0;
+            }
+            else
+            {
+                nextDir = moveSequence[moveIndex];
+                moveIndex++;
+                if (moveIndex >= moveSequence.Length)
+                {
+                    moveIndex = 0;
+                }
+            }
+
+            
+
+            if (nextDir == 1)//right
+            {
+                patches[arrayRowX, arrayColY].setEnemy(null); //leave current tile
+                patches[arrayRowX, arrayColY].canTraverse = true;
+
+                this.arrayRowX = this.arrayRowX + 1; //update grid position
+                this.x = patches[arrayRowX, arrayColY].x; //update pixel position
+
+                patches[arrayRowX, arrayColY].setEnemy(this); //enter new tile
+
+            }
+            else if (nextDir == 2)//left
+            {
+                patches[arrayRowX, arrayColY].setEnemy(null); //leave current tile
+                patches[arrayRowX, arrayColY].canTraverse = true;
+
+                this.arrayRowX = this.arrayRowX - 1; //update grid position
+                this.x = patches[arrayRowX, arrayColY].x; //update pixel position
+
+                patches[arrayRowX, arrayColY].setEnemy(this); //enter new tile
+
+            }
+            else if (nextDir == 3)//down
+            {
+                patches[arrayRowX, arrayColY].setEnemy(null); //leave current tile
+                patches[arrayRowX, arrayColY].canTraverse = true;
+
+                this.arrayColY = this.arrayColY + 1; //update grid position
+                this.x = patches[arrayRowX, arrayColY].y; //update pixel position
+
+                patches[arrayRowX, arrayColY].setEnemy(this); //enter new tile
+            }
+            else if (nextDir == 4)//up
+            {
+                patches[arrayRowX, arrayColY].setEnemy(null); //leave current tile
+                patches[arrayRowX, arrayColY].canTraverse = true;
+
+                this.arrayColY = this.arrayColY - 1; //update grid position
+                this.x = patches[arrayRowX + 1, arrayColY].y; //update pixel position
+
+                patches[arrayRowX, arrayColY].setEnemy(this); //enter new tile
+            }
         }
 
     }

@@ -24,6 +24,7 @@ namespace MowingforCookies
         public bool alize;
         public double speed;
         public Texture2D mowerTexture;
+        public Texture2D deadMower;
 
         public int arrayRowX;
         public int arrayColY;
@@ -52,6 +53,8 @@ namespace MowingforCookies
         public void LoadContent(ContentManager content)
         {
             image = content.Load<Texture2D>("MiniMower.png");
+            deadMower = content.Load<Texture2D>("DeadMiniMower.png");
+
         }
 
         public void Draw(SpriteBatch sb)
@@ -69,6 +72,8 @@ namespace MowingforCookies
                     s.isTraversed = true;
                 }
             }
+
+
             if (controls.onPress(Keys.Right, Buttons.DPadRight))
             {
                 dir = 1;
@@ -101,12 +106,17 @@ namespace MowingforCookies
                 current_time++;
             }
 
+            if (!alize)
+            {
+                dir = 0;
+            }
+
 
         }
         public void Move(int direction, Spot[,] patches)
         {
-            int patchesRows = patches.GetLength(0);//8
-            int patchesCols = patches.GetLength(1);//8
+            int patchesRows = patches.GetLength(0);//24
+            int patchesCols = patches.GetLength(1);//18
             int rowCoord = this.x;//0 
             int colCoord = this.y;//55
 
@@ -176,6 +186,7 @@ namespace MowingforCookies
                 if (objectSpot.getEnemy() != null)
                 {
                     alize = false;
+                    image = deadMower;
                     return true;
                 }
                 else
