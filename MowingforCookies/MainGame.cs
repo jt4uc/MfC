@@ -47,6 +47,8 @@ namespace MowingforCookies
             : base()
         {
             graphics = new GraphicsDeviceManager(this); /// default is 800x600
+            graphics.PreferredBackBufferWidth = 400;
+            graphics.PreferredBackBufferHeight = 400;
             Content.RootDirectory = "Content";
 
             graphics.PreferredBackBufferWidth = SCREENWIDTH;  // set this value to the desired width of your window
