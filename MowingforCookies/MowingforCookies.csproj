@@ -114,6 +114,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Icon.ico" />
+    <Content Include="TiledSharp.dll" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Content\10x10checkpoint_map.tmx">
