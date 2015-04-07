@@ -20,14 +20,14 @@ namespace MowingforCookies
         private Rectangle collisionBox;
         public Spot currentLocation;
         public int cookies;
-        public Spot targetLocation;
         public bool alive;
-        public double speed;
-        public Texture2D mowerTexture;
         public Texture2D deadMower;
 
         public int arrayRowX;
         public int arrayColY;
+
+        public int recX = 50;
+        public int recY = 50;
 
         //public Animated Sprite?? mowerTextureMap
 
@@ -46,7 +46,7 @@ namespace MowingforCookies
 
             //speed = 5;
             //movedX = 0;
-            collisionBox = new Rectangle(x, y, 50, 50);
+            collisionBox = new Rectangle(x, y, recX, recY);
         }
 
 
@@ -59,7 +59,7 @@ namespace MowingforCookies
 
         public void Draw(SpriteBatch sb)
         {
-            sb.Draw(image, new Rectangle(x, y, 50, 50), Color.White);
+            sb.Draw(image, new Rectangle(x, y, recX, recY), Color.White);
         }
 
 
@@ -70,6 +70,7 @@ namespace MowingforCookies
                 if (this.x == s.x && this.y == s.y && s.canTraverse == true)
                 {
                     s.isTraversed = true;
+
                 }
             }
 
@@ -185,7 +186,7 @@ namespace MowingforCookies
             {
                 if (objectSpot.getEnemy() != null)
                 {
-
+                    testOb(this);
                     alive = false;
                     image = deadMower;
                     return true;
@@ -195,6 +196,12 @@ namespace MowingforCookies
                     return false;
                 }
             }
+        }
+        public void testOb(Object o)
+        {
+            Type test = this.GetType();
+            Debug.WriteLine("test: " + o.GetType());
+            Debug.WriteLine(o.GetType().IsAssignableFrom(test));
         }
         //collisionEnemy
         //updateCookieAmount

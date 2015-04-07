@@ -91,14 +91,34 @@ namespace MowingforCookies
             return this.isTraversed;
         }
 
-        public void Update(ContentManager content)
+        public void Update(ContentManager content, Spot[,] patches, int mowerX, int mowerY)
         {
             if (this.isTraversed == true)
             {
                 image = content.Load<Texture2D>("mowed grass.png");
             }
-        }
+            //if (s.ob != null)
+            //{
+            //    if (s.ob.canTraverse == true)
+            //    {
+            //        //spot has a traversable obstacle
 
+            //        //boundary check here
+
+            //        //ticks
+            //        //boolean value chagne
+            //        //update spot? update obstacle?
+            //        //no. have to do boundary update based on spot type -_-
+
+            //    }
+
+            //}
+        }
+        public Rectangle obRec(Spot[,] patches)
+        {
+            Rectangle result = new Rectangle(x, y, 50, 50);
+            return result;
+        }
         public void traverseEffect(Obstacle o)
         {
             String oType = o.obstacleType;

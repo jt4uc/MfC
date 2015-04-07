@@ -30,6 +30,10 @@ namespace MowingforCookies
         public int currentTime = 0;
         const int TIME_BETWEEN_MOVES = 30;
 
+        public Rectangle cbox;
+        public int recX = 48;
+        public int recY = 50;
+
         //Content Manager?
         public Enemy(Spot currentLocation, int cookies, int arrayRowX, int arrayColY, int[] sequence)
         {
@@ -44,6 +48,8 @@ namespace MowingforCookies
             this.visible = false;
             this.moveSequence = sequence;
 
+            this.cbox = new Rectangle(x, y, recX, recY);
+
 
         }
 
@@ -54,7 +60,7 @@ namespace MowingforCookies
 
         public void Draw(SpriteBatch sb)
         {
-            sb.Draw(image, new Rectangle(x, y, 48, 50), Color.White);
+            sb.Draw(image, new Rectangle(x, y, recX, recY), Color.White);
         }
 
         public void Update(Mower mower, Controls controls, Spot[,] patches, GameTime gameTime)

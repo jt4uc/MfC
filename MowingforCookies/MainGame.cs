@@ -31,7 +31,8 @@ namespace MowingforCookies
 
         List<Enemy> enemies;
         List<Cookie> cookies;
-        List<Obstacle> obstacles;//?
+        List<Obstacle> obstacles;
+       
 
 
         Texture2D patch;
@@ -153,8 +154,8 @@ namespace MowingforCookies
             int [] kiddingMe = new int[] {1, 1, 1, 2, 2, 2}; // gives enemies path to patrol
             int [] notCoolBro = new int[] {};
             Enemy gnome1 = new Enemy(patches[4, 5], 3, 4,5, kiddingMe);
-            Enemy gnome2 = new Enemy(patches[7, 6], 3, 7,6, notCoolBro);
-            Enemy gnome3 = new Enemy(patches[2, 1], 3, 2,1, notCoolBro);
+            Enemy gnome2 = new Enemy(patches[7, 6], 3, 7, 6, notCoolBro);
+            Enemy gnome3 = new Enemy(patches[2, 1], 3, 2, 1, notCoolBro);
             enemies.Add(gnome1);
             enemies.Add(gnome2);
             enemies.Add(gnome3);
@@ -242,7 +243,7 @@ namespace MowingforCookies
 
             foreach (Spot s in patches)
             {
-                s.Update(Content);
+                s.Update(Content, patches, mower.x,mower,y);
             }
         }
 
