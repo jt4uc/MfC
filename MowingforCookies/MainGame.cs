@@ -67,7 +67,7 @@ namespace MowingforCookies
            // patches = new Spot[24, 18];
 
             //Test Tiled
-            map = new TmxMap("10x10checkpoint_map.tmx");
+            map = new TmxMap("10x10checkpoint_map_blah.tmx");
             // map.ObjectGroups[0].Objects.RemoveAt(0); // for when objects are removed
 
             patches = new Spot[map.Height, map.Width];
