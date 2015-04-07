@@ -63,7 +63,7 @@
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="TiledSharp">
-      <HintPath>bin\WindowsGL\Debug\TiledSharp\TiledSharp\bin\Debug\TiledSharp.dll</HintPath>
+      <HintPath>TiledSharp.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -117,10 +117,7 @@
     <Content Include="TiledSharp.dll" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Content\10x10checkpoint_map_blah.tmx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Content\10x10test_tiled.tmx">
+    <None Include="Content\10x10checkpoint_map.tmx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

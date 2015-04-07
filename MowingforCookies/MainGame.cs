@@ -22,8 +22,8 @@ namespace MowingforCookies
 
         // for the background
         Texture2D background;
-        const int SCREENWIDTH = 500;
-        const int SCREENHEIGHT = 500;
+        int SCREENWIDTH; 
+        int SCREENHEIGHT;
 
         Controls controls;
         Spot[,] patches;
@@ -49,6 +49,10 @@ namespace MowingforCookies
             graphics = new GraphicsDeviceManager(this); /// default is 800x600
             Content.RootDirectory = "Content";
 
+            map = new TmxMap("./Content/10x10checkpoint_map.tmx");
+            SCREENWIDTH = map.Width * 50;
+            SCREENHEIGHT = map.Height * 50;
+
             graphics.PreferredBackBufferWidth = SCREENWIDTH;  // set this value to the desired width of your window
             graphics.PreferredBackBufferHeight = SCREENHEIGHT;   // set this value to the desired height of your window
             graphics.ApplyChanges();
@@ -66,8 +70,6 @@ namespace MowingforCookies
             Window.Title = "TEST";
            // patches = new Spot[24, 18];
 
-            //Test Tiled
-            map = new TmxMap("10x10checkpoint_map_blah.tmx");
             // map.ObjectGroups[0].Objects.RemoveAt(0); // for when objects are removed
 
             patches = new Spot[map.Height, map.Width];
