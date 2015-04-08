@@ -22,8 +22,8 @@ namespace MowingforCookies
 
         // for the background
         Texture2D background;
-        const int SCREENWIDTH = 500;
-        const int SCREENHEIGHT = 500;
+        int SCREENWIDTH; 
+        int SCREENHEIGHT;
 
         Controls controls;
         Spot[,] patches;
@@ -52,6 +52,10 @@ namespace MowingforCookies
             graphics.PreferredBackBufferHeight = 400;
             Content.RootDirectory = "Content";
 
+            map = new TmxMap("./Content/10x10checkpoint_map.tmx");
+            SCREENWIDTH = map.Width * 50;
+            SCREENHEIGHT = map.Height * 50;
+
             graphics.PreferredBackBufferWidth = SCREENWIDTH;  // set this value to the desired width of your window
             graphics.PreferredBackBufferHeight = SCREENHEIGHT;   // set this value to the desired height of your window
             graphics.ApplyChanges();
@@ -68,12 +72,10 @@ namespace MowingforCookies
 
             Window.Title = "TEST";
 
-            //Test Tiled
-            map = new TmxMap("10x10checkpoint_map_blah.tmx");
             // map.ObjectGroups[0].Objects.RemoveAt(0); // for when objects are removed
 
             patches = new Spot[map.Height, map.Width];
-            System.Diagnostics.Debug.WriteLine("mapHeightWidth: " + map.Height + ", " + map.Width);
+            //System.Diagnostics.Debug.WriteLine("mapHeightWidth: " + map.Height + ", " + map.Width);
             for (int row = 0; row < patches.GetLength(0); row++)
             {
                 for (int col = 0; col < patches.GetLength(1); col++)
@@ -85,19 +87,6 @@ namespace MowingforCookies
 
                 }
             }
-
-            //patches = new Spot[8, 8];
-            //for (int row = 0; row < patches.GetLength(0); row++)
-            //{
-            //    for (int col = 0; col < patches.GetLength(1); col++)
-            //    {
-            //        int rows = row * 50;
-            //        int cols = col * 50;
-            //        Spot testT = new Spot(rows, cols, false, 3, 3, row, col);
-            //        patches[row, col] = testT;
-
-            //    }
-            //}
 
 
             // hard coding Mowers, Obstacles, and Enemies
