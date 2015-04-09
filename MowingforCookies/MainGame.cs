@@ -43,8 +43,6 @@ namespace MowingforCookies
             : base()
         {
             graphics = new GraphicsDeviceManager(this); /// default is 800x600
-            graphics.PreferredBackBufferWidth = 400;
-            graphics.PreferredBackBufferHeight = 400;
             Content.RootDirectory = "Content";
 
             map = new TmxMap("./Content/10x10checkpoint_map.tmx");
@@ -108,31 +106,7 @@ namespace MowingforCookies
                 }
 
             }
-            //int numTrees = map.ObjectGroups[0].Objects.Count; // assuming map.ObjectGroups[0] is the layer corresponding to trees
-            //// can change to ObjectLayer Type later
-            //for (int i = 0; i < numTrees; i++)
-            //{
-            //    int x = (int)map.ObjectGroups[0].Objects[i].X/50; // divide by 50 because that's the size of the tile
-            //    int y = ((int)map.ObjectGroups[0].Objects[i].Y - 50) / 50; // -50, because apparently tiled goes by bottom left corner
-            //    System.Diagnostics.Debug.WriteLine("x, y: " + x + ", " + y);
-            //    Obstacle o = new Obstacle(patches[x, y], "tree", x, y);
-            //    obstacles.Add(o);
-            //    patches[x, y].setObstacle(o);
-            //}
 
-            //int numGravel = map.ObjectGroups[1].Objects.Count; // assuming map.ObjectGroups[1] is the layer corresponding to gravel
-            //// can change to ObjectLayer Type later
-            //for (int i = 0; i < numGravel; i++)
-            //{
-            //    int x = (int)map.ObjectGroups[1].Objects[i].X/50;
-            //    int y = ((int)map.ObjectGroups[1].Objects[i].Y - 50) / 50;
-            //    Obstacle o = new Obstacle(patches[x, y], "gravel", x, y);
-            //    obstacles.Add(o);
-            //    patches[x, y].setObstacle(o);
-            //}
-
-            
-           
             // can convert this into Tiled stuff later
             Cookie c1 = new Cookie(patches[4,0],4, 4);
             cookies.Add(c1);
