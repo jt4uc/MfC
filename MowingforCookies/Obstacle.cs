@@ -78,7 +78,7 @@ namespace MowingforCookies
         {
             if (exploding == true)
             {
-                Console.WriteLine(cbox.X);
+                //Console.WriteLine(cbox.X);
                 sb.Draw(image, cbox, Color.White);//lmao. only part of the image. weird.
             }
             else
@@ -90,6 +90,7 @@ namespace MowingforCookies
         {
             if (this.cbox.Intersects(e.cbox))
             {
+                Console.WriteLine("here. intersects");
                 e.alive = false;
             }
         }
@@ -110,7 +111,7 @@ namespace MowingforCookies
         }
 
 
-        public void Update(Rectangle r, Mower mower, Enemy e)
+        public void Update(Rectangle r, Mower mower, List<Enemy> enemies)
         {
             if (mower.x == this.x && mower.y == this.y)
             {
@@ -122,7 +123,7 @@ namespace MowingforCookies
                 exploding = false;
                 changeBox(r);
             }
-            if (e != null)
+            foreach (Enemy e in enemies)
             {
                 collidesEnemy(e);
             }

@@ -91,7 +91,7 @@ namespace MowingforCookies
             return this.isTraversed;
         }
 
-        public void Update(ContentManager content, Spot[,] patches, Mower mower)
+        public void Update(ContentManager content, Spot[,] patches, Mower mower, List<Enemy> enemies)
         {
             if (this.isTraversed == true)
             {
@@ -101,7 +101,7 @@ namespace MowingforCookies
             {
                 //Console.WriteLine("mower at: " + arrayRowX + ", " + arrayColY + ". ob:  " + ob.obstacleType);
                 Rectangle result = obRec(patches, ob.obstacleType, mower); //return dynamically sized rectangle if gravel
-                traverseEffect(this.ob, result, mower);
+                traverseEffect(this.ob, result, mower, enemies);
 
             }
         }
@@ -154,7 +154,7 @@ namespace MowingforCookies
             return result = new Rectangle(mower.x,mower.y,50,50);
             
         }
-        public void traverseEffect(Obstacle ob, Rectangle obRec, Mower mower)
+        public void traverseEffect(Obstacle ob, Rectangle obRec, Mower mower, List<Enemy> enemies)
         {
             String obType = ob.obstacleType;
             switch (obType)
@@ -164,7 +164,7 @@ namespace MowingforCookies
                 case "water":
                     break;
                 case "gravel":
-                    ob.Update(obRec, mower, e );
+                    ob.Update(obRec, mower, enemies );
                     break;
                 case "bush":
                     break;

@@ -235,7 +235,7 @@ namespace MowingforCookies
 
             foreach (Spot s in patches)
             {
-                s.Update(Content, patches, mower);
+                s.Update(Content, patches, mower, enemies);
             }
         }
 
