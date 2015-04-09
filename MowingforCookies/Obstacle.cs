@@ -61,7 +61,7 @@ namespace MowingforCookies
             {
                 image = content.Load<Texture2D>("grandma.png");
             }
-
+            // put uncut_grass here?
         }
 
         public void Draw(SpriteBatch sb)
