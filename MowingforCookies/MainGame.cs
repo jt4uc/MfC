@@ -221,7 +221,10 @@ namespace MowingforCookies
             mower.Update(controls, patches, gameTime);
             foreach (Enemy e in enemies)
             {
-                e.Update(mower,controls,patches,gameTime);
+                if (e.alive)
+                {
+                    e.Update(mower, controls, patches, gameTime);
+                }
             }
             
             base.Update(gameTime);
@@ -263,7 +266,10 @@ namespace MowingforCookies
             {
                 if (e.visible == true)
                 {
-                    e.Draw(spriteBatch);
+                    if (e.alive)
+                    {
+                        e.Draw(spriteBatch);
+                    }
                 }
             }
 

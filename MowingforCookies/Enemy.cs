@@ -15,7 +15,6 @@ namespace MowingforCookies
         public int moveIndex;   
         public Spot currentLocation;
         public Spot targetLocation;
-        public bool alive;
         public double speed;
         public Texture2D enemyTexture;
         //private Rectangle collisionBox;
@@ -26,6 +25,7 @@ namespace MowingforCookies
         public int arrayColY;
         public Boolean visible;
         public int[] moveSequence;
+        public Boolean alive = true;
 
         public int currentTime = 0;
         const int TIME_BETWEEN_MOVES = 30;
