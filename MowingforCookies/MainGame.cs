@@ -232,7 +232,7 @@ namespace MowingforCookies
 
             foreach (Spot s in patches)
             {
-                s.Update(Content, patches, mower.x,mower,y);
+                s.Update(Content, patches, mower);
             }
         }
 

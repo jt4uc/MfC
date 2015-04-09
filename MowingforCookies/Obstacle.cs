@@ -95,7 +95,7 @@ namespace MowingforCookies
         }
 
 
-        public void Update()
+        public void Update(Rectangle r)
         {
             //mower steps on spot. spot updates its obstacle object.
             //this is coming from spot or something, ideally. 

@@ -70,6 +70,7 @@ namespace MowingforCookies
                 if (this.x == s.x && this.y == s.y && s.canTraverse == true)
                 {
                     s.isTraversed = true;
+                    //Console.WriteLine("Mower.cs. arrayLocation: " + arrayRowX + ", " + arrayColY);
 
                 }
             }
