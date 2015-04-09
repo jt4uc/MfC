@@ -15,8 +15,6 @@ namespace MowingforCookies
         public int y;
         public int nextDir; //values 0 through 4.  Should be a typedef.
         public int curDir = 0;
-        const int time_between_moves = 10; //number of game loops between calling move
-        public int current_time = 0; //tracks game loops
         public int moveIndex;
         private Rectangle collisionBox;
         public Spot currentLocation;
