@@ -13,21 +13,22 @@ namespace MowingforCookies
     {
         public int x;
         public int y;
-        public int dir; //values 0 through 4.  Should be a typedef.
-        const int time_between_moves = 10; //number of game loops between calling move
-        public int current_time = 0; //tracks game loops
+        public int nextDir; //values 0 through 4.  Should be a typedef.
+        public int curDir = 0;
         public int moveIndex;
         private Rectangle collisionBox;
         public Spot currentLocation;
         public int cookies;
-        public Spot targetLocation;
         public bool alive;
-        public double speed;
-        public Texture2D mowerTexture;
         public Texture2D deadMower;
 
         public int arrayRowX;
         public int arrayColY;
+
+        public int recX = 50;
+        public int recY = 50;
+
+        const int SPEED = 5;
 
         //public Animated Sprite?? mowerTextureMap
 
@@ -46,7 +47,7 @@ namespace MowingforCookies
 
             //speed = 5;
             //movedX = 0;
-            collisionBox = new Rectangle(x, y, 50, 50);
+            collisionBox = new Rectangle(x, y, recX, recY);
         }
 
 
@@ -59,7 +60,7 @@ namespace MowingforCookies
 
         public void Draw(SpriteBatch sb)
         {
-            sb.Draw(image, new Rectangle(x, y, 50, 50), Color.White);
+            sb.Draw(image, new Rectangle(x, y, recX, recY), Color.White);
         }
 
 
@@ -70,50 +71,48 @@ namespace MowingforCookies
                 if (this.x == s.x && this.y == s.y && s.canTraverse == true)
                 {
                     s.isTraversed = true;
+                    //Console.WriteLine("Mower.cs. arrayLocation: " + arrayRowX + ", " + arrayColY);
+
                 }
             }
 
 
             if (controls.onPress(Keys.Right, Buttons.DPadRight))
             {
-                dir = 1;
+                nextDir = 1;
 
             }
             else if (controls.onPress(Keys.Left, Buttons.DPadLeft))
             {
-                dir = 2;
+                nextDir = 2;
             }
             else if (controls.onPress(Keys.Down, Buttons.DPadDown))
             {
-                dir = 3;
+                nextDir = 3;
             }
             else if (controls.onPress(Keys.Up, Buttons.DPadUp))
             {
-                dir = 4;
+                nextDir = 4;
             }
             else
             {
 
             }
 
-            if (current_time >= time_between_moves)
+            if (curDir == 0)
             {
-                Move(dir, patches);
-                current_time = 0;
+                curDir = nextDir;
             }
-            else
-            {
-                current_time++;
-            }
+                Move(patches);
 
             if (!alive)
             {
-                dir = 0;
+                nextDir = 0;
             }
 
 
         }
-        public void Move(int direction, Spot[,] patches)
+        public void Move(Spot[,] patches)
         {
             int patchesRows = patches.GetLength(0);//24
             int patchesCols = patches.GetLength(1);//18
@@ -123,54 +122,78 @@ namespace MowingforCookies
             
 
             // Sideways Acceleration 
-            if (direction == 1)//right
+            if (curDir == 1)//right
             {
                 if ((arrayRowX + 1 == patchesRows) || (collisionObject(patches[arrayRowX + 1, arrayColY]) == false))
                 {
+                    curDir = nextDir;
                 }
                 else
                 {
-                    this.x = patches[arrayRowX + 1, arrayColY].x;
-                    this.collisionBox.X = patches[arrayRowX + 1, arrayColY].x;
-                    this.arrayRowX = this.arrayRowX + 1;
+                    this.x = this.x + SPEED;
+                    if (this.x >= patches[arrayRowX + 1, arrayColY].x)
+                    {
+                        this.arrayRowX = this.arrayRowX + 1;
+                        curDir = nextDir;
+                    }
                 }
+
+                
             }
-            else if (direction == 2)//left
+            else if (curDir == 2)//left
             {
                 if ((arrayRowX - 1 == -1) || (collisionObject(patches[arrayRowX - 1, arrayColY]) == false))
                 {
+                    curDir = nextDir;
                 }
                 else
                 {
-                    this.x = patches[arrayRowX - 1, arrayColY].x;
-                    this.collisionBox.X = patches[arrayRowX - 1, arrayColY].x;
-                    this.arrayRowX = this.arrayRowX - 1;
+                    this.x = this.x - SPEED;
+                    if (this.x <= patches[arrayRowX - 1, arrayColY].x)
+                    {
+                        this.arrayRowX = this.arrayRowX - 1;
+                        curDir = nextDir;
+                    }
                 }
 
+                
+
             }
-            else if (direction == 3)//down
+            else if (curDir == 3)//down
             {
-                if ((arrayColY + 1 == patchesCols) || (collisionObject(patches[arrayRowX, arrayColY+1]) == false))
+                if ((arrayColY + 1 == patchesCols) || (collisionObject(patches[arrayRowX, arrayColY + 1]) == false))
                 {
+                    curDir = nextDir;
                 }
                 else
                 {
-                    this.y = patches[arrayRowX, arrayColY+1].y;
-                    this.collisionBox.Y = patches[arrayRowX, arrayColY+1].y;
-                    this.arrayColY = this.arrayColY +1;
+                    this.y = this.y + SPEED;
+                    if (this.y >= patches[arrayRowX, arrayColY + 1].y)
+                    {
+                        this.arrayColY = this.arrayColY + 1;
+                        curDir = nextDir;
+                    }
                 }
+
+                
             }
-            else if (direction == 4)//down
+            else if (curDir == 4)//down
             {
                 if ((arrayColY - 1 == -1) || (collisionObject(patches[arrayRowX, arrayColY - 1]) == false))
                 {
+                    curDir = nextDir;
                 }
                 else
                 {
-                    this.y = patches[arrayRowX, arrayColY-1].y;
-                    this.collisionBox.Y = patches[arrayRowX, arrayColY - 1].y;
-                    this.arrayColY = this.arrayColY - 1;
+                    this.y = this.y - SPEED;
+                    if (this.y <= patches[arrayRowX, arrayColY - 1].y)
+                    {
+                        this.arrayColY = this.arrayColY - 1;
+                        curDir = nextDir;
+                    }
                 }
+
+               
             }
         }
 
@@ -185,7 +208,7 @@ namespace MowingforCookies
             {
                 if (objectSpot.getEnemy() != null)
                 {
-
+                    testOb(this);
                     alive = false;
                     image = deadMower;
                     return true;
@@ -195,6 +218,12 @@ namespace MowingforCookies
                     return false;
                 }
             }
+        }
+        public void testOb(Object o)
+        {
+            Type test = this.GetType();
+            Debug.WriteLine("test: " + o.GetType());
+            Debug.WriteLine(o.GetType().IsAssignableFrom(test));
         }
         //collisionEnemy
         //updateCookieAmount

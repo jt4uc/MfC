@@ -19,6 +19,8 @@ namespace MowingforCookies
         public int x, y;
         public Spot currentLocation;
         public int arrayRowX, arrayColY;
+        public int recX = 50;
+        public int recY = 50;
 
         public Cookie(Spot s, int arrayRowX, int arrayColY)
         {
@@ -37,7 +39,7 @@ namespace MowingforCookies
         }
         public void Draw(SpriteBatch sb)
         {
-            sb.Draw(image, new Rectangle(x, y, 50, 50), Color.White);
+            sb.Draw(image, new Rectangle(x, y, recX, recY), Color.White);
         }
 
         public void Update()

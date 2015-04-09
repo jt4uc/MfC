@@ -29,7 +29,8 @@ namespace MowingforCookies
 
         List<Enemy> enemies;
         List<Cookie> cookies;
-        List<Obstacle> obstacles;//?
+        List<Obstacle> obstacles;
+       
 
         // for Tiled
         TmxMap map;
@@ -42,6 +43,8 @@ namespace MowingforCookies
             : base()
         {
             graphics = new GraphicsDeviceManager(this); /// default is 800x600
+            graphics.PreferredBackBufferWidth = 400;
+            graphics.PreferredBackBufferHeight = 400;
             Content.RootDirectory = "Content";
 
             map = new TmxMap("./Content/10x10checkpoint_map.tmx");
@@ -142,8 +145,8 @@ namespace MowingforCookies
             int [] kiddingMe = new int[] {1, 1, 1, 2, 2, 2}; // gives enemies path to patrol
             int [] notCoolBro = new int[] {};
             Enemy gnome1 = new Enemy(patches[4, 5], 3, 4,5, kiddingMe);
-            Enemy gnome2 = new Enemy(patches[7, 6], 3, 7,6, notCoolBro);
-            Enemy gnome3 = new Enemy(patches[2, 1], 3, 2,1, notCoolBro);
+            Enemy gnome2 = new Enemy(patches[7, 6], 3, 7, 6, notCoolBro);
+            Enemy gnome3 = new Enemy(patches[2, 1], 3, 2, 1, notCoolBro);
             enemies.Add(gnome1);
             enemies.Add(gnome2);
             enemies.Add(gnome3);
@@ -218,7 +221,10 @@ namespace MowingforCookies
             mower.Update(controls, patches, gameTime);
             foreach (Enemy e in enemies)
             {
-                e.Update(mower,controls,patches,gameTime);
+                if (e.alive)
+                {
+                    e.Update(mower, controls, patches, gameTime);
+                }
             }
             
             base.Update(gameTime);
@@ -229,7 +235,7 @@ namespace MowingforCookies
 
             foreach (Spot s in patches)
             {
-                s.Update(Content);
+                s.Update(Content, patches, mower);
             }
         }
 
@@ -259,7 +265,10 @@ namespace MowingforCookies
             {
                 if (e.visible == true)
                 {
-                    e.Draw(spriteBatch);
+                    if (e.alive)
+                    {
+                        e.Draw(spriteBatch);
+                    }
                 }
             }
             spriteBatch.End();

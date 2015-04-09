@@ -17,12 +17,17 @@ namespace MowingforCookies
         public int x;
         public int y;
         public Boolean canTraverse;
+        public Texture2D boom;
+        public Texture2D gravel;
 
         public int arrayRowX;
         public int arrayColY;
 
-        //obstacleTexture: Texture2D
-        //obstacleTextureMap: Animated Sprite
+        public Rectangle cbox;
+        public Rectangle backupCbox;
+        public int recX = 40;
+        public int recY = 40;
+        public Boolean exploding;
 
         public Obstacle(Spot currentLocation, String obstacleType, int arrayRowX, int arrayColY)
         {
@@ -30,6 +35,7 @@ namespace MowingforCookies
             this.x = this.currentLocation.x;
             this.y = this.currentLocation.y;
             this.obstacleType = obstacleType;
+            this.exploding = false;
 
             if (this.obstacleType.Equals("gravel"))
             {
@@ -41,6 +47,8 @@ namespace MowingforCookies
             }
             this.arrayColY = arrayColY;
             this.arrayRowX = arrayRowX;
+            this.cbox = new Rectangle(this.x, this.y, recX, recY);
+            this.backupCbox = this.cbox;
         }
 
         public void LoadContent(ContentManager content)
@@ -51,7 +59,9 @@ namespace MowingforCookies
             }
             else if (obstacleType.Equals("gravel"))
             {
-                image = content.Load<Texture2D>("gravel.png");
+                gravel = content.Load<Texture2D>("gravel.png");
+                boom = content.Load<Texture2D>("boom.png");
+                image =  gravel;
             }
             else if (obstacleType.Equals("bush"))
             {
@@ -66,14 +76,58 @@ namespace MowingforCookies
 
         public void Draw(SpriteBatch sb)
         {
-            sb.Draw(image, new Rectangle(x, y, 40, 40), Color.White);
+            if (exploding == true)
+            {
+                Console.WriteLine(cbox.X);
+                sb.Draw(image, cbox, Color.White);//lmao. only part of the image. weird.
+            }
+            else
+            {
+                sb.Draw(image, new Rectangle(x, y, recX, recY), Color.White);
+            }
         }
-
-
-        public void Update()
+        public void collidesEnemy(Enemy e)
         {
-
+            if (this.cbox.Intersects(e.cbox))
+            {
+                //tada
+                //look up how to remove things from board
+            }
         }
+        public void changeBox(Rectangle lol)
+        {
+            if (exploding == true)
+            {
+                this.cbox = lol;
+                image = boom;
+              
+            }
+            else
+            {
+                
+                this.cbox = this.backupCbox;
+                image =  gravel;
+            }
+        }
+
+
+        public void Update(Rectangle r, Mower mower)
+        {
+            if (mower.x == this.x && mower.y == this.y)
+            {
+                exploding = true;
+                changeBox(r);
+            }
+            else
+            {
+                exploding = false;
+                changeBox(r);
+            }
+
+           
+        }
+
+
 
         public void setSpot(Spot s)
         {
