@@ -16,7 +16,7 @@ namespace MowingforCookies
         public int nextDir; //values 0 through 4.  Should be a typedef.
         public int curDir = 0;
         public int moveIndex;
-        private Rectangle collisionBox;
+        public Rectangle collisionBox;
         public Spot currentLocation;
         public int cookies;
         public bool alive;
@@ -45,8 +45,6 @@ namespace MowingforCookies
             this.arrayRowX = currentLocation.arrayRowX;
             this.arrayColY = currentLocation.arrayColY;
 
-            //speed = 5;
-            //movedX = 0;
             collisionBox = new Rectangle(x, y, recX, recY);
         }
 
@@ -103,11 +101,16 @@ namespace MowingforCookies
             {
                 curDir = nextDir;
             }
-                Move(patches);
+                
 
             if (!alive)
             {
                 nextDir = 0;
+                image = deadMower;
+            }
+            else
+            {
+                Move(patches);
             }
 
 
@@ -131,6 +134,7 @@ namespace MowingforCookies
                 else
                 {
                     this.x = this.x + SPEED;
+                    this.collisionBox.X = this.x;
                     if (this.x >= patches[arrayRowX + 1, arrayColY].x)
                     {
                         this.arrayRowX = this.arrayRowX + 1;
@@ -149,6 +153,7 @@ namespace MowingforCookies
                 else
                 {
                     this.x = this.x - SPEED;
+                    this.collisionBox.X = this.x;
                     if (this.x <= patches[arrayRowX - 1, arrayColY].x)
                     {
                         this.arrayRowX = this.arrayRowX - 1;
@@ -168,6 +173,7 @@ namespace MowingforCookies
                 else
                 {
                     this.y = this.y + SPEED;
+                    this.collisionBox.Y = this.y;
                     if (this.y >= patches[arrayRowX, arrayColY + 1].y)
                     {
                         this.arrayColY = this.arrayColY + 1;
@@ -186,6 +192,7 @@ namespace MowingforCookies
                 else
                 {
                     this.y = this.y - SPEED;
+                    this.collisionBox.Y = this.y;
                     if (this.y <= patches[arrayRowX, arrayColY - 1].y)
                     {
                         this.arrayColY = this.arrayColY - 1;
@@ -206,17 +213,7 @@ namespace MowingforCookies
             }
             else
             {
-                if (objectSpot.getEnemy() != null)
-                {
-                    testOb(this);
-                    alive = false;
-                    image = deadMower;
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                return false;
             }
         }
         public void testOb(Object o)

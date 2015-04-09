@@ -24,7 +24,6 @@ namespace MowingforCookies
         public int travelCost; //of cookies
         public int cookiesGained;
         public Obstacle ob;
-        public Enemy e;
         public Cookie c;
 
 
@@ -44,7 +43,6 @@ namespace MowingforCookies
             this.travelCost = travelCost;
             this.cookiesGained = cookiesGained;
             this.ob = ob;
-            this.e = null;
             this.c = null;
             this.arrayRowX = arrayRowX;
             this.arrayColY = arrayColY;
@@ -66,7 +64,6 @@ namespace MowingforCookies
             this.travelCost = travelCost;
             this.cookiesGained = cookiesGained;
             this.ob = null;
-            this.e = null;
             this.canTraverse = true;
             this.c = null;
             this.arrayRowX = arrayRowX;
@@ -193,19 +190,6 @@ namespace MowingforCookies
 
         }
 
-        public Enemy getEnemy()
-        {
-            return this.e;
-        }
-
-
-        public void setEnemy(Enemy e)
-        {
-            this.e = e;
-            this.canTraverse = false;
-
-
-        }
         public Rectangle getBox()
         {
             return collisionBox;
