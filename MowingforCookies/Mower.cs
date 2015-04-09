@@ -14,7 +14,7 @@ namespace MowingforCookies
         public int x;
         public int y;
         public int nextDir; //values 0 through 4.  Should be a typedef.
-        public int curDir;
+        public int curDir = 0;
         const int time_between_moves = 10; //number of game loops between calling move
         public int current_time = 0; //tracks game loops
         public int moveIndex;
@@ -29,6 +29,8 @@ namespace MowingforCookies
 
         public int recX = 50;
         public int recY = 50;
+
+        const int SPEED = 5;
 
         //public Animated Sprite?? mowerTextureMap
 
@@ -99,15 +101,11 @@ namespace MowingforCookies
 
             }
 
-            if (current_time >= time_between_moves)
+            if (curDir == 0)
             {
+                curDir = nextDir;
+            }
                 Move(patches);
-                current_time = 0;
-            }
-            else
-            {
-                current_time++;
-            }
 
             if (!alive)
             {
@@ -130,50 +128,74 @@ namespace MowingforCookies
             {
                 if ((arrayRowX + 1 == patchesRows) || (collisionObject(patches[arrayRowX + 1, arrayColY]) == false))
                 {
+                    curDir = nextDir;
                 }
                 else
                 {
-                    this.x = patches[arrayRowX + 1, arrayColY].x;
-                    this.collisionBox.X = patches[arrayRowX + 1, arrayColY].x;
-                    this.arrayRowX = this.arrayRowX + 1;
+                    this.x = this.x + SPEED;
+                    if (this.x >= patches[arrayRowX + 1, arrayColY].x)
+                    {
+                        this.arrayRowX = this.arrayRowX + 1;
+                        curDir = nextDir;
+                    }
                 }
+
+                
             }
             else if (curDir == 2)//left
             {
                 if ((arrayRowX - 1 == -1) || (collisionObject(patches[arrayRowX - 1, arrayColY]) == false))
                 {
+                    curDir = nextDir;
                 }
                 else
                 {
-                    this.x = patches[arrayRowX - 1, arrayColY].x;
-                    this.collisionBox.X = patches[arrayRowX - 1, arrayColY].x;
-                    this.arrayRowX = this.arrayRowX - 1;
+                    this.x = this.x - SPEED;
+                    if (this.x <= patches[arrayRowX - 1, arrayColY].x)
+                    {
+                        this.arrayRowX = this.arrayRowX - 1;
+                        curDir = nextDir;
+                    }
                 }
+
+                
 
             }
             else if (curDir == 3)//down
             {
-                if ((arrayColY + 1 == patchesCols) || (collisionObject(patches[arrayRowX, arrayColY+1]) == false))
+                if ((arrayColY + 1 == patchesCols) || (collisionObject(patches[arrayRowX, arrayColY + 1]) == false))
                 {
+                    curDir = nextDir;
                 }
                 else
                 {
-                    this.y = patches[arrayRowX, arrayColY+1].y;
-                    this.collisionBox.Y = patches[arrayRowX, arrayColY+1].y;
-                    this.arrayColY = this.arrayColY +1;
+                    this.y = this.y + SPEED;
+                    if (this.y >= patches[arrayRowX, arrayColY + 1].y)
+                    {
+                        this.arrayColY = this.arrayColY + 1;
+                        curDir = nextDir;
+                    }
                 }
+
+                
             }
             else if (curDir == 4)//down
             {
                 if ((arrayColY - 1 == -1) || (collisionObject(patches[arrayRowX, arrayColY - 1]) == false))
                 {
+                    curDir = nextDir;
                 }
                 else
                 {
-                    this.y = patches[arrayRowX, arrayColY-1].y;
-                    this.collisionBox.Y = patches[arrayRowX, arrayColY - 1].y;
-                    this.arrayColY = this.arrayColY - 1;
+                    this.y = this.y - SPEED;
+                    if (this.y <= patches[arrayRowX, arrayColY - 1].y)
+                    {
+                        this.arrayColY = this.arrayColY - 1;
+                        curDir = nextDir;
+                    }
                 }
+
+               
             }
         }
 
