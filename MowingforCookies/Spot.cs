@@ -164,7 +164,7 @@ namespace MowingforCookies
                 case "water":
                     break;
                 case "gravel":
-                    ob.Update(obRec, mower );
+                    ob.Update(obRec, mower, e );
                     break;
                 case "bush":
                     break;

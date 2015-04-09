@@ -90,13 +90,12 @@ namespace MowingforCookies
         {
             if (this.cbox.Intersects(e.cbox))
             {
-                //tada
-                //look up how to remove things from board
+                e.alive = false;
             }
         }
         public void changeBox(Rectangle lol)
         {
-            if (exploding == true)
+            if (exploding)
             {
                 this.cbox = lol;
                 image = boom;
@@ -111,7 +110,7 @@ namespace MowingforCookies
         }
 
 
-        public void Update(Rectangle r, Mower mower)
+        public void Update(Rectangle r, Mower mower, Enemy e)
         {
             if (mower.x == this.x && mower.y == this.y)
             {
@@ -122,6 +121,10 @@ namespace MowingforCookies
             {
                 exploding = false;
                 changeBox(r);
+            }
+            if (e != null)
+            {
+                collidesEnemy(e);
             }
 
            
