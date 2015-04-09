@@ -148,9 +148,6 @@ namespace MowingforCookies
             enemies.Add(gnome1);
             enemies.Add(gnome2);
             enemies.Add(gnome3);
-            foreach ( Enemy e in enemies){
-                patches[e.arrayRowX, e.arrayColY].setEnemy(e);
-            }
             
 
 
@@ -224,6 +221,10 @@ namespace MowingforCookies
                 if (e.alive)
                 {
                     e.Update(mower, controls, patches, gameTime);
+                    if (e.cbox.Intersects(mower.collisionBox))
+                    {
+                        mower.alive = false;
+                    }
                 }
             }
             

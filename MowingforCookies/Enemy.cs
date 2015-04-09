@@ -76,7 +76,7 @@ namespace MowingforCookies
 
             if (this.visible)
             {
-                    Move(mower, patches);
+                Move(mower, patches);
             }
 
 
@@ -106,14 +106,12 @@ namespace MowingforCookies
             {
 
                 this.x = this.x + SPEED;
+                this.cbox.X = this.x;
                 if (this.x >= patches[arrayRowX + 1, arrayColY].x)
                 {
-                    patches[arrayRowX, arrayColY].setEnemy(null); //leave current tile
-                    patches[arrayRowX, arrayColY].canTraverse = true;
 
                     this.arrayRowX = this.arrayRowX + 1; //update grid position
 
-                    patches[arrayRowX, arrayColY].setEnemy(this); //enter new tile
                     moveIndex++;
                     if (moveIndex >= moveSequence.Length)
                     {
@@ -125,14 +123,11 @@ namespace MowingforCookies
             else if (nextDir == 2)//left
             {
                 this.x = this.x - SPEED;
+                this.cbox.X = this.x;
                 if (this.x <= patches[arrayRowX - 1, arrayColY].x)
                 {
-                    patches[arrayRowX, arrayColY].setEnemy(null); //leave current tile
-                    patches[arrayRowX, arrayColY].canTraverse = true;
-
                     this.arrayRowX = this.arrayRowX - 1; //update grid position
 
-                    patches[arrayRowX, arrayColY].setEnemy(this); //enter new tile
                     moveIndex++;
                     if (moveIndex >= moveSequence.Length)
                     {
@@ -144,14 +139,12 @@ namespace MowingforCookies
             else if (nextDir == 3)//down
             {
                 this.y = this.y + SPEED;
+                this.cbox.Y = this.y;
                 if (this.y >= patches[arrayRowX, arrayColY + 1].y)
                 {
-                    patches[arrayRowX, arrayColY].setEnemy(null); //leave current tile
-                    patches[arrayRowX, arrayColY].canTraverse = true;
 
                     this.arrayColY = this.arrayColY + 1; //update grid position
 
-                    patches[arrayRowX, arrayColY].setEnemy(this); //enter new tile
                     moveIndex++;
                     if (moveIndex >= moveSequence.Length)
                     {
@@ -162,14 +155,12 @@ namespace MowingforCookies
             else if (nextDir == 4)//up
             {
                 this.y = this.y - SPEED;
+                this.cbox.Y = this.y;
                 if (this.y >= patches[arrayRowX, arrayColY - 1].y)
                 {
-                    patches[arrayRowX, arrayColY].setEnemy(null); //leave current tile
-                    patches[arrayRowX, arrayColY].canTraverse = true;
 
                     this.arrayColY = this.arrayColY - 1; //update grid position
 
-                    patches[arrayRowX, arrayColY].setEnemy(this); //enter new tile
                     moveIndex++;
                     if (moveIndex >= moveSequence.Length)
                     {
