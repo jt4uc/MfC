@@ -78,7 +78,8 @@ namespace MowingforCookies
         {
             if (exploding == true)
             {
-                sb.Draw(image, new Rectangle(x, y, 150, 150), Color.White);//lmao. only part of the image. weird.
+                Console.WriteLine(cbox.X);
+                sb.Draw(image, cbox, Color.White);//lmao. only part of the image. weird.
             }
             else
             {

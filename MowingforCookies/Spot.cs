@@ -146,7 +146,7 @@ namespace MowingforCookies
 
                     int stupidWidth = (xMax - xMin + 1) * 50;
                     int stupidHeight = (yBottom - yTop + 1) *50;
-                    result = new Rectangle(xMin, yTop, stupidWidth, stupidHeight);
+                    result = new Rectangle(patches[xMin,yTop].x, patches[xMin,yTop].y, stupidWidth, stupidHeight);
 
                     return result;
                     break;
