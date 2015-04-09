@@ -90,7 +90,7 @@ namespace MowingforCookies
         {
             if (this.cbox.Intersects(e.cbox))
             {
-                Console.WriteLine("here. intersects");
+                
                 e.alive = false;
             }
         }
