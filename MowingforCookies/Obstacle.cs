@@ -17,6 +17,8 @@ namespace MowingforCookies
         public int x;
         public int y;
         public Boolean canTraverse;
+        public Texture2D boom;
+        public Texture2D gravel;
 
         public int arrayRowX;
         public int arrayColY;
@@ -57,7 +59,9 @@ namespace MowingforCookies
             }
             else if (obstacleType.Equals("gravel"))
             {
-                image = content.Load<Texture2D>("gravel.png");
+                gravel = content.Load<Texture2D>("gravel.png");
+                boom = content.Load<Texture2D>("boom.png");
+                image =  gravel;
             }
             else if (obstacleType.Equals("bush"))
             {
@@ -72,7 +76,14 @@ namespace MowingforCookies
 
         public void Draw(SpriteBatch sb)
         {
-            sb.Draw(image, new Rectangle(x, y, recX, recY), Color.White);
+            if (exploding == true)
+            {
+                sb.Draw(image, new Rectangle(x, y, 150, 150), Color.White);//lmao. only part of the image. weird.
+            }
+            else
+            {
+                sb.Draw(image, new Rectangle(x, y, recX, recY), Color.White);
+            }
         }
         public void collidesEnemy(Enemy e)
         {
@@ -87,21 +98,31 @@ namespace MowingforCookies
             if (exploding == true)
             {
                 this.cbox = lol;
+                image = boom;
+              
             }
             else
             {
+                
                 this.cbox = this.backupCbox;
+                image =  gravel;
             }
         }
 
 
-        public void Update(Rectangle r)
+        public void Update(Rectangle r, Mower mower)
         {
-            //mower steps on spot. spot updates its obstacle object.
-            //this is coming from spot or something, ideally. 
+            if (mower.x == this.x && mower.y == this.y)
+            {
+                exploding = true;
+                changeBox(r);
+            }
+            else
+            {
+                exploding = false;
+                changeBox(r);
+            }
 
-            //get spots 
-            //boundary checking is done elsewhere
            
         }
 

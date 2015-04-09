@@ -101,7 +101,7 @@ namespace MowingforCookies
             {
                 //Console.WriteLine("mower at: " + arrayRowX + ", " + arrayColY + ". ob:  " + ob.obstacleType);
                 Rectangle result = obRec(patches, ob.obstacleType, mower); //return dynamically sized rectangle if gravel
-                traverseEffect(this.ob, result);
+                traverseEffect(this.ob, result, mower);
 
             }
         }
@@ -122,8 +122,8 @@ namespace MowingforCookies
                     int patchesXMax = patches.GetLength(0);
                     int patchesYBottom = patches.GetLength(1);
 
-                    Console.WriteLine("array x,y: " + arrayRowX + ", " + arrayColY);
-                    //y
+                    //Console.WriteLine("array x,y: " + arrayRowX + ", " + arrayColY);
+                    
                     if (0<=mower.arrayColY - 1)
                     {
                         yTop = mower.arrayColY - 1;
@@ -154,7 +154,7 @@ namespace MowingforCookies
             return result = new Rectangle(mower.x,mower.y,50,50);
             
         }
-        public void traverseEffect(Obstacle ob, Rectangle obRec)
+        public void traverseEffect(Obstacle ob, Rectangle obRec, Mower mower)
         {
             String obType = ob.obstacleType;
             switch (obType)
@@ -164,7 +164,7 @@ namespace MowingforCookies
                 case "water":
                     break;
                 case "gravel":
-                    ob.Update(obRec);
+                    ob.Update(obRec, mower );
                     break;
                 case "bush":
                     break;
