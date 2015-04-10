@@ -130,11 +130,8 @@ namespace MowingforCookies
 
             }
 
-            // can convert this into Tiled stuff later
-            Cookie c1 = new Cookie(patches[4,0],4, 0);
-            cookies.Add(c1);
-            
-
+            Cookie c2 = new Cookie(patches[5, 0], 5, 0);
+            cookies.Add(c2);
 
             base.Initialize();
             controls = new Controls();
@@ -232,6 +229,10 @@ namespace MowingforCookies
                 
                 o.Update(patches,mower,enemies,ticks);
             }
+            foreach (Cookie c in cookies)
+            {
+                c.Update(mower, grandma, ticks);
+            }
         }
 
         /// <summary>
@@ -253,7 +254,10 @@ namespace MowingforCookies
             }
             foreach (Cookie c in cookies)
             {
-                c.Draw(spriteBatch);
+                if (c.alive)
+                {
+                    c.Draw(spriteBatch);
+                }
             }
             mower.Draw(spriteBatch);
             grandma.Draw(spriteBatch);
