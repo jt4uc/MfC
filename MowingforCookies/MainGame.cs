@@ -196,7 +196,7 @@ namespace MowingforCookies
             {
                 o.LoadContent(this.Content);
             }
-            font = Content.Load<SpriteFont>("font");
+            font = Content.Load<SpriteFont>("spriteFont");
         }
 
         /// <summary>
