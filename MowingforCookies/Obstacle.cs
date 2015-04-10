@@ -60,7 +60,7 @@ namespace MowingforCookies
             {
                 gravel = content.Load<Texture2D>("gravel.png");
                 boom = content.Load<Texture2D>("boom.png");
-                image =  gravel;
+                image =  gravel;    
             }
             else if (obstacleType.Equals("bush"))
             {
@@ -70,7 +70,7 @@ namespace MowingforCookies
             {
                 image = content.Load<Texture2D>("grandma.png");
             }
-
+            // put uncut_grass here?
         }
 
         public void Draw(SpriteBatch sb)

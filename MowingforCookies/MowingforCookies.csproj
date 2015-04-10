@@ -98,7 +98,7 @@
     <Content Include="Content\MiniMower.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\mowed grass.png">
+    <Content Include="Content\mowed_grass.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\MowingforCookiesBackground.png">
@@ -121,6 +121,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Content\10x10checkpoint_map.tmx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\gravel_in_corner_test.tmx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
