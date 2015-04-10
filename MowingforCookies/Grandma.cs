@@ -22,7 +22,7 @@ namespace MowingforCookies
         public int[] moveSequence;
         public Boolean alive = true;
 
-        const int SPEED = 2;
+        const int SPEED = 5;
 
         public Rectangle cbox;
         public int recX = 48;
@@ -67,13 +67,15 @@ namespace MowingforCookies
             }
             else
             {
-                image = deadGrandma;
+               image = deadGrandma;
             }
 
         }
 
         public void Move(Mower mower, Spot[,] patches)
         {
+            int patchesRows = patches.GetLength(0);//24
+            int patchesCols = patches.GetLength(1);//18
 
             if (nextDir == 0)
             {
@@ -82,52 +84,80 @@ namespace MowingforCookies
 
             if (nextDir == 1)//right
             {
-
-                this.x = this.x + SPEED;
-                this.cbox.X = this.x;
-                if (this.x >= patches[arrayRowX + 1, arrayColY].x)
+                if (arrayRowX + 1 == patchesRows)
                 {
-
-                    this.arrayRowX = this.arrayRowX + 1; //update grid position
-
                     nextDir = rand.Next(5);
+                }
+                else{
+                    this.x = this.x + SPEED;
+                    this.cbox.X = this.x;
+                    if (this.x >= patches[arrayRowX + 1, arrayColY].x)
+                    {
+
+                        this.arrayRowX = this.arrayRowX + 1; //update grid position
+
+                        nextDir = rand.Next(5);
+                    }
                 }
 
             }
             else if (nextDir == 2)//left
             {
-                this.x = this.x - SPEED;
-                this.cbox.X = this.x;
-                if (this.x <= patches[arrayRowX - 1, arrayColY].x)
+                if (arrayRowX - 1 == -1)
                 {
-                    this.arrayRowX = this.arrayRowX - 1; //update grid position
-
                     nextDir = rand.Next(5);
                 }
+                else
+                {
+                    this.x = this.x - SPEED;
+                    this.cbox.X = this.x;
+                    if (this.x <= patches[arrayRowX - 1, arrayColY].x)
+                    {
+                        this.arrayRowX = this.arrayRowX - 1; //update grid position
+
+                        nextDir = rand.Next(5);
+                    }
+                }
+               
 
             }
             else if (nextDir == 3)//down
             {
-                this.y = this.y + SPEED;
-                this.cbox.Y = this.y;
-                if (this.y >= patches[arrayRowX, arrayColY + 1].y)
+                if (arrayColY + 1 == patchesCols)
                 {
-
-                    this.arrayColY = this.arrayColY + 1; //update grid position
-
                     nextDir = rand.Next(5);
                 }
+                else
+                {
+                    this.y = this.y + SPEED;
+                    this.cbox.Y = this.y;
+                    if (this.y >= patches[arrayRowX, arrayColY + 1].y)
+                    {
+
+                        this.arrayColY = this.arrayColY + 1; //update grid position
+
+                        nextDir = rand.Next(5);
+                    }
+                }
+                
             }
             else if (nextDir == 4)//up
             {
-                this.y = this.y - SPEED;
-                this.cbox.Y = this.y;
-                if (this.y >= patches[arrayRowX, arrayColY - 1].y)
+                if (arrayColY - 1 == -1)
                 {
-
-                    this.arrayColY = this.arrayColY - 1; //update grid position
-
                     nextDir = rand.Next(5);
+                }
+                else
+                {
+                    this.y = this.y - SPEED;
+                    this.cbox.Y = this.y;
+                    if (this.y <= patches[arrayRowX, arrayColY - 1].y)
+                    {
+
+                        this.arrayColY = this.arrayColY - 1; //update grid position
+
+                        nextDir = rand.Next(5);
+                    }
                 }
             }
         }

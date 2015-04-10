@@ -33,8 +33,6 @@ namespace MowingforCookies
         List<Enemy> enemies;
         List<Cookie> cookies;
         List<Obstacle> obstacles;
-        private SpriteFont font;
-        private Texture2D menu;
 
 
         Texture2D patch;
@@ -93,7 +91,7 @@ namespace MowingforCookies
 
             // hard coding Mowers, Obstacles, and Enemies
             mower = new Mower(patches[0,1], 150); // current location represented by spot
-            grandma = new Grandma(patches[7, 7], 7, 7);
+            grandma = new Grandma(patches[6,6], 6, 6);
             enemies = new List<Enemy>();
             cookies = new List<Cookie>();
             obstacles = new List<Obstacle>();
@@ -168,7 +166,6 @@ namespace MowingforCookies
             spriteBatch = new SpriteBatch(GraphicsDevice);
             background = Content.Load<Texture2D>("white.png");
             patch = Content.Load<Texture2D>("Patch.png");
-            menu = Content.Load<Texture2D>("menu.png");
             foreach (Spot s in patches)
             {
                 s.LoadContent(this.Content);
@@ -183,6 +180,7 @@ namespace MowingforCookies
             }
 
             mower.LoadContent(this.Content);
+            grandma.LoadContent(this.Content);
             foreach (Enemy e in enemies)
             {
                 e.LoadContent(this.Content);
@@ -195,7 +193,6 @@ namespace MowingforCookies
             {
                 o.LoadContent(this.Content);
             }
-            font = Content.Load<SpriteFont>("font");
         }
 
         /// <summary>
@@ -219,8 +216,8 @@ namespace MowingforCookies
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            mower.Update(controls, patches, gameTime);
-            grandma.Update(mower, controls, patches, gameTime);
+           mower.Update(controls, patches, gameTime);
+           grandma.Update(mower, controls, patches, gameTime);
 
             foreach (Enemy e in enemies)
             {
@@ -273,6 +270,7 @@ namespace MowingforCookies
                 }
             }
             mower.Draw(spriteBatch);
+            grandma.Draw(spriteBatch);
             foreach (Enemy e in enemies)
             {
                 if (e.visible == true)
@@ -283,7 +281,6 @@ namespace MowingforCookies
                     }
                 }
             }
-            DrawStatusBar();
 
 
 
@@ -301,12 +298,5 @@ namespace MowingforCookies
 
         }
 
-        private void DrawStatusBar()
-        {
-            spriteBatch.Draw(menu, new Rectangle(0, 500, 500, 100), Color.White);
-
-            spriteBatch.DrawString(font, "Grass mowed: " + mower.totalMowed + "/" + patches.Length, new Vector2(25, 520), Color.Black);
-            spriteBatch.DrawString(font, "Fuel: " + mower.cookies, new Vector2(25, 550), Color.Black);
-        }
     }
 }
