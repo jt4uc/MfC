@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="10" height="10" tilewidth="50" tileheight="50" nextobjectid="113">
- <tileset firstgid="1" name="mowed grass" tilewidth="50" tileheight="50">
-  <image source="../MowingforCookies/Content/mowed grass.png" width="128" height="128"/>
+ <tileset firstgid="1" name="mowed_grass" tilewidth="50" tileheight="50">
+  <image source="../MowingforCookies/Content/mowed_grass.png" width="128" height="128"/>
  </tileset>
  <tileset firstgid="5" name="oak-tree-50x50-transparent" tilewidth="50" tileheight="50">
   <image source="../MowingforCookies/Content/oak-tree-50x50-transparent.gif" width="50" height="50"/>

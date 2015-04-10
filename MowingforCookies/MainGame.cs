@@ -81,7 +81,7 @@ namespace MowingforCookies
                 }
             }
 
-            // hard coding Mowers, Obstacles, and Enemies
+            // hard coding Mower
             mower = new Mower(patches[0,1], 0); // current location represented by spot
             enemies = new List<Enemy>();
             cookies = new List<Cookie>();
@@ -91,7 +91,7 @@ namespace MowingforCookies
             for (int i = 0; i < 2; i++) // rplace 2 with map.ObjectGroups.Count when you convert grass/uncut
             {
                 String name = map.ObjectGroups[i].Name; // object layer names are labeled <png filename>_<collisions> // will change tmx to match this
-                name = name.Substring(0, name.LastIndexOf("_"));
+                //name = name.Substring(0, name.LastIndexOf("_"));
                 System.Diagnostics.Debug.WriteLine("obj layer name: " + name);
                 int numObjects = map.ObjectGroups[i].Objects.Count;
                 // go through each object of the object layer
@@ -100,9 +100,21 @@ namespace MowingforCookies
                     int x = (int)map.ObjectGroups[i].Objects[j].X / 50; // divide by 50 because that's the size of the tile
                     int y = ((int)map.ObjectGroups[i].Objects[j].Y - 50) / 50; // -50, because apparently tiled goes by bottom left corner
                     //System.Diagnostics.Debug.WriteLine("x, y: " + x + ", " + y);
-                    Obstacle o = new Obstacle(patches[x, y], name, x, y);
-                    obstacles.Add(o);
-                    patches[x, y].setObstacle(o);
+                    if (!name.Equals("gnome"))
+                    {
+                        Obstacle o = new Obstacle(patches[x, y], name, x, y);
+                        obstacles.Add(o);
+                        patches[x, y].setObstacle(o);
+                    }
+                    else
+                    {   
+                        String path = map.ObjectGroups[i].Objects[j].Name;
+                        int[] pathArray = Array.ConvertAll(path.Split(','), int.Parse); // splits the path specified in Tiled and converts into int array
+                        Enemy gnome = new Enemy(patches[x, y], x, y, pathArray);
+                        enemies.Add(gnome);
+                        patches[x, y].setEnemy(gnome);
+                    }
+                    
                 }
 
             }
@@ -115,18 +127,18 @@ namespace MowingforCookies
                 patches[c.arrayRowX, c.arrayColY].setCookie(c);
             }
 
-            // will have to think of a way to import enemy information
-            int [] kiddingMe = new int[] {1, 1, 1, 2, 2, 2}; // gives enemies path to patrol
-            int [] notCoolBro = new int[] {};
-            Enemy gnome1 = new Enemy(patches[4, 5], 3, 4,5, kiddingMe);
-            Enemy gnome2 = new Enemy(patches[7, 6], 3, 7, 6, notCoolBro);
-            Enemy gnome3 = new Enemy(patches[2, 1], 3, 2, 1, notCoolBro);
-            enemies.Add(gnome1);
-            enemies.Add(gnome2);
-            enemies.Add(gnome3);
-            foreach ( Enemy e in enemies){
-                patches[e.arrayRowX, e.arrayColY].setEnemy(e);
-            }
+            // this is from the checkpoint map
+            //int [] kiddingMe = new int[] {1, 1, 1, 2, 2, 2}; // gives enemies path to patrol
+            //int [] notCoolBro = new int[] {};
+            //Enemy gnome1 = new Enemy(patches[4, 5], 4,5, kiddingMe);
+            //Enemy gnome2 = new Enemy(patches[7, 6], 7, 6, notCoolBro);
+            //Enemy gnome3 = new Enemy(patches[2, 1], 2, 1, notCoolBro);
+            //enemies.Add(gnome1);
+            //enemies.Add(gnome2);
+            //enemies.Add(gnome3);
+            //foreach ( Enemy e in enemies){
+            //    patches[e.arrayRowX, e.arrayColY].setEnemy(e);
+            //}
             
 
 
