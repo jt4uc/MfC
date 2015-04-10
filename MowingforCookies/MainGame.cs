@@ -33,6 +33,8 @@ namespace MowingforCookies
         List<Obstacle> obstacles;
         private SpriteFont font;
         private Texture2D menu;
+        public int win_Num;
+        public bool youWinYet;
         // for Tiled
         TmxMap map;
         //Texture2D[] tiles;
@@ -46,6 +48,9 @@ namespace MowingforCookies
             map = new TmxMap("./Content/gravel_in_corner_test.tmx");
             SCREENWIDTH = map.Width * 50;
             SCREENHEIGHT = map.Height * 60;
+
+            win_Num = 100;
+            youWinYet = false;
 
             graphics.PreferredBackBufferWidth = SCREENWIDTH;  // set this value to the desired width of your window
             graphics.PreferredBackBufferHeight = SCREENHEIGHT;   // set this value to the desired height of your window
@@ -185,53 +190,65 @@ namespace MowingforCookies
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            ticks++;
-            controls.Update();
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
-
-           mower.Update(controls, patches, gameTime);
-           grandma.Update(mower, controls, patches, gameTime);
-
-           if (grandma.cbox.Intersects(mower.collisionBox))
-           {
-               grandma.alive = false;
-           }
-
-            foreach (Enemy e in enemies)
+            if (!youWinYet)
             {
-                if (e.alive)
+                ticks++;
+                controls.Update();
+                if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+                    Exit();
+
+                mower.Update(controls, patches, gameTime);
+                grandma.Update(mower, controls, patches, gameTime);
+
+                if (grandma.cbox.Intersects(mower.collisionBox))
                 {
-                    e.Update(mower, controls, patches, gameTime);
-                    if (e.cbox.Intersects(mower.collisionBox))
+                    grandma.alive = false;
+                }
+
+                foreach (Enemy e in enemies)
+                {
+                    if (e.alive)
                     {
-                        mower.alive = false;
-                    }
-                    if (e.cbox.Intersects(grandma.cbox))
-                    {
-                        e.visible = false;
+                        e.Update(mower, controls, patches, gameTime);
+                        if (e.cbox.Intersects(mower.collisionBox))
+                        {
+                            mower.alive = false;
+                        }
+                        if (e.cbox.Intersects(grandma.cbox))
+                        {
+                            e.visible = false;
+                        }
                     }
                 }
-            }
-            
-            base.Update(gameTime);
-            if (mower.alive == false)
-            {
-                //Exit();
-            }
 
-            foreach (Spot s in patches)
-            {
-                s.Update(Content, patches, mower, enemies, ticks);
+                base.Update(gameTime);
+                if (mower.alive == false)
+                {
+                    //Exit();
+                }
+
+                foreach (Spot s in patches)
+                {
+                    s.Update(Content, patches, mower, enemies, ticks);
+                }
+                foreach (Obstacle o in obstacles)
+                {
+
+                    o.Update(patches, mower, enemies, ticks);
+                }
+                foreach (Cookie c in cookies)
+                {
+                    c.Update(mower, grandma, ticks);
+                }
+
+                if (mower.totalMowed >= win_Num)
+                {
+                    youWinYet = true;
+                }
             }
-            foreach (Obstacle o in obstacles)
+            else
             {
-                
-                o.Update(patches,mower,enemies,ticks);
-            }
-            foreach (Cookie c in cookies)
-            {
-                c.Update(mower, grandma, ticks);
+
             }
         }
 
@@ -280,9 +297,16 @@ namespace MowingforCookies
         private void DrawStatusBar()
         {
             spriteBatch.Draw(menu, new Rectangle(0, 500, 500, 100), Color.White);
-
-            spriteBatch.DrawString(font, "Grass mowed: " + mower.totalMowed + "/" + patches.Length, new Vector2(25, 520), Color.Black);
-            spriteBatch.DrawString(font, "Fuel: " + mower.cookies, new Vector2(25, 550), Color.Black);
+            if (!youWinYet)
+            {
+                spriteBatch.DrawString(font, "Grass mowed: " + mower.totalMowed + "/" + patches.Length, new Vector2(25, 520), Color.Black);
+                spriteBatch.DrawString(font, "Fuel: " + mower.cookies, new Vector2(25, 550), Color.Black);
+            }
+            else
+            {
+                spriteBatch.DrawString(font, "YOU GET COOKIES!!!", new Vector2(25, 520), Color.Black);
+            }
+            
         }
 
     }
