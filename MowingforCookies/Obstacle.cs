@@ -25,10 +25,10 @@ namespace MowingforCookies
 
         public Rectangle cbox;
         public Rectangle backupCbox;
-        public int recX = 40;
-        public int recY = 40;
-        public Boolean exploding;
-        public int tickCount = 0;
+        public int recX = 50;
+        public int recY = 50;
+        public Boolean exploding = false;
+        public int tickCount = 99999;
 
         public Obstacle(Spot currentLocation, String obstacleType, int arrayRowX, int arrayColY)
         {
@@ -36,8 +36,6 @@ namespace MowingforCookies
             this.x = this.currentLocation.x;
             this.y = this.currentLocation.y;
             this.obstacleType = obstacleType;
-            this.exploding = false;
-
             if (this.obstacleType.Equals("gravel"))
             {
                 this.canTraverse = true;
@@ -77,37 +75,20 @@ namespace MowingforCookies
 
         public void Draw(SpriteBatch sb)
         {
-            if (exploding == true)
+            if (exploding)
             {
-                //Console.WriteLine(cbox.X);
                 sb.Draw(image, cbox, Color.White);//lmao. only part of the image. weird.
             }
             else
-            {
-                sb.Draw(image, new Rectangle(x, y, recX, recY), Color.White);
+            { 
+                sb.Draw(image, backupCbox, Color.White);
             }
         }
         public void collidesEnemy(Enemy e)
         {
             if (this.cbox.Intersects(e.cbox))
             {
-                
                 e.alive = false;
-            }
-        }
-        public void changeBox(Rectangle lol)
-        {
-            if (exploding)
-            {
-                this.cbox = lol;
-                image = boom;
-              
-            }
-            else
-            {
-                
-                this.cbox = this.backupCbox;
-                image =  gravel;
             }
         }
 
@@ -159,7 +140,16 @@ namespace MowingforCookies
             return result = new Rectangle(mower.x, mower.y, 50, 50);
 
         }
-
+        public void changeBox(Rectangle lol)
+        {
+            this.cbox = lol;
+            image = boom;
+        }
+        public void changeBoxBack()
+        {
+            this.cbox = this.backupCbox;
+            image = gravel;
+        }
 
         public void Update(Spot[,] patches, Mower mower, List<Enemy> enemies, int ticks)
         {
@@ -167,29 +157,25 @@ namespace MowingforCookies
             if (mower.x == this.x && mower.y == this.y)
             {
                 tickCount = ticks;
-                Console.WriteLine("tickCount: " + tickCount);
-                if (tickCount + 50 <= ticks)
+                exploding = true;
+                image = boom;
+                changeBox(r);
+            }
+            else
+            {
+                if (ticks > (tickCount + 50))
                 {
                     exploding = false;
-                    changeBox(r);
+                    image = gravel;
+                    changeBoxBack();
                 }
-                else
-                {
-                    Console.WriteLine("ticks: " + ticks);
-                    exploding = true;
-                    changeBox(r);
-                }
-                
             }
+
             foreach (Enemy e in enemies)
             {
                 collidesEnemy(e);
-            }
-
-           
+            } 
         }
-
-
 
         public void setSpot(Spot s)
         {
@@ -202,7 +188,5 @@ namespace MowingforCookies
         {
             return this.currentLocation;
         }
-
-
     }
 }
