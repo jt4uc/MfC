@@ -50,7 +50,7 @@ namespace MowingforCookies
             SCREENWIDTH = map.Width * 50;
             SCREENHEIGHT = map.Height * 60;
 
-            win_Num = 100;
+            win_Num = 75;
             youWinYet = false;
 
             graphics.PreferredBackBufferWidth = SCREENWIDTH;  // set this value to the desired width of your window
