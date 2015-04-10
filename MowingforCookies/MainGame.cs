@@ -131,8 +131,6 @@ namespace MowingforCookies
             }
 
             // can convert this into Tiled stuff later
-            Cookie c1 = new Cookie(patches[4,0],4, 0);
-            cookies.Add(c1);
             
 
 

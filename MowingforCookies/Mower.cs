@@ -13,8 +13,11 @@ namespace MowingforCookies
     {
         public int x;
         public int y;
-        public int nextDir; //values 0 through 4.  Should be a typedef.
-        public int curDir = 0;
+       // public int nextDir; //values 0 through 4.  Should be a typedef.
+        enum Direction {North, South, East, West, Stop};
+        private Direction nextDir = Direction.Stop;
+        private Direction curDir = Direction.Stop;
+       // public int curDir = 0;
         public int moveIndex;
         public Rectangle collisionBox;
         public Spot currentLocation;
@@ -67,32 +70,32 @@ namespace MowingforCookies
             }
             if (controls.onPress(Keys.Right, Buttons.DPadRight))
             {
-                nextDir = 1;
+                nextDir = Direction.East;
 
             }
             else if (controls.onPress(Keys.Left, Buttons.DPadLeft))
             {
-                nextDir = 2;
+                nextDir = Direction.West;
             }
             else if (controls.onPress(Keys.Down, Buttons.DPadDown))
             {
-                nextDir = 3;
+                nextDir = Direction.South;
             }
             else if (controls.onPress(Keys.Up, Buttons.DPadUp))
             {
-                nextDir = 4;
+                nextDir = Direction.North;
             }
             else
             {
                 //spacebar = stop?
             }
-            if (curDir == 0)
+            if (curDir == Direction.Stop)
             {
                 curDir = nextDir;
             }
             if (!alive)
             {
-                nextDir = 0;
+                nextDir = Direction.Stop;
                 image = deadMower;
             }
             else
@@ -104,7 +107,7 @@ namespace MowingforCookies
         {
             int patchesRows = patches.GetLength(0);
             int patchesCols = patches.GetLength(1);
-            if (curDir == 1)//right
+            if (curDir == Direction.East)//right
             {
                 if ((arrayRowX + 1 == patchesRows) || (collisionObject(patches[arrayRowX + 1, arrayColY]) == false))
                 {
@@ -131,7 +134,7 @@ namespace MowingforCookies
                     }
                 } 
             }
-            else if (curDir == 2)//left
+            else if (curDir == Direction.West)//left
             {
                 if ((arrayRowX - 1 == -1) || (collisionObject(patches[arrayRowX - 1, arrayColY]) == false))
                 {
@@ -158,7 +161,7 @@ namespace MowingforCookies
                     }
                 }
             }
-            else if (curDir == 3)//down
+            else if (curDir == Direction.South)//down
             {
                 if ((arrayColY + 1 == patchesCols) || (collisionObject(patches[arrayRowX, arrayColY + 1]) == false))
                 {
@@ -185,7 +188,7 @@ namespace MowingforCookies
                     }
                 }             
             }
-            else if (curDir == 4)//up
+            else if (curDir == Direction.North)//up
             {
                 if ((arrayColY - 1 == -1) || (collisionObject(patches[arrayRowX, arrayColY - 1]) == false))
                 {
