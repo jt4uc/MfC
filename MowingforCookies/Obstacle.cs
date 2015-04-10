@@ -183,10 +183,5 @@ namespace MowingforCookies
             this.x = s.x;
             this.y = s.y;
         }
-
-        public Spot getSpot()
-        {
-            return this.currentLocation;
-        }
     }
 }

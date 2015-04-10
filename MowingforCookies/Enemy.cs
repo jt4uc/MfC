@@ -14,12 +14,6 @@ namespace MowingforCookies
         public int y;
         public int moveIndex;   
         public Spot currentLocation;
-        public Spot targetLocation;
-        public double speed;
-        public Texture2D enemyTexture;
-        //private Rectangle collisionBox;
-        //public Animated Sprite?? mowerTextureMap
-
         public String type;
         public int arrayRowX;
         public int arrayColY;
@@ -27,15 +21,11 @@ namespace MowingforCookies
         public int[] moveSequence;
         public Boolean alive = true;
         public Texture2D gnome;
-
-
         const int SPEED = 2;
-
         public Rectangle cbox;
         public int recX = 48;
         public int recY = 50;
 
-        //Content Manager?
         public Enemy(Spot currentLocation, int cookies, int arrayRowX, int arrayColY, int[] sequence)
         {
 
@@ -48,45 +38,30 @@ namespace MowingforCookies
             this.arrayRowX = arrayRowX;
             this.visible = false;
             this.moveSequence = sequence;
-
             this.cbox = new Rectangle(x, y, recX, recY);
-
-
         }
 
         public void LoadContent(ContentManager content)
         {
             gnome = content.Load<Texture2D>("gnome.png");
-            
             image = gnome;
-           
         }
 
         public void Draw(SpriteBatch sb)
         {
             sb.Draw(image, new Rectangle(x, y, recX, recY), Color.White);
         }
-
         public void Update(Mower mower, Controls controls, Spot[,] patches, GameTime gameTime)
         {
             if (mower.arrayRowX > this.arrayRowX - 3 && mower.arrayRowX < this.arrayRowX + 3 && mower.arrayColY > this.arrayColY - 3 && mower.arrayColY < this.arrayColY + 3)
             {
                 this.visible = true;
             }
-
             if (this.visible)
             {
                 Move(mower, patches);
             }
-
-
         }
-
-        public void setType(String s)
-        {
-            this.type = s;
-        }
-
         public void Move(Mower mower, Spot[,] patches)
         {
             int nextDir;
@@ -97,28 +72,20 @@ namespace MowingforCookies
             else
             {
                 nextDir = moveSequence[moveIndex];
-
             }
-
-            
-
             if (nextDir == 1)//right
             {
-
                 this.x = this.x + SPEED;
                 this.cbox.X = this.x;
                 if (this.x >= patches[arrayRowX + 1, arrayColY].x)
                 {
-
                     this.arrayRowX = this.arrayRowX + 1; //update grid position
-
                     moveIndex++;
                     if (moveIndex >= moveSequence.Length)
                     {
                         moveIndex = 0;
                     }
                 }
-
             }
             else if (nextDir == 2)//left
             {
@@ -127,14 +94,12 @@ namespace MowingforCookies
                 if (this.x <= patches[arrayRowX - 1, arrayColY].x)
                 {
                     this.arrayRowX = this.arrayRowX - 1; //update grid position
-
                     moveIndex++;
                     if (moveIndex >= moveSequence.Length)
                     {
                         moveIndex = 0;
                     }
                 }
-
             }
             else if (nextDir == 3)//down
             {
@@ -142,9 +107,7 @@ namespace MowingforCookies
                 this.cbox.Y = this.y;
                 if (this.y >= patches[arrayRowX, arrayColY + 1].y)
                 {
-
                     this.arrayColY = this.arrayColY + 1; //update grid position
-
                     moveIndex++;
                     if (moveIndex >= moveSequence.Length)
                     {
@@ -158,9 +121,7 @@ namespace MowingforCookies
                 this.cbox.Y = this.y;
                 if (this.y >= patches[arrayRowX, arrayColY - 1].y)
                 {
-
                     this.arrayColY = this.arrayColY - 1; //update grid position
-
                     moveIndex++;
                     if (moveIndex >= moveSequence.Length)
                     {

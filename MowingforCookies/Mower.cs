@@ -21,7 +21,6 @@ namespace MowingforCookies
         public int cookies;
         public bool alive;
         public Texture2D deadMower;
-
         public int arrayRowX;
         public int arrayColY;
 
@@ -30,9 +29,6 @@ namespace MowingforCookies
 
         const int SPEED = 5;
 
-        //public Animated Sprite?? mowerTextureMap
-
-        //Content Manager?
         public Mower(Spot currentLocation, int cookies)
         {
 
@@ -53,15 +49,11 @@ namespace MowingforCookies
         {
             image = content.Load<Texture2D>("MiniMower.png");
             deadMower = content.Load<Texture2D>("DeadMiniMower.png");
-
         }
-
         public void Draw(SpriteBatch sb)
         {
             sb.Draw(image, new Rectangle(x, y, recX, recY), Color.White);
         }
-
-
         public void Update(Controls controls, Spot[,] patches, GameTime gameTime)
         {
             foreach (Spot s in patches)
@@ -69,12 +61,8 @@ namespace MowingforCookies
                 if (this.x == s.x && this.y == s.y && s.canTraverse == true)
                 {
                     s.isTraversed = true;
-                    //Console.WriteLine("Mower.cs. arrayLocation: " + arrayRowX + ", " + arrayColY);
-
                 }
             }
-
-
             if (controls.onPress(Keys.Right, Buttons.DPadRight))
             {
                 nextDir = 1;
@@ -94,15 +82,12 @@ namespace MowingforCookies
             }
             else
             {
-
+                //spacebar = stop?
             }
-
             if (curDir == 0)
             {
                 curDir = nextDir;
             }
-                
-
             if (!alive)
             {
                 nextDir = 0;
@@ -112,19 +97,11 @@ namespace MowingforCookies
             {
                 Move(patches);
             }
-
-
         }
         public void Move(Spot[,] patches)
         {
-            int patchesRows = patches.GetLength(0);//24
-            int patchesCols = patches.GetLength(1);//18
-            int rowCoord = this.x;//0 
-            int colCoord = this.y;//55
-
-            
-
-            // Sideways Acceleration 
+            int patchesRows = patches.GetLength(0);
+            int patchesCols = patches.GetLength(1);
             if (curDir == 1)//right
             {
                 if ((arrayRowX + 1 == patchesRows) || (collisionObject(patches[arrayRowX + 1, arrayColY]) == false))
@@ -140,9 +117,7 @@ namespace MowingforCookies
                         this.arrayRowX = this.arrayRowX + 1;
                         curDir = nextDir;
                     }
-                }
-
-                
+                } 
             }
             else if (curDir == 2)//left
             {
@@ -160,9 +135,6 @@ namespace MowingforCookies
                         curDir = nextDir;
                     }
                 }
-
-                
-
             }
             else if (curDir == 3)//down
             {
@@ -179,9 +151,7 @@ namespace MowingforCookies
                         this.arrayColY = this.arrayColY + 1;
                         curDir = nextDir;
                     }
-                }
-
-                
+                }             
             }
             else if (curDir == 4)//down
             {
@@ -199,13 +169,11 @@ namespace MowingforCookies
                         curDir = nextDir;
                     }
                 }
-
-               
             }
         }
 
 
-        public bool collisionObject(Spot objectSpot)
+        public bool collisionObject(Spot objectSpot) // used in move
         {
             if (objectSpot.canTraverse == true)
             {
@@ -215,12 +183,6 @@ namespace MowingforCookies
             {
                 return false;
             }
-        }
-        public void testOb(Object o)
-        {
-            Type test = this.GetType();
-            Debug.WriteLine("test: " + o.GetType());
-            Debug.WriteLine(o.GetType().IsAssignableFrom(test));
         }
         //collisionEnemy
         //updateCookieAmount

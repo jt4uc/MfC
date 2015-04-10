@@ -29,21 +29,13 @@ namespace MowingforCookies
         Controls controls;
         Spot[,] patches;
         Mower mower;
-
         List<Enemy> enemies;
         List<Cookie> cookies;
         List<Obstacle> obstacles;
-       
-
-
-        Texture2D patch;
 
         // for Tiled
         TmxMap map;
         Texture2D[] tiles;
-
-
-        
 
         public MainGame()
             : base()
@@ -72,7 +64,7 @@ namespace MowingforCookies
         protected override void Initialize()
         {
 
-            Window.Title = "TEST";
+            Window.Title = "MOWING FOR COOKIES";
 
             // map.ObjectGroups[0].Objects.RemoveAt(0); // for when objects are removed
 
@@ -92,7 +84,7 @@ namespace MowingforCookies
 
 
             // hard coding Mowers, Obstacles, and Enemies
-            mower = new Mower(patches[0,1], 0); // current location represented by spot
+            mower = new Mower(patches[0,1], 0); 
             enemies = new List<Enemy>();
             cookies = new List<Cookie>();
             obstacles = new List<Obstacle>();
@@ -134,12 +126,8 @@ namespace MowingforCookies
             //}
 
             // can convert this into Tiled stuff later
-            Cookie c1 = new Cookie(patches[4,0],4, 4);
+            Cookie c1 = new Cookie(patches[4,0],4, 0);
             cookies.Add(c1);
-            foreach (Cookie c in cookies)
-            {
-                patches[c.arrayRowX, c.arrayColY].setCookie(c);
-            }
 
             // will have to think of a way to import enemy information
             int [] kiddingMe = new int[] {1, 1, 1, 2, 2, 2}; // gives enemies path to patrol
@@ -166,18 +154,9 @@ namespace MowingforCookies
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             background = Content.Load<Texture2D>("white.png");
-            patch = Content.Load<Texture2D>("Patch.png");
             foreach (Spot s in patches)
             {
                 s.LoadContent(this.Content);
-                if (s.ob != null)
-                {
-                    s.ob.LoadContent(this.Content);
-                }
-                if (s.c != null)
-                {
-                    s.c.LoadContent(this.Content);
-                }
             }
 
             mower.LoadContent(this.Content);
@@ -260,19 +239,19 @@ namespace MowingforCookies
             foreach (Spot s in patches)
             {
                 s.Draw(spriteBatch);
-                if (s.c != null)
-                {
-                    s.c.Draw(spriteBatch);
-                }
             }
             foreach (Obstacle o in obstacles)
             {
                 o.Draw(spriteBatch);
             }
+            foreach (Cookie c in cookies)
+            {
+                c.Draw(spriteBatch);
+            }
             mower.Draw(spriteBatch);
             foreach (Enemy e in enemies)
             {
-                if (e.visible == true)
+                if (e.visible)
                 {
                     if (e.alive)
                     {
@@ -280,14 +259,7 @@ namespace MowingforCookies
                     }
                 }
             }
-
-
-
-
             spriteBatch.End();
-
-
-
             base.Draw(gameTime);
         }
 
@@ -295,7 +267,6 @@ namespace MowingforCookies
         {
             Rectangle screenRectangle = new Rectangle(0, 0, 800, 800);
             spriteBatch.Draw(background, screenRectangle, Color.White);
-
         }
     }
 }

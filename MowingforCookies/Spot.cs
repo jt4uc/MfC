@@ -24,13 +24,12 @@ namespace MowingforCookies
         public int travelCost; //of cookies
         public int cookiesGained;
         public Obstacle ob;
-        public Cookie c;
 
 
 
         //tileTexture: Texture2D
 
-        private Rectangle collisionBox;
+        public Rectangle collisionBox;
         public int cbWidth = 50;
         public int cbHeight = 50;
 
@@ -43,7 +42,6 @@ namespace MowingforCookies
             this.travelCost = travelCost;
             this.cookiesGained = cookiesGained;
             this.ob = ob;
-            this.c = null;
             this.arrayRowX = arrayRowX;
             this.arrayColY = arrayColY;
             this.canTraverse = true;
@@ -65,7 +63,6 @@ namespace MowingforCookies
             this.cookiesGained = cookiesGained;
             this.ob = null;
             this.canTraverse = true;
-            this.c = null;
             this.arrayRowX = arrayRowX;
             this.arrayColY = arrayColY;
 
@@ -172,14 +169,6 @@ namespace MowingforCookies
             }
         }
 
-
-
-
-        public Obstacle getObstacle()
-        {
-            return ob;
-        }
-
         public void setObstacle(Obstacle ob)
         {
             this.ob = ob;
@@ -190,13 +179,5 @@ namespace MowingforCookies
 
         }
 
-        public Rectangle getBox()
-        {
-            return collisionBox;
-        }
-        public void setCookie(Cookie c)
-        {
-            this.c = c;
-        }
     }
 }
