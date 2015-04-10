@@ -41,7 +41,7 @@ namespace MowingforCookies
             graphics = new GraphicsDeviceManager(this); /// default is 800x600
             Content.RootDirectory = "Content";
 
-            map = new TmxMap("./Content/10x10checkpoint_map.tmx");
+            map = new TmxMap("./Content/gravel_in_corner_test.tmx");
             SCREENWIDTH = map.Width * 50;
             SCREENHEIGHT = map.Height * 50;
 
@@ -97,7 +97,12 @@ namespace MowingforCookies
                     int x = (int)map.ObjectGroups[i].Objects[j].X / 50; // divide by 50 because that's the size of the tile
                     int y = ((int)map.ObjectGroups[i].Objects[j].Y - 50) / 50; // -50, because apparently tiled goes by bottom left corner
                     //System.Diagnostics.Debug.WriteLine("x, y: " + x + ", " + y);
-                    if (!name.Equals("gnome"))
+
+                    if (name.Equals("grass"))
+                    {
+
+                    }
+                    else if (!name.Equals("gnome"))
                     {
                         Obstacle o = new Obstacle(patches[x, y], name, x, y);
                         obstacles.Add(o);

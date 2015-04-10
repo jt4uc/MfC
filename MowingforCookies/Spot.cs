@@ -89,7 +89,7 @@ namespace MowingforCookies
         {
             if (this.isTraversed == true)
             {
-                image = content.Load<Texture2D>("mowed grass.png");
+                image = content.Load<Texture2D>("mowed_grass.png");
             }
             //if ( this.ob != null && this.x == mower.x && this.y == mower.y) //if ob exists
             //{
