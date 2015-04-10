@@ -128,9 +128,9 @@ namespace MowingforCookies
             // will have to think of a way to import enemy information
             int [] kiddingMe = new int[] {1, 1, 1, 2, 2, 2}; // gives enemies path to patrol
             int [] notCoolBro = new int[] {};
-            Enemy gnome1 = new Enemy(patches[4, 5], 3, 4, 5, kiddingMe);
-            Enemy gnome2 = new Enemy(patches[7, 6], 3, 7, 6, notCoolBro);
-            Enemy gnome3 = new Enemy(patches[2, 1], 3, 2, 1, notCoolBro);
+            Enemy gnome1 = new Enemy(patches[4, 5], 4, 5, kiddingMe);
+            Enemy gnome2 = new Enemy(patches[7, 6], 7, 6, notCoolBro);
+            Enemy gnome3 = new Enemy(patches[2, 1], 2, 1, notCoolBro);
             enemies.Add(gnome1);
             enemies.Add(gnome2);
             enemies.Add(gnome3);

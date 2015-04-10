@@ -120,36 +120,6 @@ namespace MowingforCookies
 
         //            //Console.WriteLine("array x,y: " + arrayRowX + ", " + arrayColY);
                     
-<<<<<<< HEAD
-                    if (0<=mower.arrayColY - 1)
-                    {
-                        yTop = mower.arrayColY - 1;
-                    }
-                    if (mower.arrayColY + 1 < patchesYBottom)
-                    {
-                        yBottom = mower.arrayColY + 1;
-                    }
-                    if (0 <= mower.arrayRowX - 1)
-                    {
-                        xMin = mower.arrayRowX - 1;
-                    }
-                    if (mower.arrayRowX + 1 < patchesXMax)
-                    {
-                        xMax = mower.arrayRowX + 1;
-                    }
-                    //now we have array coordinates of the topLeft and bottomRight of the new Rectangle
-                    //Console.WriteLine("things for rectangle: " + xMin + "," + yTop + ". " + xMax + "," + yBottom);
-                    //UNTESTED. DON'T KNOW HOW TO SET GRAVEL SO I ONLY TESTED IT IN THE THING
-
-                    int stupidWidth = (xMax - xMin + 1) * 50;
-                    int stupidHeight = (yBottom - yTop + 1) *50;
-                    result = new Rectangle(patches[xMin,yTop].x, patches[xMin,yTop].y, stupidWidth, stupidHeight);
-
-                    return result;
-                    //break;
-            }
-            return result = new Rectangle(mower.x,mower.y,50,50);
-=======
         //            if (0<=mower.arrayColY - 1)
         //            {
         //                yTop = mower.arrayColY - 1;
@@ -178,7 +148,6 @@ namespace MowingforCookies
         //            break;
         //    }
         //    return result = new Rectangle(mower.x,mower.y,50,50);
->>>>>>> 1ce4b57c1162679c0d1f9eb91d248c49083f326b
             
         //}
         public void traverseEffect(Obstacle ob, Rectangle obRec, Mower mower, List<Enemy> enemies, int ticks)
