@@ -50,7 +50,7 @@ namespace MowingforCookies
             SCREENWIDTH = map.Width * 50;
             SCREENHEIGHT = map.Height * 60;
 
-            win_Num = 75;
+            win_Num = 50;
             youWinYet = false;
 
             graphics.PreferredBackBufferWidth = SCREENWIDTH;  // set this value to the desired width of your window
@@ -202,6 +202,11 @@ namespace MowingforCookies
                 if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                     Exit();
 
+                if (Keyboard.GetState().IsKeyDown(Keys.Space))
+                {
+                    Initialize();
+                }
+
                 mower.Update(controls, patches, gameTime);
                 grandma.Update(mower, controls, patches, gameTime);
 
@@ -229,7 +234,7 @@ namespace MowingforCookies
                 base.Update(gameTime);
                 if (mower.alive == false)
                 {
-                    //Exit();
+                    
                 }
 
                 foreach (Spot s in patches)
@@ -249,11 +254,16 @@ namespace MowingforCookies
                 if (mower.totalMowed >= win_Num)
                 {
                     youWinYet = true;
+                    win_Num = 100;
+
                 }
             }
             else
             {
-
+                if (Keyboard.GetState().IsKeyDown(Keys.A))
+                {
+                    youWinYet = false;
+                }
             }
         }
 
@@ -304,7 +314,7 @@ namespace MowingforCookies
             spriteBatch.Draw(menu, new Rectangle(0, 500, 500, 100), Color.White);
             if (!youWinYet)
             {
-                spriteBatch.DrawString(font, "Grass mowed: " + mower.totalMowed + "/" + patches.Length, new Vector2(25, 520), Color.Black);
+                spriteBatch.DrawString(font, "Grass mowed: " + mower.totalMowed + "/" + win_Num, new Vector2(25, 520), Color.Black);
                 spriteBatch.DrawString(font, "Fuel: " + mower.cookies, new Vector2(25, 550), Color.Black);
             }
             else
@@ -313,6 +323,7 @@ namespace MowingforCookies
             }
             
         }
+
 
     }
 }
