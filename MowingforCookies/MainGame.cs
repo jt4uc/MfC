@@ -12,6 +12,7 @@ using TiledSharp;
 
 namespace MowingforCookies
 {
+
     /// <summary>
     /// This is the main type for your game
     /// </summary>
@@ -195,6 +196,80 @@ namespace MowingforCookies
         /// checking for collisions, gathering input, and playing audio.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
+        public void Update2(GameTime gameTime)
+        {
+            ticks++;
+            controls.Update();
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+                Exit();
+
+            mower.Update(controls, patches, gameTime);
+            foreach (Enemy e in enemies)
+            {
+                if (e.alive)
+                {
+                    e.Update(mower, controls, patches, gameTime);
+                    if (e.cbox.Intersects(mower.collisionBox))
+                    {
+                        mower.alive = false;
+                    }
+                }
+            }
+
+            base.Update(gameTime);
+            if (mower.alive == false)
+            {
+                //Exit();
+            }
+
+            foreach (Spot s in patches)
+            {
+                s.Update(Content, patches, mower, enemies, ticks);
+            }
+            foreach (Obstacle o in obstacles)
+            {
+
+                o.Update(patches, mower, enemies, ticks);
+            }
+        }
+
+        /// <summary>
+        /// This is called when the game should draw itself.
+        /// </summary>
+        /// <param name="gameTime">Provides a snapshot of timing values.</param>
+        public void Draw(GameTime gameTime)
+        {
+            GraphicsDevice.Clear(Color.LimeGreen);
+            spriteBatch.Begin();
+            foreach (Spot s in patches)
+            {
+                s.Draw(spriteBatch);
+            }
+            foreach (Obstacle o in obstacles)
+            {
+                o.Draw(spriteBatch);
+            }
+            foreach (Cookie c in cookies)
+            {
+                c.Draw(spriteBatch);
+            }
+            mower.Draw(spriteBatch);
+            foreach (Enemy e in enemies)
+            {
+                if (e.visible)
+                {
+                    if (e.alive)
+                    {
+                        e.Draw(spriteBatch);
+                    }
+                }
+            }
+            DrawStatusBar();
+
+            spriteBatch.End();
+            base.Draw(gameTime);
+        }
+
         protected override void Update(GameTime gameTime)
         {
             ticks++;
@@ -235,7 +310,7 @@ namespace MowingforCookies
         /// <summary>
         /// This is called when the game should draw itself.
         /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
+        /// <param name="gameTime">Provides a snapshot of timing values.</param>     
         protected override void Draw(GameTime gameTime)
         {
             // TODO: Add your drawing code here
