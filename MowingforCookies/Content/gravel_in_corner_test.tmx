@@ -224,7 +224,7 @@
   <object id="106" gid="6" x="0" y="500"/>
   <object id="114" gid="6" x="100" y="150"/>
  </objectgroup>
- <objectgroup name="gnome">
+ <objectgroup name="gnome" opacity="0.97">
   <object id="108" gid="7" x="300" y="200"/>
   <object id="109" gid="7" x="300" y="250"/>
   <object id="110" gid="7" x="300" y="300"/>

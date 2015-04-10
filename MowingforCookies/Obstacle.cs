@@ -25,8 +25,8 @@ namespace MowingforCookies
 
         public Rectangle cbox;
         public Rectangle backupCbox;
-        public int recX = 50;
-        public int recY = 50;
+        public int recX = 45;
+        public int recY = 45;
         public Boolean exploding = false;
         public int tickCount = 99999;
 
@@ -170,11 +170,14 @@ namespace MowingforCookies
                     changeBoxBack();
                 }
             }
-
-            foreach (Enemy e in enemies)
+            if (obstacleType == "gravel")
             {
-                collidesEnemy(e);
-            } 
+                foreach (Enemy e in enemies)
+                {
+                    collidesEnemy(e);
+                } 
+            }
+            
         }
 
         public void setSpot(Spot s)

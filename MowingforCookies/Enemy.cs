@@ -23,8 +23,8 @@ namespace MowingforCookies
         public Texture2D gnome;
         const int SPEED = 2;
         public Rectangle cbox;
-        public int recX = 50;
-        public int recY = 50;
+        public int recX = 45;
+        public int recY = 45;
 
         //Content Manager?
         public Enemy(Spot currentLocation, int arrayRowX, int arrayColY, int[] sequence)
@@ -120,7 +120,7 @@ namespace MowingforCookies
             {
                 this.y = this.y - SPEED;
                 this.cbox.Y = this.y;
-                if (this.y >= patches[arrayRowX, arrayColY - 1].y)
+                if (this.y <= patches[arrayRowX, arrayColY - 1].y)
                 {
                     this.arrayColY = this.arrayColY - 1; //update grid position
                     moveIndex++;

@@ -45,7 +45,8 @@ namespace MowingforCookies
             graphics = new GraphicsDeviceManager(this); /// default is 800x600
             Content.RootDirectory = "Content";
 
-            map = new TmxMap("./Content/gravel_in_corner_test.tmx");
+            //map = new TmxMap("./Content/gravel_in_corner_test.tmx");
+            map = new TmxMap("./Content/beta.tmx");
             SCREENWIDTH = map.Width * 50;
             SCREENHEIGHT = map.Height * 60;
 
@@ -86,7 +87,7 @@ namespace MowingforCookies
             }
             // hard coding Mowers, Obstacles, and Enemies
             mower = new Mower(patches[0,1], 150); // current location represented by spot
-            grandma = new Grandma(patches[6,6], 6, 6);
+            //grandma = new Grandma(patches[6,6], 6, 6);
             enemies = new List<Enemy>();
             cookies = new List<Cookie>();
             obstacles = new List<Obstacle>();
@@ -118,10 +119,14 @@ namespace MowingforCookies
                         Enemy gnome = new Enemy(patches[x, y], x, y, pathArray);
                         enemies.Add(gnome);
                     }
+                    else if (name.Equals("grandma"))
+                    {
+                        grandma = new Grandma(patches[x, y], x, y);
+                    }
                     else if (name.Equals("cookies"))
                     {
-                        Cookie c1 = new Cookie(patches[4, 0], 4, 0);
-                        cookies.Add(c1);
+                        Cookie c = new Cookie(patches[x, y], x, y);
+                        cookies.Add(c);
                     }
                     else if (!name.Equals("grass"))
                     {
@@ -135,8 +140,8 @@ namespace MowingforCookies
 
             }
 
-            Cookie c2 = new Cookie(patches[5, 0], 5, 0);
-            cookies.Add(c2);
+            //Cookie c2 = new Cookie(patches[5, 0], 5, 0);
+            //cookies.Add(c2);
 
             base.Initialize();
             controls = new Controls();

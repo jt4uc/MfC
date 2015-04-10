@@ -22,10 +22,10 @@ namespace MowingforCookies
         public int[] moveSequence;
         public Boolean alive = true;
 
-        public int SPEED = 2;
+        public int SPEED = 1;
 
         public Rectangle cbox;
-        public int recX = 48;
+        public int recX = 50;
         public int recY = 50;
 
         private Random rand = new Random();
@@ -43,7 +43,7 @@ namespace MowingforCookies
             this.arrayRowX = arrayRowX;
             this.visible = true;
 
-            this.cbox = new Rectangle(x, y, recX, recY);
+            this.cbox = new Rectangle(x + 10, y + 10, recX, recY);
 
 
         }
@@ -84,13 +84,13 @@ namespace MowingforCookies
 
             if (nextDir == 1)//right
             {
-                if (arrayRowX + 1 == patchesRows)
+                if (arrayRowX + 1 == patchesRows || (collisionObject(patches[arrayRowX + 1, arrayColY]) == false))
                 {
                     nextDir = rand.Next(5);
                 }
                 else{
                     this.x = this.x + SPEED;
-                    this.cbox.X = this.x;
+                    this.cbox.X = this.cbox.X + SPEED;
                     if (this.x >= patches[arrayRowX + 1, arrayColY].x)
                     {
 
@@ -103,14 +103,14 @@ namespace MowingforCookies
             }
             else if (nextDir == 2)//left
             {
-                if (arrayRowX - 1 == -1)
+                if (arrayRowX - 1 == -1 || (collisionObject(patches[arrayRowX - 1, arrayColY]) == false))
                 {
                     nextDir = rand.Next(5);
                 }
                 else
                 {
                     this.x = this.x - SPEED;
-                    this.cbox.X = this.x;
+                    this.cbox.X = this.cbox.X - SPEED;
                     if (this.x <= patches[arrayRowX - 1, arrayColY].x)
                     {
                         this.arrayRowX = this.arrayRowX - 1; //update grid position
@@ -123,14 +123,14 @@ namespace MowingforCookies
             }
             else if (nextDir == 3)//down
             {
-                if (arrayColY + 1 == patchesCols)
+                if (arrayColY + 1 == patchesCols || (collisionObject(patches[arrayRowX, arrayColY + 1]) == false))
                 {
                     nextDir = rand.Next(5);
                 }
                 else
                 {
                     this.y = this.y + SPEED;
-                    this.cbox.Y = this.y;
+                    this.cbox.Y = this.cbox.Y + SPEED;
                     if (this.y >= patches[arrayRowX, arrayColY + 1].y)
                     {
 
@@ -143,14 +143,14 @@ namespace MowingforCookies
             }
             else if (nextDir == 4)//up
             {
-                if (arrayColY - 1 == -1)
+                if (arrayColY - 1 == -1 || (collisionObject(patches[arrayRowX, arrayColY - 1]) == false))
                 {
                     nextDir = rand.Next(5);
                 }
                 else
                 {
                     this.y = this.y - SPEED;
-                    this.cbox.Y = this.y;
+                    this.cbox.Y = this.cbox.Y - SPEED;
                     if (this.y <= patches[arrayRowX, arrayColY - 1].y)
                     {
 
@@ -159,6 +159,18 @@ namespace MowingforCookies
                         nextDir = rand.Next(5);
                     }
                 }
+            }
+        }
+
+        public bool collisionObject(Spot objectSpot) // used in move
+        {
+            if (objectSpot.canTraverse == true)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
 
