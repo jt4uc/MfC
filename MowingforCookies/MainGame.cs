@@ -113,12 +113,18 @@ namespace MowingforCookies
                         Enemy gnome = new Enemy(patches[x, y], x, y, pathArray);
                         enemies.Add(gnome);
                     }
+                    else if (name.Equals("cookies"))
+                    {
+                        Cookie c1 = new Cookie(patches[4, 0], 4, 0);
+                        cookies.Add(c1);
+                    }
                     else if (!name.Equals("grass"))
                     {
                         Obstacle o = new Obstacle(patches[x, y], name, x, y);
                         obstacles.Add(o);
                         patches[x, y].setObstacle(o);
                     }
+                    
                     
                 }
 
