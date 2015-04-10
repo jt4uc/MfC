@@ -129,12 +129,9 @@
     <None Include="Content\10x10checkpoint_map.tmx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\MfC\MfC\MfC.csproj">
-      <Project>{a773d832-c907-4afb-aacc-e906e72905fa}</Project>
-      <Name>MfC</Name>
-    </ProjectReference>
+    <Content Include="Content\spriteFont.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
