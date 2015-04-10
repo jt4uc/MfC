@@ -26,9 +26,10 @@ namespace MowingforCookies
         public int recX = 50;
         public int recY = 50;
 
-        public Enemy(Spot currentLocation, int cookies, int arrayRowX, int arrayColY, int[] sequence)
+        //Content Manager?
+        public Enemy(Spot currentLocation, int arrayRowX, int arrayColY, int[] sequence)
         {
-
+            // removed cookies argument from Enemy constructor
             this.currentLocation = currentLocation;
             this.moveIndex = 0;
             this.x = currentLocation.x;
