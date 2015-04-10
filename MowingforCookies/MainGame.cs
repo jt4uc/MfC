@@ -24,6 +24,7 @@ namespace MowingforCookies
         Texture2D background;
         int SCREENWIDTH; 
         int SCREENHEIGHT;
+        int ticks;
 
         Controls controls;
         Spot[,] patches;
@@ -59,6 +60,7 @@ namespace MowingforCookies
             graphics.PreferredBackBufferWidth = SCREENWIDTH;  // set this value to the desired width of your window
             graphics.PreferredBackBufferHeight = SCREENHEIGHT;   // set this value to the desired height of your window
             graphics.ApplyChanges();
+            ticks = 0;
         }
 
         /// <summary>
@@ -210,7 +212,7 @@ namespace MowingforCookies
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-
+            ticks++;
             controls.Update();
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
@@ -236,7 +238,12 @@ namespace MowingforCookies
 
             foreach (Spot s in patches)
             {
-                s.Update(Content, patches, mower, enemies);
+                s.Update(Content, patches, mower, enemies, ticks);
+            }
+            foreach (Obstacle o in obstacles)
+            {
+                
+                o.Update(patches,mower,enemies,ticks);
             }
         }
 
@@ -253,14 +260,14 @@ namespace MowingforCookies
             foreach (Spot s in patches)
             {
                 s.Draw(spriteBatch);
-                if (s.ob != null)
-                {
-                    s.ob.Draw(spriteBatch);
-                }
                 if (s.c != null)
                 {
                     s.c.Draw(spriteBatch);
                 }
+            }
+            foreach (Obstacle o in obstacles)
+            {
+                o.Draw(spriteBatch);
             }
             mower.Draw(spriteBatch);
             foreach (Enemy e in enemies)

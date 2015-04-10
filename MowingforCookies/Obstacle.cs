@@ -28,6 +28,7 @@ namespace MowingforCookies
         public int recX = 40;
         public int recY = 40;
         public Boolean exploding;
+        public int tickCount = 0;
 
         public Obstacle(Spot currentLocation, String obstacleType, int arrayRowX, int arrayColY)
         {
@@ -110,18 +111,75 @@ namespace MowingforCookies
             }
         }
 
-
-        public void Update(Rectangle r, Mower mower, List<Enemy> enemies)
+        public Rectangle obRec(Spot[,] patches, Mower mower)
         {
+            Rectangle result;
+            switch (this.obstacleType)
+            {
+                case "gravel":
+                    //Console.WriteLine("here in gravel");
+                    //now to get the 3x3 square array around this stupid thing. 
+                    int xMin = mower.arrayRowX;
+                    int xMax = mower.arrayRowX;
+                    int yTop = mower.arrayColY;
+                    int yBottom = mower.arrayColY;
+
+                    int patchesXMax = patches.GetLength(0);
+                    int patchesYBottom = patches.GetLength(1);
+
+                    //Console.WriteLine("array x,y: " + arrayRowX + ", " + arrayColY);
+
+                    if (0 <= mower.arrayColY - 1)
+                    {
+                        yTop = mower.arrayColY - 1;
+                    }
+                    if (mower.arrayColY + 1 < patchesYBottom)
+                    {
+                        yBottom = mower.arrayColY + 1;
+                    }
+                    if (0 <= mower.arrayRowX - 1)
+                    {
+                        xMin = mower.arrayRowX - 1;
+                    }
+                    if (mower.arrayRowX + 1 < patchesXMax)
+                    {
+                        xMax = mower.arrayRowX + 1;
+                    }
+                    //now we have array coordinates of the topLeft and bottomRight of the new Rectangle
+                    //Console.WriteLine("things for rectangle: " + xMin + "," + yTop + ". " + xMax + "," + yBottom);
+                    //UNTESTED. DON'T KNOW HOW TO SET GRAVEL SO I ONLY TESTED IT IN THE THING
+
+                    int stupidWidth = (xMax - xMin + 1) * 50;
+                    int stupidHeight = (yBottom - yTop + 1) * 50;
+                    result = new Rectangle(patches[xMin, yTop].x, patches[xMin, yTop].y, stupidWidth, stupidHeight);
+
+                    return result;
+                    break;
+            }
+            return result = new Rectangle(mower.x, mower.y, 50, 50);
+
+        }
+
+
+        public void Update(Spot[,] patches, Mower mower, List<Enemy> enemies, int ticks)
+        {
+            Rectangle r = obRec(patches, mower);
             if (mower.x == this.x && mower.y == this.y)
             {
-                exploding = true;
-                changeBox(r);
-            }
-            else
-            {
-                exploding = false;
-                changeBox(r);
+                tickCount = ticks;
+                Console.WriteLine("tickCount: " + tickCount);
+                if (tickCount + 50 <= ticks)
+                {
+                    exploding = false;
+                    changeBox(r);
+                }
+                else
+                {
+                    Console.WriteLine("ticks: " + ticks);
+                    exploding = true;
+                    changeBox(r);
+                }
+                
             }
             foreach (Enemy e in enemies)
             {
