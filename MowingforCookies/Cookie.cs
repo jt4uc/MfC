@@ -25,7 +25,7 @@ namespace MowingforCookies
         public Cookie(Spot s, int arrayRowX, int arrayColY)
         {
             fuel = 5; //positive fuel gain
-            type = "chocolate chip";
+            type = "chocolatechip";
             this.x = s.x;
             this.y = s.y;
             this.currentLocation = s;
@@ -35,7 +35,7 @@ namespace MowingforCookies
 
         public void LoadContent(ContentManager content)
         {
-            image = content.Load<Texture2D>("chocolate chip.png");
+            image = content.Load<Texture2D>("chocolatechip.png");
         }
         public void Draw(SpriteBatch sb)
         {

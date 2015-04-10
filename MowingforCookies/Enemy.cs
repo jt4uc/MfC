@@ -23,7 +23,7 @@ namespace MowingforCookies
         public Texture2D gnome;
         const int SPEED = 2;
         public Rectangle cbox;
-        public int recX = 48;
+        public int recX = 50;
         public int recY = 50;
 
         public Enemy(Spot currentLocation, int cookies, int arrayRowX, int arrayColY, int[] sequence)
