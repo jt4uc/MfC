@@ -22,7 +22,7 @@ namespace MowingforCookies
         public int[] moveSequence;
         public Boolean alive = true;
 
-        const int SPEED = 5;
+        public int SPEED = 2;
 
         public Rectangle cbox;
         public int recX = 48;

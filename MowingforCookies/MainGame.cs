@@ -31,7 +31,8 @@ namespace MowingforCookies
         List<Enemy> enemies;
         List<Cookie> cookies;
         List<Obstacle> obstacles;
-
+        private SpriteFont font;
+        private Texture2D menu;
         // for Tiled
         TmxMap map;
         //Texture2D[] tiles;
@@ -126,16 +127,6 @@ namespace MowingforCookies
             // can convert this into Tiled stuff later
             Cookie c1 = new Cookie(patches[4,0],4, 0);
             cookies.Add(c1);
-
-            // will have to think of a way to import enemy information
-            int [] kiddingMe = new int[] {1, 1, 1, 2, 2, 2}; // gives enemies path to patrol
-            int [] notCoolBro = new int[] {};
-            Enemy gnome1 = new Enemy(patches[4, 5], 4, 5, kiddingMe);
-            Enemy gnome2 = new Enemy(patches[7, 6], 7, 6, notCoolBro);
-            Enemy gnome3 = new Enemy(patches[2, 1], 2, 1, notCoolBro);
-            enemies.Add(gnome1);
-            enemies.Add(gnome2);
-            enemies.Add(gnome3);
             
 
 
@@ -198,6 +189,11 @@ namespace MowingforCookies
 
            mower.Update(controls, patches, gameTime);
            grandma.Update(mower, controls, patches, gameTime);
+
+           if (grandma.cbox.Intersects(mower.collisionBox))
+           {
+               grandma.alive = false;
+           }
 
             foreach (Enemy e in enemies)
             {
@@ -265,11 +261,19 @@ namespace MowingforCookies
                     }
                 }
             }
+            DrawStatusBar();
 
             spriteBatch.End();
             base.Draw(gameTime);
         }
 
+        private void DrawStatusBar()
+        {
+            spriteBatch.Draw(menu, new Rectangle(0, 500, 500, 100), Color.White);
+
+            spriteBatch.DrawString(font, "Grass mowed: " + mower.totalMowed + "/" + patches.Length, new Vector2(25, 520), Color.Black);
+            spriteBatch.DrawString(font, "Fuel: " + mower.cookies, new Vector2(25, 550), Color.Black);
+        }
 
     }
 }

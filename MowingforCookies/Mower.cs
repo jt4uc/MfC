@@ -28,7 +28,7 @@ namespace MowingforCookies
         public int recX = 50;
         public int recY = 50;
 
-        const int SPEED = 5;
+        public int SPEED = 5;
 
         public Mower(Spot currentLocation, int cookies)
         {
