@@ -32,7 +32,8 @@ namespace MowingforCookies
         List<Enemy> enemies;
         List<Cookie> cookies;
         List<Obstacle> obstacles;
-       
+        private SpriteFont font;
+        private Texture2D menu;
 
 
         Texture2D patch;
@@ -54,7 +55,7 @@ namespace MowingforCookies
 
             map = new TmxMap("./Content/10x10checkpoint_map.tmx");
             SCREENWIDTH = map.Width * 50;
-            SCREENHEIGHT = map.Height * 50;
+            SCREENHEIGHT = map.Height * 60;
 
             graphics.PreferredBackBufferWidth = SCREENWIDTH;  // set this value to the desired width of your window
             graphics.PreferredBackBufferHeight = SCREENHEIGHT;   // set this value to the desired height of your window
@@ -90,7 +91,7 @@ namespace MowingforCookies
 
 
             // hard coding Mowers, Obstacles, and Enemies
-            mower = new Mower(patches[0,1], 0); // current location represented by spot
+            mower = new Mower(patches[0,1], 150); // current location represented by spot
             enemies = new List<Enemy>();
             cookies = new List<Cookie>();
             obstacles = new List<Obstacle>();
@@ -165,6 +166,7 @@ namespace MowingforCookies
             spriteBatch = new SpriteBatch(GraphicsDevice);
             background = Content.Load<Texture2D>("white.png");
             patch = Content.Load<Texture2D>("Patch.png");
+            menu = Content.Load<Texture2D>("menu.png");
             foreach (Spot s in patches)
             {
                 s.LoadContent(this.Content);
@@ -191,7 +193,7 @@ namespace MowingforCookies
             {
                 o.LoadContent(this.Content);
             }
-
+            font = Content.Load<SpriteFont>("font");
         }
 
         /// <summary>
@@ -273,7 +275,7 @@ namespace MowingforCookies
                     }
                 }
             }
-
+            DrawStatusBar();
 
 
 
@@ -289,6 +291,14 @@ namespace MowingforCookies
             Rectangle screenRectangle = new Rectangle(0, 0, 800, 800);
             spriteBatch.Draw(background, screenRectangle, Color.White);
 
+        }
+
+        private void DrawStatusBar()
+        {
+            spriteBatch.Draw(menu, new Rectangle(0, 500, 500, 100), Color.White);
+
+            spriteBatch.DrawString(font, "Grass mowed: " + mower.totalMowed + "/" + patches.Length, new Vector2(25, 520), Color.Black);
+            spriteBatch.DrawString(font, "Fuel: " + mower.cookies, new Vector2(25, 550), Color.Black);
         }
     }
 }
