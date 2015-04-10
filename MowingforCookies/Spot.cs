@@ -19,6 +19,7 @@ namespace MowingforCookies
         public int y;
         public int arrayRowX;
         public int arrayColY;
+        public bool grassMowed;
         public bool isTraversed;
         public bool canTraverse;
         public int travelCost; //of cookies
@@ -40,6 +41,7 @@ namespace MowingforCookies
         {
             this.x = x;
             this.y = y;
+            this.grassMowed = false;
             this.isTraversed = isTraversed;
             this.travelCost = travelCost;
             this.cookiesGained = cookiesGained;

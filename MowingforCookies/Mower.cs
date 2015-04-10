@@ -21,6 +21,7 @@ namespace MowingforCookies
         public int cookies;
         public bool alive;
         public Texture2D deadMower;
+        public int totalMowed;
 
         public int arrayRowX;
         public int arrayColY;
@@ -44,6 +45,7 @@ namespace MowingforCookies
             this.alive = true;
             this.arrayRowX = currentLocation.arrayRowX;
             this.arrayColY = currentLocation.arrayColY;
+            this.totalMowed = 0;
 
             //speed = 5;
             //movedX = 0;
@@ -135,6 +137,16 @@ namespace MowingforCookies
                     {
                         this.arrayRowX = this.arrayRowX + 1;
                         curDir = nextDir;
+                        if (patches[arrayRowX, arrayColY].grassMowed == false)
+                        {
+                            totalMowed++;
+                            patches[arrayRowX, arrayColY].grassMowed = true;
+                        }
+                        cookies--;
+                        if (cookies == 0)
+                        {
+                            alive = false;
+                        }
                     }
                 }
 
@@ -153,6 +165,16 @@ namespace MowingforCookies
                     {
                         this.arrayRowX = this.arrayRowX - 1;
                         curDir = nextDir;
+                        if (patches[arrayRowX, arrayColY].grassMowed == false)
+                        {
+                            totalMowed++;
+                            patches[arrayRowX, arrayColY].grassMowed = true;
+                        }
+                        cookies--;
+                        if (cookies == 0)
+                        {
+                            alive = false;
+                        }
                     }
                 }
 
@@ -172,12 +194,22 @@ namespace MowingforCookies
                     {
                         this.arrayColY = this.arrayColY + 1;
                         curDir = nextDir;
+                        if (patches[arrayRowX, arrayColY].grassMowed == false)
+                        {
+                            totalMowed++;
+                            patches[arrayRowX, arrayColY].grassMowed = true;
+                        }
+                        cookies--;
+                        if (cookies == 0)
+                        {
+                            alive = false;
+                        }
                     }
                 }
 
                 
             }
-            else if (curDir == 4)//down
+            else if (curDir == 4)//up
             {
                 if ((arrayColY - 1 == -1) || (collisionObject(patches[arrayRowX, arrayColY - 1]) == false))
                 {
@@ -190,6 +222,16 @@ namespace MowingforCookies
                     {
                         this.arrayColY = this.arrayColY - 1;
                         curDir = nextDir;
+                        if (patches[arrayRowX, arrayColY].grassMowed == false)
+                        {
+                            totalMowed++;
+                            patches[arrayRowX, arrayColY].grassMowed = true;
+                        }
+                        cookies--;
+                        if (cookies == 0)
+                        {
+                            alive = false;
+                        }
                     }
                 }
 
