@@ -86,12 +86,11 @@ namespace MowingforCookies
             obstacles = new List<Obstacle>();
 
             // go through each object layer
-            for (int i = 0; i < 2; i++) // rplace 2 with map.ObjectGroups.Count when you convert grass/uncut
+            for (int i = 0; i < map.ObjectGroups.Count; i++)
             {
-                String name = map.ObjectGroups[i].Name; // object layer names are labeled <png filename>_<collisions> // will change tmx to match this
-                //name = name.Substring(0, name.LastIndexOf("_"));
-                System.Diagnostics.Debug.WriteLine("obj layer name: " + name);
+                String name = map.ObjectGroups[i].Name; // object layer names are labeled <png filename>
                 int numObjects = map.ObjectGroups[i].Objects.Count;
+                System.Diagnostics.Debug.WriteLine("obj layer name: " + name);
                 // go through each object of the object layer
                 for (int j = 0; j < numObjects; j++)
                 {
@@ -99,22 +98,25 @@ namespace MowingforCookies
                     int y = ((int)map.ObjectGroups[i].Objects[j].Y - 50) / 50; // -50, because apparently tiled goes by bottom left corner
                     //System.Diagnostics.Debug.WriteLine("x, y: " + x + ", " + y);
 
-                    if (name.Equals("grass"))
+                    if (name.Equals("gnome"))
                     {
+                         
+                        String path = map.ObjectGroups[i].Objects[j].Name;
+                        int[] pathArray = new int[] { };
+                        if (!path.Equals(""))
+                        {
+                            pathArray = Array.ConvertAll(path.Split(','), int.Parse); // splits the path specified in Tiled and converts into int array
 
+                        }
+                         
+                        Enemy gnome = new Enemy(patches[x, y], x, y, pathArray);
+                        enemies.Add(gnome);
                     }
-                    else if (!name.Equals("gnome"))
+                    else if (!name.Equals("grass"))
                     {
                         Obstacle o = new Obstacle(patches[x, y], name, x, y);
                         obstacles.Add(o);
                         patches[x, y].setObstacle(o);
-                    }
-                    else
-                    {   
-                        String path = map.ObjectGroups[i].Objects[j].Name;
-                        int[] pathArray = Array.ConvertAll(path.Split(','), int.Parse); // splits the path specified in Tiled and converts into int array
-                        Enemy gnome = new Enemy(patches[x, y], x, y, pathArray);
-                        enemies.Add(gnome);
                     }
                     
                 }
