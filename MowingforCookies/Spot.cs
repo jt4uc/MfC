@@ -148,7 +148,7 @@ namespace MowingforCookies
                     result = new Rectangle(patches[xMin,yTop].x, patches[xMin,yTop].y, stupidWidth, stupidHeight);
 
                     return result;
-                    break;
+                    //break;
             }
             return result = new Rectangle(mower.x,mower.y,50,50);
             

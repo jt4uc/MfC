@@ -8,19 +8,14 @@ using Microsoft.Xna.Framework.Storage;
 
 namespace MowingforCookies
 {
-    class Enemy : Sprite
+    class Grandma : Sprite
     {
         public int x;
         public int y;
-        public int moveIndex;   
+        public int moveIndex;
         public Spot currentLocation;
-        //public Spot targetLocation;
-        //public double speed;
-        //public Texture2D enemyTexture;
-        //private Rectangle collisionBox;
-        //public Animated Sprite?? mowerTextureMap
+        public Texture2D deadGrandma;
 
-        public String type;
         public int arrayRowX;
         public int arrayColY;
         public Boolean visible;
@@ -33,19 +28,20 @@ namespace MowingforCookies
         public int recX = 48;
         public int recY = 50;
 
+        private Random rand = new Random();
+        private int nextDir = 0;
+
         //Content Manager?
-        public Enemy(Spot currentLocation, int cookies, int arrayRowX, int arrayColY, int[] sequence)
+        public Grandma(Spot currentLocation, int arrayRowX, int arrayColY)
         {
 
             this.currentLocation = currentLocation;
             this.moveIndex = 0;
             this.x = currentLocation.x;
             this.y = currentLocation.y;
-            this.type = "gnome";
             this.arrayColY = arrayColY;
             this.arrayRowX = arrayRowX;
-            this.visible = false;
-            this.moveSequence = sequence;
+            this.visible = true;
 
             this.cbox = new Rectangle(x, y, recX, recY);
 
@@ -54,7 +50,8 @@ namespace MowingforCookies
 
         public void LoadContent(ContentManager content)
         {
-            image = content.Load<Texture2D>("gnome.png");
+            image = content.Load<Texture2D>("grandma.png");
+            deadGrandma = content.Load<Texture2D>("deadGrandma2.png");
         }
 
         public void Draw(SpriteBatch sb)
@@ -64,37 +61,24 @@ namespace MowingforCookies
 
         public void Update(Mower mower, Controls controls, Spot[,] patches, GameTime gameTime)
         {
-            if (mower.arrayRowX > this.arrayRowX - 3 && mower.arrayRowX < this.arrayRowX + 3 && mower.arrayColY > this.arrayColY - 3 && mower.arrayColY < this.arrayColY + 3)
-            {
-                this.visible = true;
-            }
-
-            if (this.visible)
+            if (this.alive)
             {
                 Move(mower, patches);
             }
+            else
+            {
+                image = deadGrandma;
+            }
 
-        }
-
-        public void setType(String s)
-        {
-            this.type = s;
         }
 
         public void Move(Mower mower, Spot[,] patches)
         {
-            int nextDir;
-            if (moveSequence.Length == 0)
-            {
-                nextDir = 0;
-            }
-            else
-            {
-                nextDir = moveSequence[moveIndex];
 
+            if (nextDir == 0)
+            {
+               nextDir = rand.Next(5);
             }
-
-            
 
             if (nextDir == 1)//right
             {
@@ -106,11 +90,7 @@ namespace MowingforCookies
 
                     this.arrayRowX = this.arrayRowX + 1; //update grid position
 
-                    moveIndex++;
-                    if (moveIndex >= moveSequence.Length)
-                    {
-                        moveIndex = 0;
-                    }
+                    nextDir = rand.Next(5);
                 }
 
             }
@@ -122,11 +102,7 @@ namespace MowingforCookies
                 {
                     this.arrayRowX = this.arrayRowX - 1; //update grid position
 
-                    moveIndex++;
-                    if (moveIndex >= moveSequence.Length)
-                    {
-                        moveIndex = 0;
-                    }
+                    nextDir = rand.Next(5);
                 }
 
             }
@@ -139,11 +115,7 @@ namespace MowingforCookies
 
                     this.arrayColY = this.arrayColY + 1; //update grid position
 
-                    moveIndex++;
-                    if (moveIndex >= moveSequence.Length)
-                    {
-                        moveIndex = 0;
-                    }
+                    nextDir = rand.Next(5);
                 }
             }
             else if (nextDir == 4)//up
@@ -155,11 +127,7 @@ namespace MowingforCookies
 
                     this.arrayColY = this.arrayColY - 1; //update grid position
 
-                    moveIndex++;
-                    if (moveIndex >= moveSequence.Length)
-                    {
-                        moveIndex = 0;
-                    }
+                    nextDir = rand.Next(5);
                 }
             }
         }

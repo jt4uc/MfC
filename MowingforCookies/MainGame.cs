@@ -28,6 +28,7 @@ namespace MowingforCookies
         Controls controls;
         Spot[,] patches;
         Mower mower;
+        Grandma grandma;
 
         List<Enemy> enemies;
         List<Cookie> cookies;
@@ -40,7 +41,7 @@ namespace MowingforCookies
 
         // for Tiled
         TmxMap map;
-        Texture2D[] tiles;
+        //Texture2D[] tiles;
 
 
         
@@ -92,6 +93,7 @@ namespace MowingforCookies
 
             // hard coding Mowers, Obstacles, and Enemies
             mower = new Mower(patches[0,1], 150); // current location represented by spot
+            grandma = new Grandma(patches[7, 7], 7, 7);
             enemies = new List<Enemy>();
             cookies = new List<Cookie>();
             obstacles = new List<Obstacle>();
@@ -218,6 +220,8 @@ namespace MowingforCookies
                 Exit();
 
             mower.Update(controls, patches, gameTime);
+            grandma.Update(mower, controls, patches, gameTime);
+
             foreach (Enemy e in enemies)
             {
                 if (e.alive)
@@ -226,6 +230,10 @@ namespace MowingforCookies
                     if (e.cbox.Intersects(mower.collisionBox))
                     {
                         mower.alive = false;
+                    }
+                    if (e.cbox.Intersects(grandma.cbox))
+                    {
+                        e.visible = false;
                     }
                 }
             }
