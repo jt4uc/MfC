@@ -232,10 +232,6 @@ namespace MowingforCookies
                 }
 
                 base.Update(gameTime);
-                if (mower.alive == false)
-                {
-                    
-                }
 
                 foreach (Spot s in patches)
                 {

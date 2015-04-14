@@ -36,7 +36,7 @@ namespace MowingforCookies
             this.x = this.currentLocation.x;
             this.y = this.currentLocation.y;
             this.obstacleType = obstacleType;
-            if (this.obstacleType.Equals("gravel"))
+            if (this.obstacleType.Equals("gravel") || this.obstacleType.Equals("bush") || this.obstacleType.Equals("branch"))
             {
                 this.canTraverse = true;
             }
@@ -46,7 +46,14 @@ namespace MowingforCookies
             }
             this.arrayColY = arrayColY;
             this.arrayRowX = arrayRowX;
-            this.cbox = new Rectangle(this.x, this.y, recX, recY);
+            if (this.obstacleType.Equals("house"))
+            {
+                this.cbox = new Rectangle(this.x, this.y, 100, 100);
+            }
+            else
+            {
+                this.cbox = new Rectangle(this.x, this.y, recX, recY); 
+            }
             this.backupCbox = this.cbox;
         }
 
@@ -70,6 +77,14 @@ namespace MowingforCookies
             {
                 image = content.Load<Texture2D>("grandma.png");
             }
+            else if (obstacleType.Equals("house"))
+            {
+                image = content.Load<Texture2D>("house.png");
+            }
+            else if (obstacleType.Equals("branch"))
+            {
+                image = content.Load<Texture2D>("branch.png");
+            }
             // put uncut_grass here?
         }
 
@@ -77,7 +92,7 @@ namespace MowingforCookies
         {
             if (exploding)
             {
-                sb.Draw(image, cbox, Color.White);//lmao. only part of the image. weird.
+                sb.Draw(image, cbox, Color.White);
             }
             else
             { 
@@ -98,8 +113,6 @@ namespace MowingforCookies
             switch (this.obstacleType)
             {
                 case "gravel":
-                    //Console.WriteLine("here in gravel");
-                    //now to get the 3x3 square array around this stupid thing. 
                     int xMin = mower.arrayRowX;
                     int xMax = mower.arrayRowX;
                     int yTop = mower.arrayColY;
@@ -107,8 +120,6 @@ namespace MowingforCookies
 
                     int patchesXMax = patches.GetLength(0);
                     int patchesYBottom = patches.GetLength(1);
-
-                    //Console.WriteLine("array x,y: " + arrayRowX + ", " + arrayColY);
 
                     if (0 <= mower.arrayColY - 1)
                     {
@@ -126,16 +137,11 @@ namespace MowingforCookies
                     {
                         xMax = mower.arrayRowX + 1;
                     }
-                    //now we have array coordinates of the topLeft and bottomRight of the new Rectangle
-                    //Console.WriteLine("things for rectangle: " + xMin + "," + yTop + ". " + xMax + "," + yBottom);
-                    //UNTESTED. DON'T KNOW HOW TO SET GRAVEL SO I ONLY TESTED IT IN THE THING
-
                     int stupidWidth = (xMax - xMin + 1) * 50;
                     int stupidHeight = (yBottom - yTop + 1) * 50;
                     result = new Rectangle(patches[xMin, yTop].x, patches[xMin, yTop].y, stupidWidth, stupidHeight);
 
                     return result;
-                    break;
             }
             return result = new Rectangle(mower.x, mower.y, 50, 50);
 
@@ -153,25 +159,25 @@ namespace MowingforCookies
 
         public void Update(Spot[,] patches, Mower mower, List<Enemy> enemies, int ticks)
         {
-            Rectangle r = obRec(patches, mower);
-            if (mower.x == this.x && mower.y == this.y)
-            {
-                tickCount = ticks;
-                exploding = true;
-                image = boom;
-                changeBox(r);
-            }
-            else
-            {
-                if (ticks > (tickCount + 50))
-                {
-                    exploding = false;
-                    image = gravel;
-                    changeBoxBack();
-                }
-            }
             if (obstacleType == "gravel")
             {
+                Rectangle r = obRec(patches, mower);
+                if (mower.x == this.x && mower.y == this.y)
+                {
+                    tickCount = ticks;
+                    exploding = true;
+                    image = boom;
+                    changeBox(r);
+                }
+                else
+                {
+                    if (ticks > (tickCount + 50))
+                    {
+                        exploding = false;
+                        image = gravel;
+                        changeBoxBack();
+                    }
+                }
                 foreach (Enemy e in enemies)
                 {
                     collidesEnemy(e);

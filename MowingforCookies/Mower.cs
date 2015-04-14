@@ -17,7 +17,6 @@ namespace MowingforCookies
         enum Direction {North, South, East, West, Stop};
         private Direction nextDir = Direction.Stop;
         private Direction curDir = Direction.Stop;
-       // public int curDir = 0;
         public int moveIndex;
         public Rectangle collisionBox;
         public Spot currentLocation;
