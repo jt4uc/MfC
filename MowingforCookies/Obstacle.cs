@@ -29,6 +29,7 @@ namespace MowingforCookies
         public int recY = 45;
         public Boolean exploding = false;
         public int tickCount = 99999;
+        public int cookieCost;
 
         public Obstacle(Spot currentLocation, String obstacleType, int arrayRowX, int arrayColY)
         {
@@ -55,6 +56,7 @@ namespace MowingforCookies
                 this.cbox = new Rectangle(this.x, this.y, recX, recY); 
             }
             this.backupCbox = this.cbox;
+            this.cookieCost = 15;
         }
 
         public void LoadContent(ContentManager content)

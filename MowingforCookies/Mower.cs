@@ -125,8 +125,15 @@ namespace MowingforCookies
                             totalMowed++;
                             patches[arrayRowX, arrayColY].grassMowed = true;
                         }
-                        cookies--;
-                        if (cookies == 0)
+                        if (patches[arrayRowX, arrayColY].ob != null)
+                        {
+                            cookies = cookies - patches[arrayRowX, arrayColY].ob.cookieCost;
+                        }
+                        else
+                        {
+                            cookies--;
+                        }
+                        if (cookies <= 0)
                         {
                             alive = false;
                         }
@@ -152,8 +159,15 @@ namespace MowingforCookies
                             totalMowed++;
                             patches[arrayRowX, arrayColY].grassMowed = true;
                         }
-                        cookies--;
-                        if (cookies == 0)
+                        if (patches[arrayRowX, arrayColY].ob != null)
+                        {
+                            cookies = cookies - patches[arrayRowX, arrayColY].ob.cookieCost;
+                        }
+                        else
+                        {
+                            cookies--;
+                        }
+                        if (cookies <= 0)
                         {
                             alive = false;
                         }
@@ -179,8 +193,15 @@ namespace MowingforCookies
                             totalMowed++;
                             patches[arrayRowX, arrayColY].grassMowed = true;
                         }
-                        cookies--;
-                        if (cookies == 0)
+                        if (patches[arrayRowX, arrayColY].ob != null)
+                        {
+                            cookies = cookies - patches[arrayRowX, arrayColY].ob.cookieCost;
+                        }
+                        else
+                        {
+                            cookies--;
+                        }
+                        if (cookies <= 0)
                         {
                             alive = false;
                         }
@@ -206,8 +227,15 @@ namespace MowingforCookies
                             totalMowed++;
                             patches[arrayRowX, arrayColY].grassMowed = true;
                         }
-                        cookies--;
-                        if (cookies == 0)
+                        if (patches[arrayRowX, arrayColY].ob != null)
+                        {
+                            cookies = cookies - patches[arrayRowX, arrayColY].ob.cookieCost;
+                        }
+                        else
+                        {
+                            cookies--;
+                        }
+                        if (cookies <= 0)
                         {
                             alive = false;
                         }
@@ -217,18 +245,9 @@ namespace MowingforCookies
         }
 
 
-        public bool collisionObject(Spot objectSpot) // used in move
+        public bool collisionObject(Spot objectSpot) // returns if can traverse to that spot
         {
-            if (objectSpot.canTraverse == true)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return objectSpot.canTraverse;
         }
-        //collisionEnemy
-        //updateCookieAmount
     }
 }
