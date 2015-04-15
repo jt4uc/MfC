@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="6" height="4" tilewidth="50" tileheight="50" nextobjectid="29">
+ <tileset firstgid="1" name="mowed_grass" tilewidth="50" tileheight="50">
+  <image source="mowed_grass.png" width="128" height="128"/>
+ </tileset>
+ <tileset firstgid="5" name="grass" tilewidth="50" tileheight="50">
+  <image source="grass.png" width="50" height="50"/>
+ </tileset>
+ <tileset firstgid="6" name="mower placeholder" tilewidth="50" tileheight="50">
+  <image source="mower placeholder.png" width="50" height="50"/>
+ </tileset>
+ <tileset firstgid="7" name="oak-tree-50x50-transparent" tilewidth="50" tileheight="50">
+  <image source="oak-tree-50x50-transparent.gif" width="50" height="50"/>
+ </tileset>
+ <layer name="mowed grass" width="6" height="4">
+  <data encoding="base64" compression="zlib">
+   eJxjZGBgYAJiRjSaGYhZsNDo6gipBwAK4AA9
+  </data>
+ </layer>
+ <objectgroup name="grass">
+  <object id="1" gid="5" x="0" y="50"/>
+  <object id="2" gid="5" x="0" y="100"/>
+  <object id="3" gid="5" x="0" y="150"/>
+  <object id="4" gid="5" x="0" y="200"/>
+  <object id="5" gid="5" x="50" y="200"/>
+  <object id="6" gid="5" x="50" y="150"/>
+  <object id="7" gid="5" x="50" y="100"/>
+  <object id="8" gid="5" x="100" y="50"/>
+  <object id="9" gid="5" x="50" y="50"/>
+  <object id="10" gid="5" x="100" y="100"/>
+  <object id="11" gid="5" x="100" y="150"/>
+  <object id="12" gid="5" x="100" y="200"/>
+  <object id="13" gid="5" x="150" y="200"/>
+  <object id="14" gid="5" x="150" y="150"/>
+  <object id="15" gid="5" x="150" y="100"/>
+  <object id="16" gid="5" x="200" y="50"/>
+  <object id="17" gid="5" x="200" y="100"/>
+  <object id="18" gid="5" x="150" y="50"/>
+  <object id="19" gid="5" x="200" y="200"/>
+  <object id="20" gid="5" x="200" y="150"/>
+  <object id="21" gid="5" x="250" y="200"/>
+  <object id="22" gid="5" x="250" y="150"/>
+  <object id="23" gid="5" x="250" y="100"/>
+  <object id="24" gid="5" x="250" y="50"/>
+ </objectgroup>
+ <objectgroup name="mower">
+  <object id="25" gid="6" x="0" y="50"/>
+ </objectgroup>
+ <objectgroup name="tree">
+  <object id="26" gid="7" x="150" y="50"/>
+  <object id="27" gid="7" x="0" y="100"/>
+  <object id="28" gid="7" x="50" y="150"/>
+ </objectgroup>
+</map>
