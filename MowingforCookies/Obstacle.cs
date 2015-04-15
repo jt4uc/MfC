@@ -49,7 +49,7 @@ namespace MowingforCookies
             this.arrayRowX = arrayRowX;
             if (this.obstacleType.Equals("house"))
             {
-                this.cbox = new Rectangle(this.x, this.y, 100, 100);
+                this.cbox = new Rectangle(this.x, this.y, 2 * recX, 2 * recY);
             }
             else
             {
