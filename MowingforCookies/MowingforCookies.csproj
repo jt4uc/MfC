@@ -35,17 +35,26 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="BackgroundScreen.cs" />
     <Compile Include="Controls.cs" />
     <Compile Include="Cookie.cs" />
     <Compile Include="Enemy.cs" />
+    <Compile Include="Game.cs" />
+    <Compile Include="GameplayScreen.cs" />
+    <Compile Include="GameScreen.cs" />
     <Compile Include="Grandma.cs" />
+    <Compile Include="LoadingScreen.cs" />
+    <Compile Include="MainMenuScreen.cs" />
+    <Compile Include="MenuEntry.cs" />
+    <Compile Include="MenuScreen.cs" />
     <Compile Include="Mower.cs" />
     <Compile Include="Obstacle.cs" />
+    <Compile Include="OptionsMenuScreen.cs" />
+    <Compile Include="PlayerIndexEventArgs.cs" />
+    <Compile Include="ScreenManager.cs" />
     <Compile Include="Spot.cs" />
     <Compile Include="Sprite.cs" />
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="MainGame.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="OpenTK">
@@ -72,6 +81,12 @@
       <Link>SDL.dll</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\background.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\blank.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\boom.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -89,6 +104,9 @@
     </Content>
     <Content Include="Content\gnome.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\gradient.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\grandma.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
