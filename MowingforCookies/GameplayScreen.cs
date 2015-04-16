@@ -86,8 +86,9 @@ namespace MowingforCookies
             //map = new TmxMap("./Content/gravel_in_corner_test.tmx");
             map = new TmxMap("./Content/" + level + ".tmx");
             graphics.PreferredBackBufferWidth = map.Width * 50; // set this value to the desired width of your window
-            graphics.PreferredBackBufferHeight = map.Height * 60; // set this value to the desired height of your window
+            graphics.PreferredBackBufferHeight = map.Height * 50+100; // set this value to the desired height of your window
             graphics.ApplyChanges();
+            System.Diagnostics.Debug.WriteLine("mapwidth: " + map.Width);
 
             win_Num = 50;
             youWinYet = false;
@@ -112,7 +113,7 @@ namespace MowingforCookies
 
             // map.ObjectGroups[0].Objects.RemoveAt(0); // for when objects are removed
 
-            patches = new Spot[map.Height, map.Width];
+            patches = new Spot[map.Width, map.Height];
             //System.Diagnostics.Debug.WriteLine("mapHeightWidth: " + map.Height + ", " + map.Width);
             for (int row = 0; row < patches.GetLength(0); row++)
             {
@@ -461,15 +462,15 @@ namespace MowingforCookies
         private void DrawStatusBar()
         {
             SpriteBatch spriteBatch = ScreenManager.SpriteBatch;
-            spriteBatch.Draw(menu, new Rectangle(0, 500, 500, 100), Color.White);
+            spriteBatch.Draw(menu, new Rectangle(0, map.Height*50, map.Width*50, 100), Color.White);
             if (!youWinYet)
             {
-                spriteBatch.DrawString(font, "Grass mowed: " + mower.totalMowed + "/" + win_Num, new Vector2(25, 520), Color.Black);
-                spriteBatch.DrawString(font, "Fuel: " + mower.cookies, new Vector2(25, 550), Color.Black);
+                spriteBatch.DrawString(font, "Grass mowed: " + mower.totalMowed + "/" + win_Num, new Vector2(25, map.Height*50+20), Color.Black);
+                spriteBatch.DrawString(font, "Fuel: " + mower.cookies, new Vector2(25, map.Height*50+50), Color.Black);
             }
             else
             {
-                spriteBatch.DrawString(font, "YOU GET COOKIES!!!", new Vector2(25, 520), Color.Black);
+                spriteBatch.DrawString(font, "YOU GET COOKIES!!!", new Vector2(25, map.Height*50+20), Color.Black);
             }
 
         }
