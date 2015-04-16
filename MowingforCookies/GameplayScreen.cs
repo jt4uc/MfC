@@ -46,8 +46,8 @@ namespace MowingforCookies
         private SpriteFont font;
         private Texture2D menu;
         public int win_Num;
-        public bool youWinYet = false;
-        public bool youDoneYet = false;
+        public bool youWinYet;
+        public bool youDoneYet;
         public int mowablePatches;
         // for Tiled
         TmxMap map;
@@ -87,6 +87,7 @@ namespace MowingforCookies
             graphics.ApplyChanges();
 
             youWinYet = false;
+            youDoneYet = false;
             ticks = 0;
             mowablePatches = 0;
 
