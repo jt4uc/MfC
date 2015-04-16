@@ -51,8 +51,8 @@ namespace MowingforCookies
         TmxMap map;
         //Texture2D[] tiles;
 
-
-
+        String[] levels = new String[] {"intro level 1A", "intro level 2A", "intro level 3A", "level 1A", "ice_level_10"};
+        String level;
 
         ContentManager content;
         SpriteFont gameFont;
@@ -80,17 +80,16 @@ namespace MowingforCookies
 
 
             this.graphics = graphics;
-            //graphics = new GraphicsDeviceManager(game); /// default is 800x600
             //Content.RootDirectory = "Content";
+            this.level = level;
 
-            //map = new TmxMap("./Content/gravel_in_corner_test.tmx");
             map = new TmxMap("./Content/" + level + ".tmx");
             graphics.PreferredBackBufferWidth = map.Width * 50; // set this value to the desired width of your window
             graphics.PreferredBackBufferHeight = map.Height * 50+100; // set this value to the desired height of your window
             graphics.ApplyChanges();
             System.Diagnostics.Debug.WriteLine("mapwidth: " + map.Width);
 
-            win_Num = 50;
+            win_Num = 5;
             youWinYet = false;
             ticks = 0;
 
@@ -285,7 +284,6 @@ namespace MowingforCookies
                     {
                         Initialize();
                     }
-
                     mower.Update(controls, patches, gameTime);
                     if (grandma != null)
                     {
@@ -342,6 +340,14 @@ namespace MowingforCookies
                 }
                 else
                 {
+                    if (Keyboard.GetState().IsKeyDown(Keys.Enter))
+                    {
+                        if (Array.IndexOf(levels, level) == levels.Length - 1)
+                            ScreenManager.AddScreen(new LevelSelectionMenuScreen(graphics), 0);
+                        else
+                            LoadingScreen.Load(ScreenManager, true, 0,
+                              new GameplayScreen(graphics, levels[Array.IndexOf(levels, level) + 1]));
+                    }
                     if (Keyboard.GetState().IsKeyDown(Keys.A))
                     {
                         youWinYet = false;
@@ -357,53 +363,7 @@ namespace MowingforCookies
         /// </summary>
         public override void HandleInput(Controls control)
         {
-            //if (input == null)
-            //    throw new ArgumentNullException("input");
-
-            //// Look up inputs for the active player profile.
-            //int playerIndex = (int)ControllingPlayer.Value;
-
-            //KeyboardState keyboardState = input.CurrentKeyboardStates[playerIndex];
-            //GamePadState gamePadState = input.CurrentGamePadStates[playerIndex];
-
-            //// The game pauses either if the user presses the pause button, or if
-            //// they unplug the active gamepad. This requires us to keep track of
-            //// whether a gamepad was ever plugged in, because we don't want to pause
-            //// on PC if they are playing with a keyboard and have no gamepad at all!
-            //bool gamePadDisconnected = !gamePadState.IsConnected &&
-            //                           input.GamePadWasConnected[playerIndex];
-
-            //if (input.IsPauseGame(ControllingPlayer) || gamePadDisconnected)
-            //{
-            //    //ScreenManager.AddScreen(new PauseMenuScreen(), ControllingPlayer);
-            //}
-            //else
-            //{
-            //    // Otherwise move the player position.
-            //    Vector2 movement = Vector2.Zero;
-
-            //    if (keyboardState.IsKeyDown(Keys.Left))
-            //        movement.X--;
-
-            //    if (keyboardState.IsKeyDown(Keys.Right))
-            //        movement.X++;
-
-            //    if (keyboardState.IsKeyDown(Keys.Up))
-            //        movement.Y--;
-
-            //    if (keyboardState.IsKeyDown(Keys.Down))
-            //        movement.Y++;
-
-            //    Vector2 thumbstick = gamePadState.ThumbSticks.Left;
-
-            //    movement.X += thumbstick.X;
-            //    movement.Y -= thumbstick.Y;
-
-            //    if (movement.Length() > 1)
-            //        movement.Normalize();
-
-            //    playerPosition += movement * 2;
-            //}
+  
         }
 
 
@@ -465,12 +425,14 @@ namespace MowingforCookies
             spriteBatch.Draw(menu, new Rectangle(0, map.Height*50, map.Width*50, 100), Color.White);
             if (!youWinYet)
             {
-                spriteBatch.DrawString(font, "Grass mowed: " + mower.totalMowed + "/" + win_Num, new Vector2(25, map.Height*50+20), Color.Black);
-                spriteBatch.DrawString(font, "Fuel: " + mower.cookies, new Vector2(25, map.Height*50+50), Color.Black);
+                spriteBatch.DrawString(font, "Grass mowed:" + mower.totalMowed + "/" + win_Num, new Vector2(15, map.Height*50+20), Color.Black);
+                spriteBatch.DrawString(font, "Fuel:" + mower.cookies, new Vector2(15, map.Height*50+50), Color.Black);
             }
             else
             {
-                spriteBatch.DrawString(font, "YOU GET COOKIES!!!", new Vector2(25, map.Height*50+20), Color.Black);
+                spriteBatch.DrawString(font, "YOU GET COOKIES!!!", new Vector2(15, map.Height*50+20), Color.Black);
+                spriteBatch.DrawString(font, "(Press Enter", new Vector2(15, map.Height * 50 + 40), Color.Black);
+                spriteBatch.DrawString(font, " for next level)", new Vector2(15, map.Height * 50 + 60), Color.Black);
             }
 
         }
