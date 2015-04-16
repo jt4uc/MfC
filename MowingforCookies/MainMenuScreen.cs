@@ -33,16 +33,19 @@ namespace MowingforCookies
             this.graphics = graphics;
             // Create our menu entries.
             MenuEntry playGameMenuEntry = new MenuEntry("Play Game");
+            MenuEntry levelSelectionEntry = new MenuEntry("Level Selection");
             MenuEntry optionsMenuEntry = new MenuEntry("Options");
             MenuEntry exitMenuEntry = new MenuEntry("Exit");
 
             // Hook up menu event handlers.
             playGameMenuEntry.Selected += PlayGameMenuEntrySelected;
+            levelSelectionEntry.Selected += LevelSelectionEntrySelected;
             optionsMenuEntry.Selected += OptionsMenuEntrySelected;
             exitMenuEntry.Selected += OnCancel;
 
             // Add entries to the menu.
             MenuEntries.Add(playGameMenuEntry);
+            MenuEntries.Add(levelSelectionEntry);
             MenuEntries.Add(optionsMenuEntry);
             MenuEntries.Add(exitMenuEntry);
         }
@@ -62,6 +65,12 @@ namespace MowingforCookies
                                new GameplayScreen(graphics));
         }
 
+        void LevelSelectionEntrySelected(object sender, PlayerIndexEventArgs e)
+        {
+            //LoadingScreen.Load(ScreenManager, true, e.PlayerIndex,
+            //                   new GameplayScreen(graphics));
+            ScreenManager.AddScreen(new LevelSelectionMenuScreen(graphics), e.PlayerIndex);
+        }
 
         /// <summary>
         /// Event handler for when the Options menu entry is selected.

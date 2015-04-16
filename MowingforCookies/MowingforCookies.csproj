@@ -43,6 +43,7 @@
     <Compile Include="GameplayScreen.cs" />
     <Compile Include="GameScreen.cs" />
     <Compile Include="Grandma.cs" />
+    <Compile Include="LevelSelectionMenuScreen.cs" />
     <Compile Include="LoadingScreen.cs" />
     <Compile Include="MainMenuScreen.cs" />
     <Compile Include="MenuEntry.cs" />
