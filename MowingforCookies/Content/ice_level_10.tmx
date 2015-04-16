@@ -29,7 +29,7 @@
    eJxjZGBgYBzFgwYDAFB4AGU=
   </data>
  </layer>
- <objectgroup name="mowed grass">
+ <objectgroup name="grass">
   <object id="7" gid="1" x="0" y="50"/>
   <object id="8" gid="1" x="0" y="50"/>
   <object id="9" gid="1" x="300" y="100"/>
@@ -167,7 +167,7 @@
   <object id="125" gid="6" x="150" y="300"/>
   <object id="126" gid="6" x="300" y="150"/>
  </objectgroup>
- <objectgroup name="cookie">
+ <objectgroup name="cookies">
   <object id="132" gid="11" x="100" y="300"/>
  </objectgroup>
  <objectgroup name="branch"/>

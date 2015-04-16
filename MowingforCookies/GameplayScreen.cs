@@ -34,8 +34,6 @@ namespace MowingforCookies
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        int SCREENWIDTH;
-        int SCREENHEIGHT;
         int ticks;
 
         Controls controls;
@@ -74,7 +72,7 @@ namespace MowingforCookies
         /// <summary>
         /// Constructor.
         /// </summary>
-        public GameplayScreen(GraphicsDeviceManager graphics)
+        public GameplayScreen(GraphicsDeviceManager graphics, String level)
         {
             TransitionOnTime = TimeSpan.FromSeconds(1.5);
             TransitionOffTime = TimeSpan.FromSeconds(0.5);
@@ -86,16 +84,13 @@ namespace MowingforCookies
             //Content.RootDirectory = "Content";
 
             //map = new TmxMap("./Content/gravel_in_corner_test.tmx");
-            map = new TmxMap("./Content/beta.tmx");
-            SCREENWIDTH = map.Width * 50;
-            SCREENHEIGHT = map.Height * 60;
+            map = new TmxMap("./Content/" + level + ".tmx");
+            graphics.PreferredBackBufferWidth = map.Width * 50; // set this value to the desired width of your window
+            graphics.PreferredBackBufferHeight = map.Height * 60; // set this value to the desired height of your window
+            graphics.ApplyChanges();
 
             win_Num = 50;
             youWinYet = false;
-
-            graphics.PreferredBackBufferWidth = SCREENWIDTH;  // set this value to the desired width of your window
-            graphics.PreferredBackBufferHeight = SCREENHEIGHT;   // set this value to the desired height of your window
-            graphics.ApplyChanges();
             ticks = 0;
 
 
@@ -130,8 +125,7 @@ namespace MowingforCookies
 
                 }
             }
-            // hard coding Mower
-            mower = new Mower(patches[0, 1], 150); // current location represented by spot
+            
             enemies = new List<Enemy>();
             cookies = new List<Cookie>();
             obstacles = new List<Obstacle>();
@@ -140,6 +134,7 @@ namespace MowingforCookies
             for (int i = 0; i < map.ObjectGroups.Count; i++)
             {
                 String name = map.ObjectGroups[i].Name; // object layer names are labeled <png filename>
+
                 int numObjects = map.ObjectGroups[i].Objects.Count;
                 // go through each object of the object layer
                 for (int j = 0; j < numObjects; j++)
@@ -147,8 +142,19 @@ namespace MowingforCookies
                     int x = (int)map.ObjectGroups[i].Objects[j].X / 50; // divide by 50 because that's the size of the tile
                     int y = ((int)map.ObjectGroups[i].Objects[j].Y - 50) / 50; // -50, because apparently tiled goes by bottom left corner
                     //System.Diagnostics.Debug.WriteLine("x, y: " + x + ", " + y);
-
-                    if (name.Equals("gnome"))
+                    if (name.Equals("mower"))
+                    {   
+                        String numCookies = map.ObjectGroups[i].Objects[j].Name;
+                        if(numCookies.Equals(""))
+                        {
+                            mower = new Mower(patches[x, y], 150);
+                        }
+                        else
+                        {
+                            mower = new Mower(patches[x, y], int.Parse(numCookies));
+                        }
+                    }
+                    else if (name.Equals("gnome"))
                     {
 
                         String path = map.ObjectGroups[i].Objects[j].Name;
@@ -182,7 +188,8 @@ namespace MowingforCookies
                 }
 
             }
-
+            if (mower == null)
+                mower = new Mower(patches[0, 1], 150);
 
             //base.Initialize();
             controls = new Controls();
@@ -271,7 +278,7 @@ namespace MowingforCookies
                     ticks++;
                     controls.Update();
                     if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                        //Exit();
+                        Environment.Exit(0); //Exit();
 
                     if (Keyboard.GetState().IsKeyDown(Keys.Space))
                     {

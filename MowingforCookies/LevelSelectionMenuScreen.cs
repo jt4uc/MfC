@@ -42,6 +42,7 @@ namespace MowingforCookies
             MenuEntry level2 = new MenuEntry("Thar be another level arrrrr");
             MenuEntry level3 = new MenuEntry("America's Lastest Pestilence");
             MenuEntry level4 = new MenuEntry("Maybe Grandma Should Go Apartment Hunting");
+            MenuEntry level5 = new MenuEntry("Watch for the Roamin' Gnomes");
 
            // SetMenuEntryText();
 
@@ -52,6 +53,7 @@ namespace MowingforCookies
             level2.Selected += Level2Selected;
             level3.Selected += Level3Selected;
             level4.Selected += Level4Selected;
+            level5.Selected += Level5Selected;
             backMenuEntry.Selected += OnCancel;
 
             // Add entries to the menu.
@@ -59,6 +61,7 @@ namespace MowingforCookies
             MenuEntries.Add(level2);
             MenuEntries.Add(level3);
             MenuEntries.Add(level4);
+            MenuEntries.Add(level5);
             MenuEntries.Add(backMenuEntry);
         }
 
@@ -82,25 +85,31 @@ namespace MowingforCookies
         void Level1Selected(object sender, PlayerIndexEventArgs e)
         {
             LoadingScreen.Load(ScreenManager, true, e.PlayerIndex,
-                               new GameplayScreen(graphics));
+                               new GameplayScreen(graphics, "intro level 1A"));
         }
 
         void Level2Selected(object sender, PlayerIndexEventArgs e)
         {
             LoadingScreen.Load(ScreenManager, true, e.PlayerIndex,
-                               new GameplayScreen(graphics));
+                               new GameplayScreen(graphics, "intro level 2A"));
         }
 
         void Level3Selected(object sender, PlayerIndexEventArgs e)
         {
             LoadingScreen.Load(ScreenManager, true, e.PlayerIndex,
-                               new GameplayScreen(graphics));
+                               new GameplayScreen(graphics, "intro level 3A"));
         }
 
         void Level4Selected(object sender, PlayerIndexEventArgs e)
         {
             LoadingScreen.Load(ScreenManager, true, e.PlayerIndex,
-                               new GameplayScreen(graphics));
+                               new GameplayScreen(graphics, "level 1A"));
+        }
+
+        void Level5Selected(object sender, PlayerIndexEventArgs e)
+        {
+            LoadingScreen.Load(ScreenManager, true, e.PlayerIndex,
+                               new GameplayScreen(graphics, "ice_level_10"));
         }
 
         #endregion

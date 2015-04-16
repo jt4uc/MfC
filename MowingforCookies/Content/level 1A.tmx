@@ -29,7 +29,7 @@
    eJxjZGBgYAJiRhw0MxCz4KFx6Rsq+gFOAACh
   </data>
  </layer>
- <objectgroup name="fucking grass">
+ <objectgroup name="grass">
   <object id="2" gid="5" x="0" y="50"/>
   <object id="3" gid="5" x="0" y="100"/>
   <object id="4" gid="5" x="0" y="150"/>
@@ -95,14 +95,14 @@
   <object id="69" gid="5" x="350" y="400"/>
   <object id="70" gid="5" x="300" y="400"/>
  </objectgroup>
- <objectgroup name="stupid mower">
+ <objectgroup name="mower">
   <object id="71" gid="6" x="50" y="150"/>
  </objectgroup>
- <objectgroup name="TREES">
+ <objectgroup name="tree">
   <object id="76" gid="7" x="150" y="50"/>
   <object id="77" gid="7" x="350" y="150"/>
  </objectgroup>
- <objectgroup name="cookie">
+ <objectgroup name="cookies">
   <object id="80" gid="8" x="0" y="300"/>
  </objectgroup>
  <objectgroup name="gnome">
