@@ -325,7 +325,7 @@ namespace MowingforCookies
                     if (mower.totalMowed >= win_Num)
                     {
                         youWinYet = true; 
-                        win_Num = mowablePatches;
+                        win_Num = mowablePatches; // mowable patches isn't even close to being accurate... can't calculate it - it will have to be included in the maps
 
                     }
                 }
@@ -342,6 +342,10 @@ namespace MowingforCookies
                     if (Keyboard.GetState().IsKeyDown(Keys.A))
                     {
                         youWinYet = false;
+                    }
+                    if (Keyboard.GetState().IsKeyDown(Keys.Space))
+                    {
+                        LoadContent();
                     }
                 }
             }
