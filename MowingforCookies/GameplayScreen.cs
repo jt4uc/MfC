@@ -320,7 +320,10 @@ namespace MowingforCookies
                     }
                     foreach (Cookie c in cookies)
                     {
-                        c.Update(mower, grandma, ticks);
+                        //if (c.alive)
+                        //{
+                            c.Update(mower, grandma, ticks);
+                        //}
                     }
 
                     if (mower.totalMowed >= win_Num)

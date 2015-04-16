@@ -47,7 +47,7 @@ namespace MowingforCookies
 
         public void Update(Mower m, Grandma g, int ticks)
         {
-            if (m.x == this.x && m.y == this.y) { 
+            if (m.x == this.x && m.y == this.y && this.alive == true) { 
                 if (type.Equals("chocolatechip"))
                 {
                     tickCount = ticks;
