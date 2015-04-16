@@ -67,6 +67,8 @@ namespace MowingforCookies
                     s.isTraversed = true;
                 }
             }
+            //if ((arrayRowX + 1 == patchesRows) || (arrayRowX - 1 == -1) || (arrayColY + 1 == patchesCols) || (arrayColY - 1 == -1) || (collisionObject(patches[arrayRowX - 1, arrayColY]) == false))
+
             if (controls.onPress(Keys.Right, Buttons.DPadRight))
             {
                 nextDir = Direction.East;
@@ -88,6 +90,8 @@ namespace MowingforCookies
             {
                 //spacebar = stop?
             }
+            
+
             if (curDir == Direction.Stop)
             {
                 curDir = nextDir;

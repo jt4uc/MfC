@@ -87,9 +87,8 @@ namespace MowingforCookies
             graphics.PreferredBackBufferWidth = map.Width * 50; // set this value to the desired width of your window
             graphics.PreferredBackBufferHeight = map.Height * 50+100; // set this value to the desired height of your window
             graphics.ApplyChanges();
-            System.Diagnostics.Debug.WriteLine("mapwidth: " + map.Width);
 
-            win_Num = 5;
+            win_Num = 10;
             youWinYet = false;
             ticks = 0;
 
