@@ -276,10 +276,10 @@ namespace MowingforCookies
                     {
                         LoadContent();
                     }
-                    //if (Keyboard.GetState().IsKeyDown(Keys.Back))
-                    //{
-                        
-                    //}
+                    if (Keyboard.GetState().IsKeyDown(Keys.Back))
+                    {
+                        ScreenManager.AddScreen(new MainMenuScreen(graphics), null);
+                    }
                     mower.Update(controls, patches, gameTime);
                     if (grandma != null)
                     {
