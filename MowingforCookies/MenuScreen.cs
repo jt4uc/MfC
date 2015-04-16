@@ -75,23 +75,6 @@ namespace MowingforCookies
         /// </summary>
         public override void HandleInput(Controls controls)
         {
-            //// Move to the previous menu entry?
-            //if (input.IsMenuUp(ControllingPlayer))
-            //{
-            //    selectedEntry--;
-
-            //    if (selectedEntry < 0)
-            //        selectedEntry = menuEntries.Count - 1;
-            //}
-
-            //// Move to the next menu entry?
-            //if (input.IsMenuDown(ControllingPlayer))
-            //{
-            //    selectedEntry++;
-
-            //    if (selectedEntry >= menuEntries.Count)
-            //        selectedEntry = 0;
-            //}
 
             // Move to the previous menu entry?
             if (controls.onPress(Keys.Up, Buttons.DPadUp))
@@ -126,16 +109,6 @@ namespace MowingforCookies
             {
                 OnCancel(playerIndex);
             }
-            //PlayerIndex playerIndex;
-
-            //if (input.IsMenuSelect(ControllingPlayer, out playerIndex))
-            //{
-            //    OnSelectEntry(selectedEntry, playerIndex);
-            //}
-            //else if (input.IsMenuCancel(ControllingPlayer, out playerIndex))
-            //{
-            //    OnCancel(playerIndex);
-            //}
 
         }
 
