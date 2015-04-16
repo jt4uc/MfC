@@ -19,50 +19,49 @@ namespace MowingforCookies
         public int x, y;
         public Spot currentLocation;
         public int arrayRowX, arrayColY;
+        public int recX = 50;
+        public int recY = 50;
+        public int tickCount = 9999999;
+        public Boolean alive = true;
 
         public Cookie(Spot s, int arrayRowX, int arrayColY)
         {
             fuel = 5; //positive fuel gain
-            type = "chocolate chip";
+            type = "chocolatechip";
             this.x = s.x;
             this.y = s.y;
             this.currentLocation = s;
             this.arrayColY = arrayColY;
             this.arrayRowX = arrayRowX;
+            
         }
 
         public void LoadContent(ContentManager content)
         {
-            image = content.Load<Texture2D>("chocolate chip.png");
+            image = content.Load<Texture2D>("chocolatechip.png");
         }
         public void Draw(SpriteBatch sb)
         {
-            sb.Draw(image, new Rectangle(x, y, 50, 50), Color.White);
+            sb.Draw(image, new Rectangle(x, y, recX, recY), Color.White);
         }
 
-        public void Update()
+        public void Update(Mower m, Grandma g, int ticks)
         {
-
-        }
-        public void setX(int x){
-            this.x = x;
-        }
-        public void setY(int y){
-            this.y = y;
-        }
-        public void setType(String s)
-        {
-            this.type = s; 
-        }
-        public void setFuel(int f)
-        {
-            this.fuel = f;
-        }
-        public void setSpot(Spot s)
-        {
-            this.x = s.x;
-            this.y = s.y;
-            this.currentLocation = s;
+            if (m.x == this.x && m.y == this.y) { 
+                if (type.Equals("chocolatechip"))
+                {
+                    tickCount = ticks;
+                    g.SPEED = 3;
+                    this.alive = false;
+                }
+            }
+            else
+            {
+                if (ticks > (tickCount + 200))
+                {
+                    g.SPEED = 1;
+                }
+            }
         }
     }
 }

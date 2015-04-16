@@ -14,26 +14,22 @@ namespace MowingforCookies
         public int y;
         public int moveIndex;   
         public Spot currentLocation;
-        public Spot targetLocation;
-        public bool alive;
-        public double speed;
-        public Texture2D enemyTexture;
-        //private Rectangle collisionBox;
-        //public Animated Sprite?? mowerTextureMap
-
         public String type;
         public int arrayRowX;
         public int arrayColY;
         public Boolean visible;
         public int[] moveSequence;
-
-        public int currentTime = 0;
-        const int TIME_BETWEEN_MOVES = 30;
+        public Boolean alive = true;
+        public Texture2D gnome;
+        const int SPEED = 2;
+        public Rectangle cbox;
+        public int recX = 45;
+        public int recY = 45;
 
         //Content Manager?
-        public Enemy(Spot currentLocation, int cookies, int arrayRowX, int arrayColY, int[] sequence)
+        public Enemy(Spot currentLocation, int arrayRowX, int arrayColY, int[] sequence)
         {
-
+            // removed cookies argument from Enemy constructor
             this.currentLocation = currentLocation;
             this.moveIndex = 0;
             this.x = currentLocation.x;
@@ -43,48 +39,30 @@ namespace MowingforCookies
             this.arrayRowX = arrayRowX;
             this.visible = false;
             this.moveSequence = sequence;
-
-
+            this.cbox = new Rectangle(x, y, recX, recY);
         }
 
         public void LoadContent(ContentManager content)
         {
-            image = content.Load<Texture2D>("gnome.png");
+            gnome = content.Load<Texture2D>("gnome.png");
+            image = gnome;
         }
 
         public void Draw(SpriteBatch sb)
         {
-            sb.Draw(image, new Rectangle(x, y, 48, 50), Color.White);
+            sb.Draw(image, new Rectangle(x, y, recX, recY), Color.White);
         }
-
         public void Update(Mower mower, Controls controls, Spot[,] patches, GameTime gameTime)
         {
             if (mower.arrayRowX > this.arrayRowX - 3 && mower.arrayRowX < this.arrayRowX + 3 && mower.arrayColY > this.arrayColY - 3 && mower.arrayColY < this.arrayColY + 3)
             {
                 this.visible = true;
             }
-
             if (this.visible)
             {
-                if (currentTime >= TIME_BETWEEN_MOVES)
-                {
-                    Move(mower, patches);
-                    currentTime = 0;
-                }
-                else
-                {
-                    currentTime++;
-                }
+                Move(mower, patches);
             }
-
-            //Move(mower, patches);
         }
-
-        public void setType(String s)
-        {
-            this.type = s;
-        }
-
         public void Move(Mower mower, Spot[,] patches)
         {
             int nextDir;
@@ -95,56 +73,62 @@ namespace MowingforCookies
             else
             {
                 nextDir = moveSequence[moveIndex];
-                moveIndex++;
-                if (moveIndex >= moveSequence.Length)
-                {
-                    moveIndex = 0;
-                }
             }
-
-            
-
             if (nextDir == 1)//right
             {
-                patches[arrayRowX, arrayColY].setEnemy(null); //leave current tile
-                patches[arrayRowX, arrayColY].canTraverse = true;
-
-                this.arrayRowX = this.arrayRowX + 1; //update grid position
-                this.x = patches[arrayRowX, arrayColY].x; //update pixel position
-
-                patches[arrayRowX, arrayColY].setEnemy(this); //enter new tile
-
+                this.x = this.x + SPEED;
+                this.cbox.X = this.x;
+                if (this.x >= patches[arrayRowX + 1, arrayColY].x)
+                {
+                    this.arrayRowX = this.arrayRowX + 1; //update grid position
+                    moveIndex++;
+                    if (moveIndex >= moveSequence.Length)
+                    {
+                        moveIndex = 0;
+                    }
+                }
             }
             else if (nextDir == 2)//left
             {
-                patches[arrayRowX, arrayColY].setEnemy(null); //leave current tile
-                patches[arrayRowX, arrayColY].canTraverse = true;
-
-                this.arrayRowX = this.arrayRowX - 1; //update grid position
-                this.x = patches[arrayRowX, arrayColY].x; //update pixel position
-
-                patches[arrayRowX, arrayColY].setEnemy(this); //enter new tile
-
+                this.x = this.x - SPEED;
+                this.cbox.X = this.x;
+                if (this.x <= patches[arrayRowX - 1, arrayColY].x)
+                {
+                    this.arrayRowX = this.arrayRowX - 1; //update grid position
+                    moveIndex++;
+                    if (moveIndex >= moveSequence.Length)
+                    {
+                        moveIndex = 0;
+                    }
+                }
             }
             else if (nextDir == 3)//down
             {
-                patches[arrayRowX, arrayColY].setEnemy(null); //leave current tile
-                patches[arrayRowX, arrayColY].canTraverse = true;
-
-                this.arrayColY = this.arrayColY + 1; //update grid position
-                this.x = patches[arrayRowX, arrayColY].y; //update pixel position
-
-                patches[arrayRowX, arrayColY].setEnemy(this); //enter new tile
+                this.y = this.y + SPEED;
+                this.cbox.Y = this.y;
+                if (this.y >= patches[arrayRowX, arrayColY + 1].y)
+                {
+                    this.arrayColY = this.arrayColY + 1; //update grid position
+                    moveIndex++;
+                    if (moveIndex >= moveSequence.Length)
+                    {
+                        moveIndex = 0;
+                    }
+                }
             }
             else if (nextDir == 4)//up
             {
-                patches[arrayRowX, arrayColY].setEnemy(null); //leave current tile
-                patches[arrayRowX, arrayColY].canTraverse = true;
-
-                this.arrayColY = this.arrayColY - 1; //update grid position
-                this.x = patches[arrayRowX + 1, arrayColY].y; //update pixel position
-
-                patches[arrayRowX, arrayColY].setEnemy(this); //enter new tile
+                this.y = this.y - SPEED;
+                this.cbox.Y = this.y;
+                if (this.y <= patches[arrayRowX, arrayColY - 1].y)
+                {
+                    this.arrayColY = this.arrayColY - 1; //update grid position
+                    moveIndex++;
+                    if (moveIndex >= moveSequence.Length)
+                    {
+                        moveIndex = 0;
+                    }
+                }
             }
         }
 

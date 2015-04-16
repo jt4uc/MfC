@@ -17,12 +17,19 @@ namespace MowingforCookies
         public int x;
         public int y;
         public Boolean canTraverse;
+        public Texture2D boom;
+        public Texture2D gravel;
 
         public int arrayRowX;
         public int arrayColY;
 
-        //obstacleTexture: Texture2D
-        //obstacleTextureMap: Animated Sprite
+        public Rectangle cbox;
+        public Rectangle backupCbox;
+        public int recX = 45;
+        public int recY = 45;
+        public Boolean exploding = false;
+        public int tickCount = 99999;
+        public int cookieCost;
 
         public Obstacle(Spot currentLocation, String obstacleType, int arrayRowX, int arrayColY)
         {
@@ -30,8 +37,7 @@ namespace MowingforCookies
             this.x = this.currentLocation.x;
             this.y = this.currentLocation.y;
             this.obstacleType = obstacleType;
-
-            if (this.obstacleType.Equals("gravel"))
+            if (this.obstacleType.Equals("gravel") || this.obstacleType.Equals("bush") || this.obstacleType.Equals("branch"))
             {
                 this.canTraverse = true;
             }
@@ -41,6 +47,16 @@ namespace MowingforCookies
             }
             this.arrayColY = arrayColY;
             this.arrayRowX = arrayRowX;
+            if (this.obstacleType.Equals("house"))
+            {
+                this.cbox = new Rectangle(this.x, this.y, 2 * recX, 2 * recY);
+            }
+            else
+            {
+                this.cbox = new Rectangle(this.x, this.y, recX, recY); 
+            }
+            this.backupCbox = this.cbox;
+            this.cookieCost = 15;
         }
 
         public void LoadContent(ContentManager content)
@@ -51,7 +67,9 @@ namespace MowingforCookies
             }
             else if (obstacleType.Equals("gravel"))
             {
-                image = content.Load<Texture2D>("gravel.png");
+                gravel = content.Load<Texture2D>("gravel.png");
+                boom = content.Load<Texture2D>("boom.png");
+                image =  gravel;    
             }
             else if (obstacleType.Equals("bush"))
             {
@@ -61,18 +79,113 @@ namespace MowingforCookies
             {
                 image = content.Load<Texture2D>("grandma.png");
             }
-
+            else if (obstacleType.Equals("house"))
+            {
+                image = content.Load<Texture2D>("house.png");
+            }
+            else if (obstacleType.Equals("branch"))
+            {
+                image = content.Load<Texture2D>("branch.png");
+            }
+            // put uncut_grass here?
         }
 
         public void Draw(SpriteBatch sb)
         {
-            sb.Draw(image, new Rectangle(x, y, 40, 40), Color.White);
+            if (exploding)
+            {
+                sb.Draw(image, cbox, Color.White);
+            }
+            else
+            { 
+                sb.Draw(image, backupCbox, Color.White);
+            }
+        }
+        public void collidesEnemy(Enemy e)
+        {
+            if (this.cbox.Intersects(e.cbox))
+            {
+                e.alive = false;
+            }
         }
 
-
-        public void Update()
+        public Rectangle obRec(Spot[,] patches, Mower mower)
         {
+            Rectangle result;
+            switch (this.obstacleType)
+            {
+                case "gravel":
+                    int xMin = mower.arrayRowX;
+                    int xMax = mower.arrayRowX;
+                    int yTop = mower.arrayColY;
+                    int yBottom = mower.arrayColY;
 
+                    int patchesXMax = patches.GetLength(0);
+                    int patchesYBottom = patches.GetLength(1);
+
+                    if (0 <= mower.arrayColY - 1)
+                    {
+                        yTop = mower.arrayColY - 1;
+                    }
+                    if (mower.arrayColY + 1 < patchesYBottom)
+                    {
+                        yBottom = mower.arrayColY + 1;
+                    }
+                    if (0 <= mower.arrayRowX - 1)
+                    {
+                        xMin = mower.arrayRowX - 1;
+                    }
+                    if (mower.arrayRowX + 1 < patchesXMax)
+                    {
+                        xMax = mower.arrayRowX + 1;
+                    }
+                    int stupidWidth = (xMax - xMin + 1) * 50;
+                    int stupidHeight = (yBottom - yTop + 1) * 50;
+                    result = new Rectangle(patches[xMin, yTop].x, patches[xMin, yTop].y, stupidWidth, stupidHeight);
+
+                    return result;
+            }
+            return result = new Rectangle(mower.x, mower.y, 50, 50);
+
+        }
+        public void changeBox(Rectangle lol)
+        {
+            this.cbox = lol;
+            image = boom;
+        }
+        public void changeBoxBack()
+        {
+            this.cbox = this.backupCbox;
+            image = gravel;
+        }
+
+        public void Update(Spot[,] patches, Mower mower, List<Enemy> enemies, int ticks)
+        {
+            if (obstacleType == "gravel")
+            {
+                Rectangle r = obRec(patches, mower);
+                if (mower.x == this.x && mower.y == this.y)
+                {
+                    tickCount = ticks;
+                    exploding = true;
+                    image = boom;
+                    changeBox(r);
+                }
+                else
+                {
+                    if (ticks > (tickCount + 50))
+                    {
+                        exploding = false;
+                        image = gravel;
+                        changeBoxBack();
+                    }
+                }
+                foreach (Enemy e in enemies)
+                {
+                    collidesEnemy(e);
+                } 
+            }
+            
         }
 
         public void setSpot(Spot s)
@@ -81,12 +194,5 @@ namespace MowingforCookies
             this.x = s.x;
             this.y = s.y;
         }
-
-        public Spot getSpot()
-        {
-            return this.currentLocation;
-        }
-
-
     }
 }

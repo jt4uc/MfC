@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="8" height="8" tilewidth="50" tileheight="50" nextobjectid="81">
+ <tileset firstgid="1" name="mowed_grass" tilewidth="50" tileheight="50">
+  <image source="mowed_grass.png" width="128" height="128"/>
+ </tileset>
+ <tileset firstgid="5" name="grass" tilewidth="50" tileheight="50">
+  <image source="grass.png" width="50" height="50"/>
+ </tileset>
+ <tileset firstgid="6" name="mower placeholder" tilewidth="50" tileheight="50">
+  <image source="mower placeholder.png" width="50" height="50"/>
+ </tileset>
+ <tileset firstgid="7" name="oak-tree-50x50-transparent" tilewidth="50" tileheight="50">
+  <image source="oak-tree-50x50-transparent.gif" width="50" height="50"/>
+ </tileset>
+ <tileset firstgid="8" name="chocolatechip50x50" tilewidth="50" tileheight="50">
+  <image source="chocolatechip50x50.gif" width="50" height="50"/>
+ </tileset>
+ <tileset firstgid="9" name="gnome_placeholder" tilewidth="50" tileheight="50">
+  <image source="gnome_placeholder.png" width="50" height="50"/>
+ </tileset>
+ <tileset firstgid="10" name="gravel" tilewidth="50" tileheight="50">
+  <image source="gravel.png" width="50" height="50"/>
+ </tileset>
+ <tileset firstgid="11" name="grandma" tilewidth="50" tileheight="50">
+  <image source="grandma.png" width="80" height="81"/>
+ </tileset>
+ <layer name="grass" width="8" height="8">
+  <data encoding="base64" compression="zlib">
+   eJxjZGBgYAJiRhw0MxCz4KFx6Rsq+gFOAACh
+  </data>
+ </layer>
+ <objectgroup name="grass">
+  <object id="2" gid="5" x="0" y="50"/>
+  <object id="3" gid="5" x="0" y="100"/>
+  <object id="4" gid="5" x="0" y="150"/>
+  <object id="5" gid="5" x="0" y="200"/>
+  <object id="6" gid="5" x="0" y="300"/>
+  <object id="7" gid="5" x="0" y="250"/>
+  <object id="9" gid="5" x="0" y="400"/>
+  <object id="10" gid="5" x="0" y="350"/>
+  <object id="11" gid="5" x="50" y="400"/>
+  <object id="12" gid="5" x="50" y="350"/>
+  <object id="13" gid="5" x="50" y="300"/>
+  <object id="14" gid="5" x="50" y="250"/>
+  <object id="15" gid="5" x="100" y="150"/>
+  <object id="16" gid="5" x="50" y="200"/>
+  <object id="17" gid="5" x="50" y="150"/>
+  <object id="18" gid="5" x="50" y="100"/>
+  <object id="19" gid="5" x="50" y="50"/>
+  <object id="20" gid="5" x="100" y="50"/>
+  <object id="21" gid="5" x="100" y="100"/>
+  <object id="24" gid="5" x="100" y="200"/>
+  <object id="25" gid="5" x="100" y="300"/>
+  <object id="26" gid="5" x="100" y="250"/>
+  <object id="27" gid="5" x="100" y="350"/>
+  <object id="29" gid="5" x="100" y="400"/>
+  <object id="30" gid="5" x="150" y="400"/>
+  <object id="31" gid="5" x="150" y="350"/>
+  <object id="32" gid="5" x="150" y="300"/>
+  <object id="33" gid="5" x="150" y="250"/>
+  <object id="34" gid="5" x="150" y="200"/>
+  <object id="35" gid="5" x="150" y="150"/>
+  <object id="36" gid="5" x="150" y="50"/>
+  <object id="37" gid="5" x="150" y="100"/>
+  <object id="38" gid="5" x="200" y="50"/>
+  <object id="39" gid="5" x="200" y="100"/>
+  <object id="40" gid="5" x="200" y="150"/>
+  <object id="41" gid="5" x="200" y="200"/>
+  <object id="42" gid="5" x="200" y="250"/>
+  <object id="43" gid="5" x="200" y="300"/>
+  <object id="44" gid="5" x="200" y="350"/>
+  <object id="46" gid="5" x="200" y="400"/>
+  <object id="47" gid="5" x="250" y="400"/>
+  <object id="48" gid="5" x="250" y="350"/>
+  <object id="49" gid="5" x="250" y="300"/>
+  <object id="50" gid="5" x="250" y="250"/>
+  <object id="51" gid="5" x="250" y="200"/>
+  <object id="52" gid="5" x="250" y="150"/>
+  <object id="53" gid="5" x="250" y="50"/>
+  <object id="54" gid="5" x="250" y="100"/>
+  <object id="55" gid="5" x="300" y="50"/>
+  <object id="56" gid="5" x="350" y="50"/>
+  <object id="57" gid="5" x="350" y="100"/>
+  <object id="58" gid="5" x="300" y="100"/>
+  <object id="59" gid="5" x="300" y="150"/>
+  <object id="60" gid="5" x="350" y="150"/>
+  <object id="61" gid="5" x="350" y="200"/>
+  <object id="62" gid="5" x="300" y="200"/>
+  <object id="63" gid="5" x="300" y="250"/>
+  <object id="64" gid="5" x="350" y="250"/>
+  <object id="65" gid="5" x="350" y="300"/>
+  <object id="66" gid="5" x="300" y="300"/>
+  <object id="67" gid="5" x="300" y="350"/>
+  <object id="68" gid="5" x="350" y="350"/>
+  <object id="69" gid="5" x="350" y="400"/>
+  <object id="70" gid="5" x="300" y="400"/>
+ </objectgroup>
+ <objectgroup name="mower">
+  <object id="71" name="90,41" gid="6" x="50" y="150"/>
+ </objectgroup>
+ <objectgroup name="tree">
+  <object id="76" gid="7" x="150" y="50"/>
+  <object id="77" gid="7" x="350" y="150"/>
+ </objectgroup>
+ <objectgroup name="cookies">
+  <object id="80" gid="8" x="0" y="300"/>
+ </objectgroup>
+ <objectgroup name="gnome">
+  <object id="78" gid="9" x="250" y="400"/>
+  <object id="79" gid="9" x="250" y="100"/>
+ </objectgroup>
+ <objectgroup name="gravel">
+  <object id="74" gid="10" x="250" y="150"/>
+ </objectgroup>
+ <objectgroup name="grandma">
+  <object id="73" gid="11" x="300" y="300"/>
+ </objectgroup>
+</map>

@@ -19,19 +19,18 @@ namespace MowingforCookies
         public int y;
         public int arrayRowX;
         public int arrayColY;
+        public bool grassMowed;
         public bool isTraversed;
         public bool canTraverse;
         public int travelCost; //of cookies
         public int cookiesGained;
         public Obstacle ob;
-        public Enemy e;
-        public Cookie c;
 
 
 
         //tileTexture: Texture2D
 
-        private Rectangle collisionBox;
+        public Rectangle collisionBox;
         public int cbWidth = 50;
         public int cbHeight = 50;
 
@@ -40,12 +39,11 @@ namespace MowingforCookies
         {
             this.x = x;
             this.y = y;
+            this.grassMowed = false;
             this.isTraversed = isTraversed;
             this.travelCost = travelCost;
             this.cookiesGained = cookiesGained;
             this.ob = ob;
-            this.e = null;
-            this.c = null;
             this.arrayRowX = arrayRowX;
             this.arrayColY = arrayColY;
             this.canTraverse = true;
@@ -66,9 +64,7 @@ namespace MowingforCookies
             this.travelCost = travelCost;
             this.cookiesGained = cookiesGained;
             this.ob = null;
-            this.e = null;
             this.canTraverse = true;
-            this.c = null;
             this.arrayRowX = arrayRowX;
             this.arrayColY = arrayColY;
 
@@ -91,18 +87,18 @@ namespace MowingforCookies
             return this.isTraversed;
         }
 
-        public void Update(ContentManager content)
+        public void Update(ContentManager content, Spot[,] patches, Mower mower, List<Enemy> enemies, int ticks)
         {
             if (this.isTraversed == true)
             {
-                image = content.Load<Texture2D>("mowed grass.png");
+                image = content.Load<Texture2D>("mowed_grass.png");
             }
         }
-
-        public void traverseEffect(Obstacle o)
+        
+        public void traverseEffect(Obstacle ob, Rectangle obRec, Mower mower, List<Enemy> enemies, int ticks)
         {
-            String oType = o.obstacleType;
-            switch (oType)
+            String obType = ob.obstacleType;
+            switch (obType)
             {
                 case "tree":
                     break;
@@ -119,14 +115,6 @@ namespace MowingforCookies
             }
         }
 
-
-
-
-        public Obstacle getObstacle()
-        {
-            return ob;
-        }
-
         public void setObstacle(Obstacle ob)
         {
             this.ob = ob;
@@ -137,26 +125,5 @@ namespace MowingforCookies
 
         }
 
-        public Enemy getEnemy()
-        {
-            return this.e;
-        }
-
-
-        public void setEnemy(Enemy e)
-        {
-            this.e = e;
-            this.canTraverse = false;
-
-
-        }
-        public Rectangle getBox()
-        {
-            return collisionBox;
-        }
-        public void setCookie(Cookie c)
-        {
-            this.c = c;
-        }
     }
 }
