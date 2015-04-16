@@ -171,7 +171,7 @@ namespace MowingforCookies
             SpriteBatch spriteBatch = ScreenManager.SpriteBatch;
             SpriteFont font = ScreenManager.Font;
 
-            Vector2 position = new Vector2(100, 150);
+            Vector2 position = new Vector2(100, 200);
 
             // Make the menu slide into place during transitions, using a
             // power curve to make things look more interesting (this makes

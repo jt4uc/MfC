@@ -34,7 +34,7 @@ namespace MowingforCookies
         /// Constructor.
         /// </summary>
         public LevelSelectionMenuScreen(GraphicsDeviceManager graphics)
-            : base("Level Selection") // Options
+            : base("") // Options
         {
             this.graphics = graphics;
             // Create our menu entries.
@@ -42,7 +42,7 @@ namespace MowingforCookies
             MenuEntry level2 = new MenuEntry("Perfection is Overrated"); //Thar be another level arrrrr
             MenuEntry level3 = new MenuEntry("America's Lastest Pestilence");
             MenuEntry level4 = new MenuEntry("The Dreaded 41"); //Maybe Grandma Should Go Apartment Hunting
-            MenuEntry level5 = new MenuEntry("Watch for the Roamin' Gnomes");
+            MenuEntry level5 = new MenuEntry("This is not Mowing for Inheritance");  //Watch for the Roamin' Gnomes
 
            // SetMenuEntryText();
 

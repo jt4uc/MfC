@@ -55,7 +55,7 @@ namespace MowingforCookies
             if (content == null)
                 content = new ContentManager(ScreenManager.Game.Services, "Content");
 
-            backgroundTexture = content.Load<Texture2D>("mowingbackground");
+            backgroundTexture = content.Load<Texture2D>("grandmabackground");
         }
 
 
