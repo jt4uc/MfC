@@ -86,8 +86,7 @@ namespace MowingforCookies
             graphics.PreferredBackBufferHeight = map.Height * 50+100; // set this value to the desired height of your window
             graphics.ApplyChanges();
 
-            youWinYet = false;
-            youDoneYet = false;
+            
             ticks = 0;
             mowablePatches = 0;
 
@@ -105,7 +104,8 @@ namespace MowingforCookies
 
             //Window.Title = "MOWING FOR COOKIES";
 
-            
+            youWinYet = false;
+            youDoneYet = false;
 
             // map.ObjectGroups[0].Objects.RemoveAt(0); // for when objects are removed
 
