@@ -17,6 +17,7 @@ namespace MowingforCookies
         enum Direction {North, South, East, West, Stop};
         private Direction nextDir = Direction.Stop;
         private Direction curDir = Direction.Stop;
+        private bool starting = true;
         public int moveIndex;
         public Rectangle collisionBox;
         public Spot currentLocation;
@@ -60,6 +61,9 @@ namespace MowingforCookies
         }
         public void Update(Controls controls, Spot[,] patches, GameTime gameTime)
         {
+            int patchesRows = patches.GetLength(0);
+            int patchesCols = patches.GetLength(1);
+
             foreach (Spot s in patches)
             {
                 if (this.x == s.x && this.y == s.y && s.canTraverse == true)
@@ -67,30 +71,41 @@ namespace MowingforCookies
                     s.isTraversed = true;
                 }
             }
-            //if ((arrayRowX + 1 == patchesRows) || (arrayRowX - 1 == -1) || (arrayColY + 1 == patchesCols) || (arrayColY - 1 == -1) || (collisionObject(patches[arrayRowX - 1, arrayColY]) == false))
-
-            if (controls.onPress(Keys.Right, Buttons.DPadRight))
-            {
-                nextDir = Direction.East;
-
-            }
-            else if (controls.onPress(Keys.Left, Buttons.DPadLeft))
-            {
-                nextDir = Direction.West;
-            }
-            else if (controls.onPress(Keys.Down, Buttons.DPadDown))
-            {
-                nextDir = Direction.South;
-            }
-            else if (controls.onPress(Keys.Up, Buttons.DPadUp))
-            {
-                nextDir = Direction.North;
-            }
-            else
-            {
-                //spacebar = stop?
-            }
             
+            if(starting)
+            {
+                if (controls.onPress(Keys.Right, Buttons.DPadRight))
+                {
+                    nextDir = Direction.East;
+                    starting = false;
+                    Move(controls, patches);
+
+                }
+                else if (controls.onPress(Keys.Left, Buttons.DPadLeft))
+                {
+                    nextDir = Direction.West;
+                    starting = false;
+                    Move(controls, patches);
+                }
+                else if (controls.onPress(Keys.Down, Buttons.DPadDown))
+                {
+                    nextDir = Direction.South;
+                    starting = false;
+                    Move(controls, patches);
+                }
+                else if (controls.onPress(Keys.Up, Buttons.DPadUp))
+                {
+                    nextDir = Direction.North;
+                    starting = false;
+                    Move(controls, patches);
+                }
+                else
+                {
+                    //spacebar = stop?
+                }
+                
+                
+            } 
 
             if (curDir == Direction.Stop)
             {
@@ -103,10 +118,10 @@ namespace MowingforCookies
             }
             else
             {
-                Move(patches);
+                Move(controls, patches);
             }
         }
-        public void Move(Spot[,] patches)
+        public void Move(Controls controls, Spot[,] patches)
         {
             int patchesRows = patches.GetLength(0);
             int patchesCols = patches.GetLength(1);
@@ -115,6 +130,19 @@ namespace MowingforCookies
                 if ((arrayRowX + 1 == patchesRows) || (collisionObject(patches[arrayRowX + 1, arrayColY]) == false))
                 {
                     curDir = nextDir;
+                    if (controls.onPress(Keys.Left, Buttons.DPadLeft))
+                    {
+                        nextDir = Direction.West;
+                    }
+                    else if (controls.onPress(Keys.Down, Buttons.DPadDown))
+                    {
+                        nextDir = Direction.South;
+                    }
+                    else if (controls.onPress(Keys.Up, Buttons.DPadUp))
+                    {
+                        nextDir = Direction.North;
+                    }
+                    
                 }
                 else
                 {
@@ -149,6 +177,19 @@ namespace MowingforCookies
                 if ((arrayRowX - 1 == -1) || (collisionObject(patches[arrayRowX - 1, arrayColY]) == false))
                 {
                     curDir = nextDir;
+                    if (controls.onPress(Keys.Right, Buttons.DPadRight))
+                    {
+                        nextDir = Direction.East;
+
+                    }
+                    else if (controls.onPress(Keys.Down, Buttons.DPadDown))
+                    {
+                        nextDir = Direction.South;
+                    }
+                    else if (controls.onPress(Keys.Up, Buttons.DPadUp))
+                    {
+                        nextDir = Direction.North;
+                    }
                 }
                 else
                 {
@@ -183,6 +224,19 @@ namespace MowingforCookies
                 if ((arrayColY + 1 == patchesCols) || (collisionObject(patches[arrayRowX, arrayColY + 1]) == false))
                 {
                     curDir = nextDir;
+                    if (controls.onPress(Keys.Left, Buttons.DPadLeft))
+                    {
+                        nextDir = Direction.West;
+                    }
+                    else if (controls.onPress(Keys.Right, Buttons.DPadRight))
+                    {
+                        nextDir = Direction.East;
+
+                    }
+                    else if (controls.onPress(Keys.Up, Buttons.DPadUp))
+                    {
+                        nextDir = Direction.North;
+                    }
                 }
                 else
                 {
@@ -217,6 +271,20 @@ namespace MowingforCookies
                 if ((arrayColY - 1 == -1) || (collisionObject(patches[arrayRowX, arrayColY - 1]) == false))
                 {
                     curDir = nextDir;
+                    if (controls.onPress(Keys.Left, Buttons.DPadLeft))
+                    {
+                        nextDir = Direction.West;
+                    }
+                    if (controls.onPress(Keys.Right, Buttons.DPadRight))
+                    {
+                        nextDir = Direction.East;
+
+                    }
+                    else if (controls.onPress(Keys.Down, Buttons.DPadDown))
+                    {
+                        nextDir = Direction.South;
+                    }
+
                 }
                 else
                 {
