@@ -27,6 +27,8 @@ namespace MowingforCookies
         public Rectangle cbox;
         public int recX = 50;
         public int recY = 50;
+        public int hitX = 20;
+        public int hitY = 20;
 
         private Random rand = new Random();
         private int nextDir = 0;
@@ -43,7 +45,7 @@ namespace MowingforCookies
             this.arrayRowX = arrayRowX;
             this.visible = true;
 
-            this.cbox = new Rectangle(x + 10, y + 10, recX, recY);
+            this.cbox = new Rectangle(x + 15, y + 15, hitX, hitY);
 
 
         }
