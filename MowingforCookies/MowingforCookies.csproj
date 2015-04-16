@@ -130,6 +130,9 @@
     <Content Include="Content\mowed_grass.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\mowingbackground.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\MowingforCookiesBackground.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
