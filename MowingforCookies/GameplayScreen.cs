@@ -282,6 +282,7 @@ namespace MowingforCookies
                         if (grandma.cbox.Intersects(mower.collisionBox))
                         {
                             grandma.alive = false;
+                            mower.alive = false;
                         }
                     }
 
