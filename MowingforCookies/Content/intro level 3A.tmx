@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="6" height="6" tilewidth="50" tileheight="50" nextobjectid="46">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="6" height="6" tilewidth="50" tileheight="50" nextobjectid="49">
  <tileset firstgid="1" name="mowed_grass" tilewidth="50" tileheight="50">
   <image source="mowed_grass.png" width="128" height="128"/>
  </tileset>
@@ -67,9 +67,10 @@
  <objectgroup name="tree">
   <object id="40" gid="7" x="100" y="300"/>
   <object id="41" gid="7" x="200" y="50"/>
+  <object id="47" gid="7" x="50" y="250"/>
  </objectgroup>
  <objectgroup name="gnome">
-  <object id="43" gid="8" x="100" y="150"/>
+  <object id="43" gid="8" x="100" y="200"/>
  </objectgroup>
  <objectgroup name="gravel">
   <object id="44" gid="9" x="150" y="200"/>
