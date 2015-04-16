@@ -47,6 +47,7 @@ namespace MowingforCookies
         private Texture2D menu;
         public int win_Num;
         public bool youWinYet;
+        public int mowablePatches;
         // for Tiled
         TmxMap map;
         //Texture2D[] tiles;
@@ -57,10 +58,6 @@ namespace MowingforCookies
         ContentManager content;
         SpriteFont gameFont;
 
-        //Vector2 playerPosition = new Vector2(100, 100);
-        //Vector2 enemyPosition = new Vector2(100, 100);
-
-        //Random random = new Random();
 
         #endregion
 
@@ -88,10 +85,9 @@ namespace MowingforCookies
             graphics.PreferredBackBufferHeight = map.Height * 50+100; // set this value to the desired height of your window
             graphics.ApplyChanges();
 
-            win_Num = 10;
             youWinYet = false;
             ticks = 0;
-
+            mowablePatches = 0;
 
         }
 
@@ -112,7 +108,6 @@ namespace MowingforCookies
             // map.ObjectGroups[0].Objects.RemoveAt(0); // for when objects are removed
 
             patches = new Spot[map.Width, map.Height];
-            //System.Diagnostics.Debug.WriteLine("mapHeightWidth: " + map.Height + ", " + map.Width);
             for (int row = 0; row < patches.GetLength(0); row++)
             {
                 for (int col = 0; col < patches.GetLength(1); col++)
@@ -143,15 +138,11 @@ namespace MowingforCookies
                     //System.Diagnostics.Debug.WriteLine("x, y: " + x + ", " + y);
                     if (name.Equals("mower"))
                     {   
-                        String numCookies = map.ObjectGroups[i].Objects[j].Name;
-                        if(numCookies.Equals(""))
-                        {
-                            mower = new Mower(patches[x, y], 150);
-                        }
-                        else
-                        {
-                            mower = new Mower(patches[x, y], int.Parse(numCookies));
-                        }
+                        String values = map.ObjectGroups[i].Objects[j].Name;
+                        int[] valuesArray = new int[] { };
+                        valuesArray = Array.ConvertAll(values.Split(','), int.Parse);
+                        mower = new Mower(patches[x, y], valuesArray[0]);
+                        win_Num = valuesArray[1];
                     }
                     else if (name.Equals("gnome"))
                     {
@@ -189,6 +180,7 @@ namespace MowingforCookies
             }
             if (mower == null)
                 mower = new Mower(patches[0, 1], 150);
+            mowablePatches = map.Width * map.Height - obstacles.Count;
 
             //base.Initialize();
             controls = new Controls();
@@ -332,8 +324,8 @@ namespace MowingforCookies
 
                     if (mower.totalMowed >= win_Num)
                     {
-                        youWinYet = true;
-                        win_Num = 100;
+                        youWinYet = true; 
+                        win_Num = mowablePatches;
 
                     }
                 }

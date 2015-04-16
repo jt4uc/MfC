@@ -172,6 +172,6 @@
  </objectgroup>
  <objectgroup name="branch"/>
  <objectgroup name="mower">
-  <object id="124" gid="10" x="0" y="50"/>
+  <object id="124" name="150,70" gid="10" x="0" y="50"/>
  </objectgroup>
 </map>

@@ -43,7 +43,7 @@ namespace MowingforCookies
             this.alive = true;
             this.arrayRowX = currentLocation.arrayRowX;
             this.arrayColY = currentLocation.arrayColY;
-            this.totalMowed = 0;
+            this.totalMowed = 1;
 
             collisionBox = new Rectangle(x, y, recX, recY);
         }

@@ -62,7 +62,7 @@ namespace MowingforCookies
         void PlayGameMenuEntrySelected(object sender, PlayerIndexEventArgs e)
         {
             LoadingScreen.Load(ScreenManager, true, e.PlayerIndex,
-                               new GameplayScreen(graphics, "beta"));
+                               new GameplayScreen(graphics, "intro level 1A"));
         }
 
         void LevelSelectionEntrySelected(object sender, PlayerIndexEventArgs e)

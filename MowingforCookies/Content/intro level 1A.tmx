@@ -36,7 +36,7 @@
   <object id="16" gid="5" x="100" y="200"/>
  </objectgroup>
  <objectgroup name="mower">
-  <object id="17" gid="6" x="50" y="100"/>
+  <object id="17" name="25,15" gid="6" x="50" y="100"/>
  </objectgroup>
  <objectgroup name="tree">
   <object id="18" gid="7" x="0" y="100"/>
