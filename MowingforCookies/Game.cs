@@ -21,7 +21,7 @@ namespace MowingforCookies
     /// menu. This main game class is extremely simple: all the interesting
     /// stuff happens in the ScreenManager component.
     /// </summary>
-    public class GameStateManagementGame : Microsoft.Xna.Framework.Game
+    public class GameStateManagementGame : Game
     {
         #region Fields
 
@@ -42,8 +42,8 @@ namespace MowingforCookies
 
             graphics = new GraphicsDeviceManager(this);
 
-            graphics.PreferredBackBufferWidth = 853;
-            graphics.PreferredBackBufferHeight = 480;
+            graphics.PreferredBackBufferWidth = 10*50;
+            graphics.PreferredBackBufferHeight = 10*60;
 
             // Create the screen manager component.
             screenManager = new ScreenManager(this);
