@@ -39,7 +39,7 @@ namespace MowingforCookies
             this.graphics = graphics;
             // Create our menu entries.
             MenuEntry level1 = new MenuEntry("The Owner's Quick Guide to a Cookie-Powered Mower");
-            MenuEntry level2 = new MenuEntry("Thar be another level arrrrr");
+            MenuEntry level2 = new MenuEntry("Perfection is Overrated"); //Thar be another level arrrrr
             MenuEntry level3 = new MenuEntry("America's Lastest Pestilence");
             MenuEntry level4 = new MenuEntry("The Dreaded 41"); //Maybe Grandma Should Go Apartment Hunting
             MenuEntry level5 = new MenuEntry("Watch for the Roamin' Gnomes");

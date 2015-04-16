@@ -28,7 +28,7 @@ namespace MowingforCookies
         /// Constructor fills in the menu contents.
         /// </summary>
         public MainMenuScreen(GraphicsDeviceManager graphics)
-            : base("Main Menu")
+            : base("Mowing for Cookies")
         {
             this.graphics = graphics;
             // Create our menu entries.
