@@ -332,7 +332,6 @@ namespace MowingforCookies
                         youWinYet = true;
                         youDoneYet = true;
                         win_Num = mowablePatches; // mowable patches isn't even close to being accurate... can't calculate it - it will have to be included in the maps
-
                     }
 
                     if (Keyboard.GetState().IsKeyDown(Keys.Enter) && youWinYet)
@@ -354,6 +353,14 @@ namespace MowingforCookies
                     if (Keyboard.GetState().IsKeyDown(Keys.Space))
                     {
                         LoadContent();
+                    }
+                    if (Keyboard.GetState().IsKeyDown(Keys.Enter) && youWinYet)
+                    {
+                        if (Array.IndexOf(levels, level) == levels.Length - 1)
+                            ScreenManager.AddScreen(new LevelSelectionMenuScreen(graphics), 0);
+                        else
+                            LoadingScreen.Load(ScreenManager, true, 0,
+                              new GameplayScreen(graphics, levels[Array.IndexOf(levels, level) + 1]));
                     }
                 }
             }
