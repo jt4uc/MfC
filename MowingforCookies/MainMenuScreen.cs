@@ -18,15 +18,19 @@ namespace MowingforCookies
     /// </summary>
     class MainMenuScreen : MenuScreen
     {
+
+        GraphicsDeviceManager graphics;
+
         #region Initialization
 
 
         /// <summary>
         /// Constructor fills in the menu contents.
         /// </summary>
-        public MainMenuScreen()
+        public MainMenuScreen(GraphicsDeviceManager graphics)
             : base("Main Menu")
         {
+            this.graphics = graphics;
             // Create our menu entries.
             MenuEntry playGameMenuEntry = new MenuEntry("Play Game");
             MenuEntry optionsMenuEntry = new MenuEntry("Options");
@@ -55,7 +59,7 @@ namespace MowingforCookies
         void PlayGameMenuEntrySelected(object sender, PlayerIndexEventArgs e)
         {
             LoadingScreen.Load(ScreenManager, true, e.PlayerIndex,
-                               new GameplayScreen());
+                               new GameplayScreen(graphics));
         }
 
 

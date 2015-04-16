@@ -42,8 +42,8 @@ namespace MowingforCookies
 
             graphics = new GraphicsDeviceManager(this);
 
-            graphics.PreferredBackBufferWidth = 10*50;
-            graphics.PreferredBackBufferHeight = 10*60;
+            graphics.PreferredBackBufferWidth = 500;
+            graphics.PreferredBackBufferHeight = 600;
 
             // Create the screen manager component.
             screenManager = new ScreenManager(this);
@@ -52,7 +52,7 @@ namespace MowingforCookies
 
             // Activate the first screens.
             screenManager.AddScreen(new BackgroundScreen(), null);
-            screenManager.AddScreen(new MainMenuScreen(), null);
+            screenManager.AddScreen(new MainMenuScreen(graphics), null);
         }
 
 
@@ -69,6 +69,7 @@ namespace MowingforCookies
             graphics.GraphicsDevice.Clear(Color.Black);
 
             // The real drawing happens inside the screen manager component.
+
             base.Draw(gameTime);
         }
 

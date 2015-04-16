@@ -33,6 +33,7 @@ namespace MowingforCookies
 
         //InputState input = new InputState();
         Controls controls = new Controls();
+        Game game;
 
         SpriteBatch spriteBatch;
         SpriteFont font;
@@ -90,6 +91,7 @@ namespace MowingforCookies
         public ScreenManager(Game game)
             : base(game)
         {
+            this.game = game;
         }
 
 

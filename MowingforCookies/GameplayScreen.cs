@@ -74,15 +74,15 @@ namespace MowingforCookies
         /// <summary>
         /// Constructor.
         /// </summary>
-        public GameplayScreen()
+        public GameplayScreen(GraphicsDeviceManager graphics)
         {
             TransitionOnTime = TimeSpan.FromSeconds(1.5);
             TransitionOffTime = TimeSpan.FromSeconds(0.5);
 
 
 
-
-            //graphics = new GraphicsDeviceManager(this); /// default is 800x600
+            this.graphics = graphics;
+            //graphics = new GraphicsDeviceManager(game); /// default is 800x600
             //Content.RootDirectory = "Content";
 
             //map = new TmxMap("./Content/gravel_in_corner_test.tmx");
@@ -93,9 +93,9 @@ namespace MowingforCookies
             win_Num = 50;
             youWinYet = false;
 
-            //graphics.PreferredBackBufferWidth = SCREENWIDTH;  // set this value to the desired width of your window
-            //graphics.PreferredBackBufferHeight = SCREENHEIGHT;   // set this value to the desired height of your window
-            //graphics.ApplyChanges();
+            graphics.PreferredBackBufferWidth = SCREENWIDTH;  // set this value to the desired width of your window
+            graphics.PreferredBackBufferHeight = SCREENHEIGHT;   // set this value to the desired height of your window
+            graphics.ApplyChanges();
             ticks = 0;
 
 
