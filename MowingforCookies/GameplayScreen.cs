@@ -281,7 +281,7 @@ namespace MowingforCookies
 
                     if (Keyboard.GetState().IsKeyDown(Keys.Space))
                     {
-                        Initialize();
+                        LoadContent();
                     }
                     mower.Update(controls, patches, gameTime);
                     if (grandma != null)
