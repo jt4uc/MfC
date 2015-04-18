@@ -75,6 +75,10 @@ namespace MowingforCookies
             {
                 image = content.Load<Texture2D>("bush.png");
             }
+            else if (obstacleType.Equals("fence bottom"))
+            {
+                image = content.Load<Texture2D>("fence bottom.png");
+            }
             else if (obstacleType.Equals("grandma"))
             {
                 image = content.Load<Texture2D>("grandma.png");
