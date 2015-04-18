@@ -30,6 +30,8 @@ namespace MowingforCookies
         public Boolean exploding = false;
         public int tickCount = 99999;
         public int cookieCost;
+        public int nextSpotX; //to be used to set a water target
+        public int nextSpotY;
 
         public Obstacle(Spot currentLocation, String obstacleType, int arrayRowX, int arrayColY)
         {
@@ -37,7 +39,8 @@ namespace MowingforCookies
             this.x = this.currentLocation.x;
             this.y = this.currentLocation.y;
             this.obstacleType = obstacleType;
-            if (this.obstacleType.Equals("gravel") || this.obstacleType.Equals("bush") || this.obstacleType.Equals("branch"))
+            if (this.obstacleType.Equals("gravel") || this.obstacleType.Equals("bush") || this.obstacleType.Equals("branch") 
+                || this.obstacleType.Equals("water"))
             {
                 this.canTraverse = true;
             }
@@ -82,6 +85,10 @@ namespace MowingforCookies
             else if (obstacleType.Equals("grandma"))
             {
                 image = content.Load<Texture2D>("grandma.png");
+            }
+            else if (obstacleType.Equals("water"))
+            {
+                image = content.Load<Texture2D>("water.png");
             }
             else if (obstacleType.Equals("house"))
             {
