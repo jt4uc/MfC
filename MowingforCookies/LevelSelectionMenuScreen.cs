@@ -8,7 +8,10 @@
 #endregion
 
 #region Using Statements
+using System;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 #endregion
 
 namespace MowingforCookies
@@ -22,8 +25,8 @@ namespace MowingforCookies
     {
         #region Fields
 
-        // could have each MenuEntry be a field
         GraphicsDeviceManager graphics;
+        MenuEntry backMenuEntry;
 
         #endregion
 
@@ -44,9 +47,12 @@ namespace MowingforCookies
             MenuEntry level4 = new MenuEntry("The Dreaded 41"); //Maybe Grandma Should Go Apartment Hunting
             MenuEntry level5 = new MenuEntry("This is not Mowing for Inheritance");  //Watch for the Roamin' Gnomes
 
-           // SetMenuEntryText();
+           
 
-            MenuEntry backMenuEntry = new MenuEntry("Back");
+            MenuEntry backMenuEntry = new MenuEntry("\nBack");
+            MenuEntry exitEntry = new MenuEntry("\nExit");
+
+            
 
             // Hook up menu event handlers.
             level1.Selected += Level1Selected;
@@ -55,6 +61,7 @@ namespace MowingforCookies
             level4.Selected += Level4Selected;
             level5.Selected += Level5Selected;
             backMenuEntry.Selected += OnCancel;
+            exitEntry.Selected += OnExit;
 
             // Add entries to the menu.
             MenuEntries.Add(level1);
@@ -63,6 +70,9 @@ namespace MowingforCookies
             MenuEntries.Add(level4);
             MenuEntries.Add(level5);
             MenuEntries.Add(backMenuEntry);
+            MenuEntries.Add(exitEntry);
+
+            SetMenuEntryText();
         }
 
 
@@ -75,6 +85,8 @@ namespace MowingforCookies
             //languageMenuEntry.Text = "Language: " + languages[currentLanguage];
             //frobnicateMenuEntry.Text = "Frobnicate: " + (frobnicate ? "on" : "off");
             //elfMenuEntry.Text = "elf: " + elf;
+            
+            
         }
 
 
@@ -110,6 +122,33 @@ namespace MowingforCookies
         {
             LoadingScreen.Load(ScreenManager, true, e.PlayerIndex,
                                new GameplayScreen(graphics, "ice_level_10"));
+        }
+
+        protected override void OnCancel(PlayerIndex playerIndex)
+        {
+            GameScreen[] screens = ScreenManager.GetScreens();
+            bool noPauseOrMain = true;
+            foreach (GameScreen screen in screens)
+            {
+                if (screen.GetType().Name.Equals("PauseScreen") || screen.GetType().Name.Equals("MainMenuScreen"))
+                {
+                    ScreenManager.RemoveScreen(this);
+                    noPauseOrMain = false;
+                }
+            }
+            if (noPauseOrMain)
+            {
+                ScreenManager.AddScreen(new BackgroundScreen(), null);
+                ScreenManager.AddScreen(new MainMenuScreen(graphics), null);
+            }
+            
+
+        }
+
+        void OnExit(object sender, PlayerIndexEventArgs e)
+        {
+            Environment.Exit(0);
+
         }
 
         #endregion

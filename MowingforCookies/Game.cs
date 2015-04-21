@@ -53,6 +53,7 @@ namespace MowingforCookies
             // Activate the first screens.
             screenManager.AddScreen(new BackgroundScreen(), null);
             screenManager.AddScreen(new MainMenuScreen(graphics), null);
+            
         }
 
 

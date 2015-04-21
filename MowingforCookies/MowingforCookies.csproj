@@ -51,6 +51,7 @@
     <Compile Include="Mower.cs" />
     <Compile Include="Obstacle.cs" />
     <Compile Include="OptionsMenuScreen.cs" />
+    <Compile Include="PauseScreen.cs" />
     <Compile Include="PlayerIndexEventArgs.cs" />
     <Compile Include="ScreenManager.cs" />
     <Compile Include="Spot.cs" />

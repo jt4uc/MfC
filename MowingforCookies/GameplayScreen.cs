@@ -262,7 +262,7 @@ namespace MowingforCookies
         public override void Update(GameTime gameTime, bool otherScreenHasFocus,
                                                        bool coveredByOtherScreen)
         {
-            base.Update(gameTime, otherScreenHasFocus, coveredByOtherScreen);
+            base.Update(gameTime, otherScreenHasFocus, false); // third param coveredByOtherScreen
 
             if (IsActive)
             {
@@ -279,7 +279,9 @@ namespace MowingforCookies
                     }
                     if (Keyboard.GetState().IsKeyDown(Keys.Back))
                     {
-                        ScreenManager.AddScreen(new MainMenuScreen(graphics), null);
+                        ScreenManager.AddScreen(new BackgroundScreen(), null);
+                        ScreenManager.AddScreen(new PauseScreen(graphics), null);
+                        //ScreenManager.TraceScreens();
                     }
                     mower.Update(controls, patches, gameTime);
                     if (grandma != null)
@@ -342,7 +344,11 @@ namespace MowingforCookies
                     if (Keyboard.GetState().IsKeyDown(Keys.Enter) && youWinYet)
                     {
                         if (Array.IndexOf(levels, level) == levels.Length - 1)
+                        {
+                            ScreenManager.AddScreen(new BackgroundScreen(), null);
                             ScreenManager.AddScreen(new LevelSelectionMenuScreen(graphics), 0);
+                            
+                        } 
                         else
                             LoadingScreen.Load(ScreenManager, true, 0,
                               new GameplayScreen(graphics, levels[Array.IndexOf(levels, level) + 1]));
@@ -362,7 +368,11 @@ namespace MowingforCookies
                     if (Keyboard.GetState().IsKeyDown(Keys.Enter) && youWinYet)
                     {
                         if (Array.IndexOf(levels, level) == levels.Length - 1)
+                        {
+                            ScreenManager.AddScreen(new BackgroundScreen(), null);
                             ScreenManager.AddScreen(new LevelSelectionMenuScreen(graphics), 0);
+
+                        }
                         else
                             LoadingScreen.Load(ScreenManager, true, 0,
                               new GameplayScreen(graphics, levels[Array.IndexOf(levels, level) + 1]));
