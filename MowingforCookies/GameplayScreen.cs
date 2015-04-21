@@ -47,6 +47,7 @@ namespace MowingforCookies
         private Texture2D menu;
         public int win_Num;
         public int startingFuel;
+        public int optimalFuel;
         public bool youWinYet;
         public bool youDoneYet;
         public int mowablePatches;
@@ -146,6 +147,7 @@ namespace MowingforCookies
                         valuesArray = Array.ConvertAll(values.Split(','), int.Parse);
                         mower = new Mower(patches[x, y], valuesArray[0]);
                         win_Num = valuesArray[1];
+                        optimalFuel = valuesArray[2];
                     }
                     else if (name.Equals("gnome"))
                     {
@@ -457,7 +459,7 @@ namespace MowingforCookies
             else
             {
                 spriteBatch.DrawString(font, "YOU WIN!!!", new Vector2(15, map.Height*50+20), Color.Black);
-                spriteBatch.DrawString(font, "Fuel Use: " + (startingFuel - mower.cookies) + ", Optimal Fuel Use: " + (startingFuel - 9), new Vector2(15, map.Height * 50 + 40), Color.Black);
+                spriteBatch.DrawString(font, "Fuel Use: " + (startingFuel - mower.cookies) + ", Optimal Fuel Use: " + optimalFuel, new Vector2(15, map.Height * 50 + 40), Color.Black);
                 spriteBatch.DrawString(font, "(Press Enter for next level)", new Vector2(15, map.Height * 50 + 60), Color.Black);
             }
 

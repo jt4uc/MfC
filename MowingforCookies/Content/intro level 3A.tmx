@@ -65,7 +65,7 @@
   <object id="37" gid="5" x="450" y="450"/>
  </objectgroup>
  <objectgroup name="mower">
-  <object id="39" name="50,25" gid="6" x="300" y="200"/>
+  <object id="39" name="50,25,40" gid="6" x="300" y="200"/>
  </objectgroup>
  <objectgroup name="tree">
   <object id="40" gid="7" x="350" y="450"/>

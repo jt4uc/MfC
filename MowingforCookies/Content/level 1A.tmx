@@ -99,7 +99,7 @@
   <object id="70" gid="5" x="500" y="500"/>
  </objectgroup>
  <objectgroup name="mower">
-  <object id="71" name="90,41" gid="6" x="250" y="250"/>
+  <object id="71" name="90,41,63" gid="6" x="250" y="250"/>
  </objectgroup>
  <objectgroup name="tree">
   <object id="76" gid="7" x="350" y="150"/>
