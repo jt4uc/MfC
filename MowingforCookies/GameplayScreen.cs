@@ -166,7 +166,8 @@ namespace MowingforCookies
                     }
                     else if (name.Equals("cookies"))
                     {
-                        Cookie c = new Cookie(patches[x, y], x, y);
+                        String type = map.ObjectGroups[i].Objects[j].Name;
+                        Cookie c = new Cookie(patches[x, y], type, x, y);
                         cookies.Add(c);
                     }
                     else if (!name.Equals("grass"))

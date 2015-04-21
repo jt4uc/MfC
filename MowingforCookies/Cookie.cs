@@ -24,10 +24,10 @@ namespace MowingforCookies
         public int tickCount = 9999999;
         public Boolean alive = true;
 
-        public Cookie(Spot s, int arrayRowX, int arrayColY)
+        public Cookie(Spot s, String type, int arrayRowX, int arrayColY)
         {
             fuel = 5; //positive fuel gain
-            type = "chocolatechip";
+            this.type = type;
             this.x = s.x;
             this.y = s.y;
             this.currentLocation = s;
@@ -38,7 +38,13 @@ namespace MowingforCookies
 
         public void LoadContent(ContentManager content)
         {
-            image = content.Load<Texture2D>("chocolatechip.png");
+            if (this.type.Equals("chocolatechip")){
+                image = content.Load<Texture2D>("chocolatechip.png");
+            }
+            else if (this.type.Equals("bombcookie"))
+            {
+                image = content.Load<Texture2D>("water.png");
+            }
         }
         public void Draw(SpriteBatch sb)
         {
@@ -53,6 +59,14 @@ namespace MowingforCookies
                     tickCount = ticks;
                     g.SPEED = 3;
                     this.alive = false;
+                }
+                if (type.Equals("bombcookie"))
+                {
+                    this.currentLocation.isTraversed = true;
+                }
+                if (type.Equals("healthcookie"))
+                {
+                    m.cookies += 5;
                 }
             }
             else
