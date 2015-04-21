@@ -1,6 +1,6 @@
-#region File Description
+﻿#region File Description
 //-----------------------------------------------------------------------------
-// MainMenuScreen.cs
+// 
 //
 // Microsoft XNA Community Game Platform
 // Copyright (C) Microsoft Corporation. All rights reserved.
@@ -10,6 +10,8 @@
 #region Using Statements
 using System;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 #endregion
 
 namespace MowingforCookies
@@ -17,10 +19,12 @@ namespace MowingforCookies
     /// <summary>
     /// The main menu screen is the first thing displayed when the game starts up.
     /// </summary>
-    class MainMenuScreen : MenuScreen
+    class PauseScreen : MenuScreen
     {
 
         GraphicsDeviceManager graphics;
+        ContentManager content;
+        Texture2D backgroundTexture;
 
         #region Initialization
 
@@ -28,12 +32,12 @@ namespace MowingforCookies
         /// <summary>
         /// Constructor fills in the menu contents.
         /// </summary>
-        public MainMenuScreen(GraphicsDeviceManager graphics)
+        public PauseScreen(GraphicsDeviceManager graphics)
             : base("")
         {
             this.graphics = graphics;
             // Create our menu entries.
-            MenuEntry playGameMenuEntry = new MenuEntry("Play Game");
+            MenuEntry playGameMenuEntry = new MenuEntry("Continue");
             MenuEntry levelSelectionEntry = new MenuEntry("Level Selection");
             MenuEntry optionsMenuEntry = new MenuEntry("Options");
             MenuEntry exitMenuEntry = new MenuEntry("Exit");
@@ -62,8 +66,15 @@ namespace MowingforCookies
         /// </summary>
         void PlayGameMenuEntrySelected(object sender, PlayerIndexEventArgs e)
         {
-            LoadingScreen.Load(ScreenManager, true, e.PlayerIndex,
-                               new GameplayScreen(graphics, "intro level 1A"));
+            GameScreen[] screens = ScreenManager.GetScreens();
+            foreach (GameScreen screen in screens)
+            {
+                if (screen.GetType().Name.Equals("BackgroundScreen"))
+                {
+                    ScreenManager.RemoveScreen(screen);
+                }
+            }
+            ScreenManager.RemoveScreen(this);
         }
 
         void LevelSelectionEntrySelected(object sender, PlayerIndexEventArgs e)
@@ -71,7 +82,6 @@ namespace MowingforCookies
             //LoadingScreen.Load(ScreenManager, true, e.PlayerIndex,
             //                   new GameplayScreen(graphics));
             ScreenManager.AddScreen(new LevelSelectionMenuScreen(graphics), e.PlayerIndex);
-            ScreenManager.TraceScreens();
         }
 
         /// <summary>
@@ -88,26 +98,13 @@ namespace MowingforCookies
         /// </summary>
         protected override void OnCancel(PlayerIndex playerIndex)
         {
-            //const string message = "Are you sure you want to exit this sample?";
 
-            //MessageBoxScreen confirmExitMessageBox = new MessageBoxScreen(message);
-
-            //confirmExitMessageBox.Accepted += ConfirmExitMessageBoxAccepted;
-
-            //ScreenManager.AddScreen(confirmExitMessageBox, playerIndex);
 
             Environment.Exit(0);
+            
         }
 
 
-        /// <summary>
-        /// Event handler for when the user selects ok on the "are you sure
-        /// you want to exit" message box.
-        /// </summary>
-        void ConfirmExitMessageBoxAccepted(object sender, PlayerIndexEventArgs e)
-        {
-            ScreenManager.Game.Exit();
-        }
 
 
         #endregion

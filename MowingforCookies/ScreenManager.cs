@@ -201,7 +201,7 @@ namespace MowingforCookies
         /// <summary>
         /// Prints a list of all the screens, for debugging.
         /// </summary>
-        void TraceScreens()
+        public void TraceScreens() // was just void
         {
             List<string> screenNames = new List<string>();
 

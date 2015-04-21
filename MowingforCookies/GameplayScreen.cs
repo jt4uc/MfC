@@ -46,6 +46,7 @@ namespace MowingforCookies
         private SpriteFont font;
         private Texture2D menu;
         public int win_Num;
+        public int startingFuel;
         public bool youWinYet;
         public bool youDoneYet;
         public int mowablePatches;
@@ -184,6 +185,7 @@ namespace MowingforCookies
             if (mower == null)
                 mower = new Mower(patches[0, 1], 150);
             mowablePatches = map.Width * map.Height - obstacles.Count;
+            startingFuel = mower.cookies;
 
             //base.Initialize();
             controls = new Controls();
@@ -263,7 +265,7 @@ namespace MowingforCookies
         public override void Update(GameTime gameTime, bool otherScreenHasFocus,
                                                        bool coveredByOtherScreen)
         {
-            base.Update(gameTime, otherScreenHasFocus, coveredByOtherScreen);
+            base.Update(gameTime, otherScreenHasFocus, false); // third param coveredByOtherScreen
 
             if (IsActive)
             {
@@ -272,15 +274,16 @@ namespace MowingforCookies
                     ticks++;
                     controls.Update();
                     if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                        Environment.Exit(0); //Exit();
+                        Environment.Exit(0); 
 
                     if (Keyboard.GetState().IsKeyDown(Keys.Space))
                     {
                         LoadContent();
                     }
-                    if (Keyboard.GetState().IsKeyDown(Keys.Back))
+                    if (Keyboard.GetState().IsKeyDown(Keys.P))
                     {
-                        ScreenManager.AddScreen(new MainMenuScreen(graphics), null);
+                        ScreenManager.AddScreen(new BackgroundScreen(), null);
+                        ScreenManager.AddScreen(new PauseScreen(graphics), null);
                     }
                     mower.Update(controls, patches, gameTime);
                     if (grandma != null)
@@ -343,7 +346,11 @@ namespace MowingforCookies
                     if (Keyboard.GetState().IsKeyDown(Keys.Enter) && youWinYet)
                     {
                         if (Array.IndexOf(levels, level) == levels.Length - 1)
+                        {
+                            ScreenManager.AddScreen(new BackgroundScreen(), null);
                             ScreenManager.AddScreen(new LevelSelectionMenuScreen(graphics), 0);
+                            
+                        } 
                         else
                             LoadingScreen.Load(ScreenManager, true, 0,
                               new GameplayScreen(graphics, levels[Array.IndexOf(levels, level) + 1]));
@@ -363,7 +370,11 @@ namespace MowingforCookies
                     if (Keyboard.GetState().IsKeyDown(Keys.Enter) && youWinYet)
                     {
                         if (Array.IndexOf(levels, level) == levels.Length - 1)
+                        {
+                            ScreenManager.AddScreen(new BackgroundScreen(), null);
                             ScreenManager.AddScreen(new LevelSelectionMenuScreen(graphics), 0);
+
+                        }
                         else
                             LoadingScreen.Load(ScreenManager, true, 0,
                               new GameplayScreen(graphics, levels[Array.IndexOf(levels, level) + 1]));
@@ -446,9 +457,9 @@ namespace MowingforCookies
             }
             else
             {
-                spriteBatch.DrawString(font, "YOU GET COOKIES!!!", new Vector2(15, map.Height*50+20), Color.Black);
-                spriteBatch.DrawString(font, "(Press Enter", new Vector2(15, map.Height * 50 + 40), Color.Black);
-                spriteBatch.DrawString(font, " for next level)", new Vector2(15, map.Height * 50 + 60), Color.Black);
+                spriteBatch.DrawString(font, "YOU WIN!!!", new Vector2(15, map.Height*50+20), Color.Black);
+                spriteBatch.DrawString(font, "Fuel Use: " + (startingFuel - mower.cookies) + ", Optimal Fuel Use: " + (startingFuel - 9), new Vector2(15, map.Height * 50 + 40), Color.Black);
+                spriteBatch.DrawString(font, "(Press Enter for next level)", new Vector2(15, map.Height * 50 + 60), Color.Black);
             }
 
         }
