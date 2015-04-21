@@ -46,6 +46,7 @@ namespace MowingforCookies
         private SpriteFont font;
         private Texture2D menu;
         public int win_Num;
+        public int startingFuel;
         public bool youWinYet;
         public bool youDoneYet;
         public int mowablePatches;
@@ -183,6 +184,7 @@ namespace MowingforCookies
             if (mower == null)
                 mower = new Mower(patches[0, 1], 150);
             mowablePatches = map.Width * map.Height - obstacles.Count;
+            startingFuel = mower.cookies;
 
             //base.Initialize();
             controls = new Controls();
@@ -454,9 +456,9 @@ namespace MowingforCookies
             }
             else
             {
-                spriteBatch.DrawString(font, "YOU GET COOKIES!!!", new Vector2(15, map.Height*50+20), Color.Black);
-                spriteBatch.DrawString(font, "(Press Enter", new Vector2(15, map.Height * 50 + 40), Color.Black);
-                spriteBatch.DrawString(font, " for next level)", new Vector2(15, map.Height * 50 + 60), Color.Black);
+                spriteBatch.DrawString(font, "YOU WIN!!!", new Vector2(15, map.Height*50+20), Color.Black);
+                spriteBatch.DrawString(font, "Fuel Use: " + (startingFuel - mower.cookies) + ", Optimal Fuel Use: " + (startingFuel - 9), new Vector2(15, map.Height * 50 + 40), Color.Black);
+                spriteBatch.DrawString(font, "(Press Enter for next level)", new Vector2(15, map.Height * 50 + 60), Color.Black);
             }
 
         }

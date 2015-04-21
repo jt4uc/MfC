@@ -171,7 +171,7 @@
   <object id="126" gid="6" x="450" y="200"/>
  </objectgroup>
  <objectgroup name="cookies">
-  <object id="132" gid="11" x="250" y="350"/>
+  <object id="132" name="healthcookie" gid="11" x="250" y="350"/>
  </objectgroup>
  <objectgroup name="branch"/>
  <objectgroup name="mower">

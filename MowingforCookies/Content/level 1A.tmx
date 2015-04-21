@@ -106,7 +106,7 @@
   <object id="77" gid="7" x="550" y="250"/>
  </objectgroup>
  <objectgroup name="cookies">
-  <object id="80" gid="8" x="200" y="400"/>
+  <object id="80" name="bombcookie" gid="8" x="200" y="400"/>
  </objectgroup>
  <objectgroup name="gnome">
   <object id="78" gid="9" x="450" y="500"/>
