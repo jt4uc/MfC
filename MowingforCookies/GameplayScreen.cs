@@ -271,17 +271,16 @@ namespace MowingforCookies
                     ticks++;
                     controls.Update();
                     if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                        Environment.Exit(0); //Exit();
+                        Environment.Exit(0); 
 
                     if (Keyboard.GetState().IsKeyDown(Keys.Space))
                     {
                         LoadContent();
                     }
-                    if (Keyboard.GetState().IsKeyDown(Keys.Back))
+                    if (Keyboard.GetState().IsKeyDown(Keys.P))
                     {
                         ScreenManager.AddScreen(new BackgroundScreen(), null);
                         ScreenManager.AddScreen(new PauseScreen(graphics), null);
-                        //ScreenManager.TraceScreens();
                     }
                     mower.Update(controls, patches, gameTime);
                     if (grandma != null)
