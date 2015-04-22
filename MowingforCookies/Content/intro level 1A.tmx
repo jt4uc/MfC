@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="16" height="12" tilewidth="50" tileheight="50" nextobjectid="40">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="16" height="12" tilewidth="50" tileheight="50" nextobjectid="54">
  <tileset firstgid="1" name="mowed_grass" tilewidth="50" tileheight="50">
   <image source="mowed_grass.png" width="128" height="128"/>
  </tileset>
@@ -14,6 +14,15 @@
  </tileset>
  <tileset firstgid="8" name="fence bottom" tilewidth="50" tileheight="50">
   <image source="fence bottom.png" width="50" height="50"/>
+ </tileset>
+ <tileset firstgid="9" name="fence top" tilewidth="50" tileheight="50">
+  <image source="fence top.png" width="50" height="50"/>
+ </tileset>
+ <tileset firstgid="10" name="fence left" tilewidth="50" tileheight="50">
+  <image source="fence left.png" width="50" height="50"/>
+ </tileset>
+ <tileset firstgid="11" name="fence right" tilewidth="50" tileheight="50">
+  <image source="fence right.png" width="50" height="50"/>
  </tileset>
  <layer name="mowed grass" width="16" height="12">
   <data encoding="base64" compression="zlib">
@@ -45,25 +54,27 @@
   <object id="18" gid="7" x="300" y="300"/>
  </objectgroup>
  <objectgroup name="fence bottom">
-  <object id="20" gid="8" x="500" y="200"/>
-  <object id="21" gid="8" x="500" y="250"/>
-  <object id="22" gid="8" x="500" y="300"/>
-  <object id="23" gid="8" x="500" y="350"/>
-  <object id="24" gid="8" x="500" y="400"/>
-  <object id="25" gid="8" x="500" y="450"/>
-  <object id="26" gid="8" x="450" y="450"/>
-  <object id="27" gid="8" x="400" y="450"/>
-  <object id="28" gid="8" x="350" y="450"/>
-  <object id="29" gid="8" x="300" y="450"/>
-  <object id="30" gid="8" x="250" y="450"/>
-  <object id="31" gid="8" x="250" y="400"/>
-  <object id="32" gid="8" x="250" y="350"/>
-  <object id="33" gid="8" x="250" y="300"/>
-  <object id="34" gid="8" x="250" y="250"/>
-  <object id="35" gid="8" x="250" y="200"/>
   <object id="36" gid="8" x="300" y="200"/>
   <object id="37" gid="8" x="350" y="200"/>
   <object id="38" gid="8" x="400" y="200"/>
   <object id="39" gid="8" x="450" y="200"/>
+ </objectgroup>
+ <objectgroup name="fence top">
+  <object id="41" gid="9" x="450" y="450"/>
+  <object id="42" gid="9" x="400" y="450"/>
+  <object id="43" gid="9" x="350" y="450"/>
+  <object id="44" gid="9" x="300" y="450"/>
+ </objectgroup>
+ <objectgroup name="fence left">
+  <object id="46" gid="10" x="500" y="250"/>
+  <object id="47" gid="10" x="500" y="300"/>
+  <object id="48" gid="10" x="500" y="350"/>
+  <object id="49" gid="10" x="500" y="400"/>
+ </objectgroup>
+ <objectgroup name="fence right">
+  <object id="50" gid="11" x="250" y="250"/>
+  <object id="51" gid="11" x="250" y="300"/>
+  <object id="52" gid="11" x="250" y="350"/>
+  <object id="53" gid="11" x="250" y="400"/>
  </objectgroup>
 </map>
