@@ -35,6 +35,7 @@ namespace MowingforCookies
         SpriteBatch spriteBatch;
 
         int ticks;
+        int tickCount;
 
         Controls controls;
         Spot[,] patches;
@@ -51,12 +52,29 @@ namespace MowingforCookies
         public bool youWinYet;
         public bool youDoneYet;
         public int mowablePatches;
+        public bool narrativeGiven;
         // for Tiled
         TmxMap map;
         //Texture2D[] tiles;
 
         String[] levels = new String[] {"intro level 1A", "intro level 2A", "intro level 3A", "level 1A", "ice_level_10"};
         String level;
+        String[] narrative = new String[] {
+             "Grandma: Hello, hello, can you hear me?",
+             "You: Yes, Grandma.",
+             "Grandma: Sweetie, could you come over and mow the lawn for me?",
+             "You: Ok...",
+             "Grandma: Eh? Could you say that again? I'll bake some cookies for you!",
+             "You: YES!",
+             "Grandma: No need to yell! I can hear just fine.",
+             "You: ...",
+             "Grandma: Just so you know, I've bought a powerful mower.",
+             "Grandma: It's a little hard to control.",
+             "Grandma: You can only change directions once you've hit something.",
+             "You: ...?"
+        };
+       int line;
+        
 
         ContentManager content;
         SpriteFont gameFont;
@@ -80,8 +98,10 @@ namespace MowingforCookies
 
 
             this.graphics = graphics;
-            //Content.RootDirectory = "Content";
             this.level = level;
+            this.narrativeGiven = false;
+            line = 0;
+            tickCount = 0;
 
             map = new TmxMap("./Content/" + level + ".tmx");
             graphics.PreferredBackBufferWidth = map.Width * 50; // set this value to the desired width of your window
@@ -266,13 +286,14 @@ namespace MowingforCookies
         public override void Update(GameTime gameTime, bool otherScreenHasFocus,
                                                        bool coveredByOtherScreen)
         {
-            base.Update(gameTime, otherScreenHasFocus, false); // third param coveredByOtherScreen
+            base.Update(gameTime, otherScreenHasFocus, false); 
 
             if (IsActive)
             {
-                if (!youDoneYet)
+                ticks++;
+                if (narrativeGiven && !youDoneYet)
                 {
-                    ticks++;
+                    
                     controls.Update();
                     if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                         Environment.Exit(0); 
@@ -296,8 +317,6 @@ namespace MowingforCookies
                             mower.alive = false;
                         }
                     }
-
-
                     foreach (Enemy e in enemies)
                     {
                         if (e.alive)
@@ -381,6 +400,23 @@ namespace MowingforCookies
                               new GameplayScreen(graphics, levels[Array.IndexOf(levels, level) + 1]));
                     }
                 }
+                
+                if (narrativeGiven == false) {
+                    if (Keyboard.GetState().IsKeyDown(Keys.Enter) && line < narrative.Length && ticks > (tickCount + 25))
+                    {
+                        line++;
+                        
+                        tickCount = ticks;
+                        if (line == narrative.Length)
+                        {
+                            narrativeGiven = true;
+                        }
+                    }
+                    if (Keyboard.GetState().IsKeyDown(Keys.Space) && line < narrative.Length && ticks > (tickCount + 25))
+                    {
+                        narrativeGiven = true;
+                    }
+                }
             }
         }
 
@@ -451,16 +487,24 @@ namespace MowingforCookies
         {
             SpriteBatch spriteBatch = ScreenManager.SpriteBatch;
             spriteBatch.Draw(menu, new Rectangle(0, map.Height*50, map.Width*50, 100), Color.White);
-            if (!youWinYet)
+            if (narrativeGiven == false)
             {
-                spriteBatch.DrawString(font, "Grass mowed:" + mower.totalMowed + "/" + win_Num, new Vector2(15, map.Height*50+20), Color.Black);
-                spriteBatch.DrawString(font, "Fuel:" + mower.cookies, new Vector2(15, map.Height*50+50), Color.Black);
+                spriteBatch.DrawString(font, narrative[line], new Vector2(15, map.Height * 50 + 20), Color.Black);
+                spriteBatch.DrawString(font, "(Enter to Continue, Space to Skip)", new Vector2(15, map.Height * 50 + 60), Color.Black);
             }
             else
             {
-                spriteBatch.DrawString(font, "YOU WIN!!!", new Vector2(15, map.Height*50+20), Color.Black);
-                spriteBatch.DrawString(font, "Fuel Remaining: " + mower.cookies + ", Optimal Fuel Remaining: " + optimalFuel, new Vector2(15, map.Height * 50 + 40), Color.Black);
-                spriteBatch.DrawString(font, "(Press Enter for next level)", new Vector2(15, map.Height * 50 + 60), Color.Black);
+                if (!youWinYet)
+                {
+                    spriteBatch.DrawString(font, "Grass mowed:" + mower.totalMowed + "/" + win_Num, new Vector2(15, map.Height * 50 + 20), Color.Black);
+                    spriteBatch.DrawString(font, "Fuel:" + mower.cookies, new Vector2(15, map.Height * 50 + 50), Color.Black);
+                }
+                else
+                {
+                    spriteBatch.DrawString(font, "YOU WIN!!!", new Vector2(15, map.Height * 50 + 20), Color.Black);
+                    spriteBatch.DrawString(font, "Fuel Remaining: " + mower.cookies + ", Optimal Fuel Remaining: " + optimalFuel, new Vector2(15, map.Height * 50 + 40), Color.Black);
+                    spriteBatch.DrawString(font, "(Press Enter for next level)", new Vector2(15, map.Height * 50 + 60), Color.Black);
+                }
             }
 
         }

@@ -209,7 +209,7 @@ namespace MowingforCookies
                                    titleOrigin, titleScale, SpriteEffects.None, 0);
             if (this.GetType().Name.Equals("MainMenuScreen")) //ScreenManager.Contains("MainMenuScreen")
             {
-                spriteBatch.DrawString(font, "Arrow Keys to Move, Space to Retry Level, Enter to Select", new Vector2(80, 530), Color.White);
+                spriteBatch.DrawString(font, "Arrow Keys to Move, Space to Retry Level, Enter to Select", new Vector2(80, 580), Color.White);
             } 
 
             spriteBatch.End();
