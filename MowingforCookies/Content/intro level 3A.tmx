@@ -18,16 +18,16 @@
  <tileset firstgid="9" name="gravel" tilewidth="50" tileheight="50">
   <image source="gravel.png" width="50" height="50"/>
  </tileset>
- <tileset firstgid="10" name="fence bottom" tilewidth="50" tileheight="50">
+ <tileset firstgid="315" name="fence bottom" tilewidth="50" tileheight="50">
   <image source="fence bottom.png" width="50" height="50"/>
  </tileset>
- <tileset firstgid="11" name="fence top" tilewidth="50" tileheight="50">
+ <tileset firstgid="316" name="fence top" tilewidth="50" tileheight="50">
   <image source="fence top.png" width="50" height="50"/>
  </tileset>
- <tileset firstgid="12" name="fence left" tilewidth="50" tileheight="50">
+ <tileset firstgid="317" name="fence left" tilewidth="50" tileheight="50">
   <image source="fence left.png" width="50" height="50"/>
  </tileset>
- <tileset firstgid="13" name="fence right" tilewidth="50" tileheight="50">
+ <tileset firstgid="318" name="fence right" tilewidth="50" tileheight="50">
   <image source="fence right.png" width="50" height="50"/>
  </tileset>
  <layer name="mowed grass" width="16" height="12">
@@ -82,41 +82,41 @@
   <object id="47" gid="7" x="300" y="400"/>
  </objectgroup>
  <objectgroup name="gnome">
-  <object id="43" gid="8" x="350" y="350"/>
+  <object id="43" name="1,1,1,2,2,2,2,2,3,3,4,4,1,1" gid="8" x="350" y="300"/>
  </objectgroup>
  <objectgroup name="gravel">
   <object id="44" gid="9" x="400" y="350"/>
  </objectgroup>
  <objectgroup name="fence bottom">
-  <object id="71" gid="10" x="250" y="150"/>
-  <object id="72" gid="10" x="300" y="150"/>
-  <object id="73" gid="10" x="350" y="150"/>
-  <object id="74" gid="10" x="400" y="150"/>
-  <object id="75" gid="10" x="450" y="150"/>
-  <object id="76" gid="10" x="500" y="150"/>
+  <object id="71" gid="315" x="250" y="150"/>
+  <object id="72" gid="315" x="300" y="150"/>
+  <object id="73" gid="315" x="350" y="150"/>
+  <object id="74" gid="315" x="400" y="150"/>
+  <object id="75" gid="315" x="450" y="150"/>
+  <object id="76" gid="315" x="500" y="150"/>
  </objectgroup>
  <objectgroup name="fence top">
-  <object id="79" gid="11" x="500" y="500"/>
-  <object id="80" gid="11" x="450" y="500"/>
-  <object id="81" gid="11" x="400" y="500"/>
-  <object id="82" gid="11" x="350" y="500"/>
-  <object id="83" gid="11" x="300" y="500"/>
-  <object id="85" gid="11" x="250" y="500"/>
+  <object id="79" gid="316" x="500" y="500"/>
+  <object id="80" gid="316" x="450" y="500"/>
+  <object id="81" gid="316" x="400" y="500"/>
+  <object id="82" gid="316" x="350" y="500"/>
+  <object id="83" gid="316" x="300" y="500"/>
+  <object id="85" gid="316" x="250" y="500"/>
  </objectgroup>
  <objectgroup name="fence left">
-  <object id="86" gid="12" x="550" y="200"/>
-  <object id="87" gid="12" x="550" y="250"/>
-  <object id="88" gid="12" x="550" y="300"/>
-  <object id="89" gid="12" x="550" y="350"/>
-  <object id="90" gid="12" x="550" y="400"/>
-  <object id="91" gid="12" x="550" y="450"/>
+  <object id="86" gid="317" x="550" y="200"/>
+  <object id="87" gid="317" x="550" y="250"/>
+  <object id="88" gid="317" x="550" y="300"/>
+  <object id="89" gid="317" x="550" y="350"/>
+  <object id="90" gid="317" x="550" y="400"/>
+  <object id="91" gid="317" x="550" y="450"/>
  </objectgroup>
  <objectgroup name="fence right">
-  <object id="92" gid="13" x="200" y="200"/>
-  <object id="93" gid="13" x="200" y="250"/>
-  <object id="94" gid="13" x="200" y="300"/>
-  <object id="95" gid="13" x="200" y="350"/>
-  <object id="96" gid="13" x="200" y="400"/>
-  <object id="97" gid="13" x="200" y="450"/>
+  <object id="92" gid="318" x="200" y="200"/>
+  <object id="93" gid="318" x="200" y="250"/>
+  <object id="94" gid="318" x="200" y="300"/>
+  <object id="95" gid="318" x="200" y="350"/>
+  <object id="96" gid="318" x="200" y="400"/>
+  <object id="97" gid="318" x="200" y="450"/>
  </objectgroup>
 </map>

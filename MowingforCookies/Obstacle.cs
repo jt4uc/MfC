@@ -30,8 +30,27 @@ namespace MowingforCookies
         public Boolean exploding = false;
         public int tickCount = 99999;
         public int cookieCost;
-        public int nextSpotX; //to be used to set a water target
-        public int nextSpotY;
+        public int targetArrayRowX; //to be used to set a water target
+        public int targetArrayColY;
+
+        //used for water!
+        public Obstacle(Spot currentLocation, String obstacleType, int arrayRowX, int arrayColY, int targetArrayRowX, int targetArrayColY)
+        {
+            this.currentLocation = currentLocation;
+            this.x = this.currentLocation.x;
+            this.y = this.currentLocation.y;
+            this.obstacleType = obstacleType;
+            this.canTraverse = true;
+            this.arrayColY = arrayColY;
+            this.arrayRowX = arrayRowX;
+            this.targetArrayColY = targetArrayColY;
+            this.targetArrayRowX = targetArrayRowX;
+
+            this.cbox = new Rectangle(this.x, this.y, recX, recY);
+            this.backupCbox = this.cbox;
+            this.cookieCost = 5;
+        }
+
 
         public Obstacle(Spot currentLocation, String obstacleType, int arrayRowX, int arrayColY)
         {
@@ -39,8 +58,7 @@ namespace MowingforCookies
             this.x = this.currentLocation.x;
             this.y = this.currentLocation.y;
             this.obstacleType = obstacleType;
-            if (this.obstacleType.Equals("gravel") || this.obstacleType.Equals("bush") || this.obstacleType.Equals("branch") 
-                || this.obstacleType.Equals("water"))
+            if (this.obstacleType.Equals("gravel") || this.obstacleType.Equals("bush") || this.obstacleType.Equals("branch") )
             {
                 this.canTraverse = true;
             }
@@ -137,6 +155,8 @@ namespace MowingforCookies
             Rectangle result;
             switch (this.obstacleType)
             {
+                case "water":
+                    break;
                 case "gravel":
                     int xMin = mower.arrayRowX;
                     int xMax = mower.arrayRowX;
@@ -167,7 +187,9 @@ namespace MowingforCookies
                     result = new Rectangle(patches[xMin, yTop].x, patches[xMin, yTop].y, stupidWidth, stupidHeight);
 
                     return result;
+                    
             }
+
             return result = new Rectangle(mower.x, mower.y, 50, 50);
 
         }
@@ -184,6 +206,7 @@ namespace MowingforCookies
 
         public void Update(Spot[,] patches, Mower mower, List<Enemy> enemies, int ticks)
         {
+            
             if (obstacleType == "gravel")
             {
                 Rectangle r = obRec(patches, mower);

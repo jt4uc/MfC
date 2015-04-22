@@ -61,14 +61,6 @@ namespace MowingforCookies
         ContentManager content;
         SpriteFont gameFont;
 
-
-       
-
-        #region Initialization
-
-       
-
-
         /// <summary>
         /// Constructor.
         /// </summary>
@@ -252,8 +244,6 @@ namespace MowingforCookies
             content.Unload();
         }
 
-
-        #endregion
 
         #region Update and Draw
 
