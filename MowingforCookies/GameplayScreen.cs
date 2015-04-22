@@ -332,7 +332,7 @@ namespace MowingforCookies
                     {
                         //if (c.alive)
                         //{
-                            c.Update(mower, grandma, ticks);
+                            c.Update(mower, grandma, ticks, patches);
                         //}
                     }
 

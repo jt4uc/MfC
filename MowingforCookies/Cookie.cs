@@ -45,13 +45,17 @@ namespace MowingforCookies
             {
                 image = content.Load<Texture2D>("water.png");
             }
+            else if (this.type.Equals("healthcookie"))
+            {
+                image = content.Load<Texture2D>("branch.png");
+            }
         }
         public void Draw(SpriteBatch sb)
         {
             sb.Draw(image, new Rectangle(x, y, recX, recY), Color.White);
         }
 
-        public void Update(Mower m, Grandma g, int ticks)
+        public void Update(Mower m, Grandma g, int ticks, Spot[,] patches)
         {
             if (m.x == this.x && m.y == this.y && this.alive == true) { 
                 if (type.Equals("chocolatechip"))
@@ -62,11 +66,65 @@ namespace MowingforCookies
                 }
                 if (type.Equals("bombcookie"))
                 {
-                    this.currentLocation.isTraversed = true;
+                    //top
+                    if (patches[this.currentLocation.arrayRowX, this.currentLocation.arrayColY - 1].canTraverse && patches[this.currentLocation.arrayRowX, this.currentLocation.arrayColY - 1].isTraversed == false)
+                    {
+                        patches[this.currentLocation.arrayRowX, this.currentLocation.arrayColY - 1].isTraversed = true;
+                        m.totalMowed++;
+                    }
+                    
+                    //top-right
+                    if (patches[this.currentLocation.arrayRowX + 1, this.currentLocation.arrayColY - 1].canTraverse && patches[this.currentLocation.arrayRowX + 1, this.currentLocation.arrayColY - 1].isTraversed == false)
+                    {
+                        patches[this.currentLocation.arrayRowX + 1, this.currentLocation.arrayColY - 1].isTraversed = true;
+                        m.totalMowed++;
+                    }
+
+                    //right
+                    if (patches[this.currentLocation.arrayRowX + 1, this.currentLocation.arrayColY].canTraverse && patches[this.currentLocation.arrayRowX + 1, this.currentLocation.arrayColY].isTraversed == false)
+                    {
+                        patches[this.currentLocation.arrayRowX + 1, this.currentLocation.arrayColY].isTraversed = true;
+                        m.totalMowed++;
+                    }
+                    
+                    //bottom-right
+                    if (patches[this.currentLocation.arrayRowX + 1, this.currentLocation.arrayColY + 1].canTraverse && patches[this.currentLocation.arrayRowX + 1, this.currentLocation.arrayColY + 1].isTraversed == false)
+                    {
+                        patches[this.currentLocation.arrayRowX + 1, this.currentLocation.arrayColY + 1].isTraversed = true;
+                        m.totalMowed++;
+                    }
+                    
+                    //bottom
+                    if (patches[this.currentLocation.arrayRowX, this.currentLocation.arrayColY + 1].canTraverse && patches[this.currentLocation.arrayRowX, this.currentLocation.arrayColY + 1].isTraversed == false)
+                    {
+                        patches[this.currentLocation.arrayRowX, this.currentLocation.arrayColY + 1].isTraversed = true;
+                        m.totalMowed++;
+                    }
+                    //bottom-left
+                    if (patches[this.currentLocation.arrayRowX - 1, this.currentLocation.arrayColY + 1].canTraverse && patches[this.currentLocation.arrayRowX - 1, this.currentLocation.arrayColY + 1].isTraversed == false)
+                    {
+                        patches[this.currentLocation.arrayRowX - 1, this.currentLocation.arrayColY + 1].isTraversed = true;
+                        m.totalMowed++;
+                    }
+                    //left
+                    if (patches[this.currentLocation.arrayRowX - 1, this.currentLocation.arrayColY].canTraverse && patches[this.currentLocation.arrayRowX - 1, this.currentLocation.arrayColY].isTraversed == false)
+                    {
+                        patches[this.currentLocation.arrayRowX - 1, this.currentLocation.arrayColY].isTraversed = true;
+                        m.totalMowed++;
+                    }
+                    //top-left
+                    if (patches[this.currentLocation.arrayRowX - 1, this.currentLocation.arrayColY - 1].canTraverse && patches[this.currentLocation.arrayRowX - 1, this.currentLocation.arrayColY - 1].isTraversed == false)
+                    {
+                        patches[this.currentLocation.arrayRowX - 1, this.currentLocation.arrayColY - 1].isTraversed = true;
+                        m.totalMowed++;
+                    }
+                    m.totalMowed--;
+                    this.alive = false;
                 }
                 if (type.Equals("healthcookie"))
                 {
                     m.cookies += 5;
+                    this.alive = false;
                 }
             }
             else

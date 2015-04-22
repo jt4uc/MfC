@@ -72,6 +72,13 @@ namespace MowingforCookies
 
         }
 
+        public Spot getSpot(int x, int y, int arrayRowX, int arrayColY){
+            this.arrayRowX = arrayRowX;
+            this.arrayColY = arrayColY;
+
+            return this;
+        }
+
         public void LoadContent(ContentManager content)
         {
             image = content.Load<Texture2D>("grass.png");
