@@ -29,7 +29,7 @@ namespace MowingforCookies
     /// </summary>
     class GameplayScreen : GameScreen
     {
-        #region Fields
+        
 
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -55,14 +55,14 @@ namespace MowingforCookies
         TmxMap map;
         //Texture2D[] tiles;
 
-        String[] levels = new String[] {"intro level 1A", "intro level 2A", "intro level 3A", "level 1A", "ice_level_10"};
+        String[] levels = new String[] {"intro level 1A", "intro level 3A", "level 1A", "ice_level_10"};
         String level;
 
         ContentManager content;
         SpriteFont gameFont;
 
 
-        #endregion
+       
 
         #region Initialization
 

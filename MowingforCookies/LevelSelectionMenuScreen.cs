@@ -30,8 +30,6 @@ namespace MowingforCookies
 
         #endregion
 
-        #region Initialization
-
 
         /// <summary>
         /// Constructor.
@@ -42,7 +40,7 @@ namespace MowingforCookies
             this.graphics = graphics;
             // Create our menu entries.
             MenuEntry level1 = new MenuEntry("The Owner's Quick Guide to a Cookie-Powered Mower");
-            MenuEntry level2 = new MenuEntry("Perfection is the Enemy of Good Enough"); //Thar be another level arrrrr
+           // MenuEntry level2 = new MenuEntry("Perfection is the Enemy of Good Enough"); //Thar be another level arrrrr
             MenuEntry level3 = new MenuEntry("Oh Gnome! America's Lastest Pestilence");
             MenuEntry level4 = new MenuEntry("The Dreaded 41"); //Maybe Grandma Should Go Apartment Hunting
             MenuEntry level5 = new MenuEntry("This is not Mowing for Inheritance");  //Watch for the Roamin' Gnomes
@@ -56,7 +54,7 @@ namespace MowingforCookies
 
             // Hook up menu event handlers.
             level1.Selected += Level1Selected;
-            level2.Selected += Level2Selected;
+            
             level3.Selected += Level3Selected;
             level4.Selected += Level4Selected;
             level5.Selected += Level5Selected;
@@ -65,7 +63,7 @@ namespace MowingforCookies
 
             // Add entries to the menu.
             MenuEntries.Add(level1);
-            MenuEntries.Add(level2);
+       
             MenuEntries.Add(level3);
             MenuEntries.Add(level4);
             MenuEntries.Add(level5);
@@ -89,22 +87,13 @@ namespace MowingforCookies
             
         }
 
-
-        #endregion
-
-        #region Handle Input
-
         void Level1Selected(object sender, PlayerIndexEventArgs e)
         {
             LoadingScreen.Load(ScreenManager, true, e.PlayerIndex,
                                new GameplayScreen(graphics, "intro level 1A"));
         }
 
-        void Level2Selected(object sender, PlayerIndexEventArgs e)
-        {
-            LoadingScreen.Load(ScreenManager, true, e.PlayerIndex,
-                               new GameplayScreen(graphics, "intro level 2A"));
-        }
+
 
         void Level3Selected(object sender, PlayerIndexEventArgs e)
         {
@@ -151,6 +140,6 @@ namespace MowingforCookies
 
         }
 
-        #endregion
+     
     }
 }
