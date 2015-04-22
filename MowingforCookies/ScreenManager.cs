@@ -211,6 +211,16 @@ namespace MowingforCookies
             Trace.WriteLine(string.Join(", ", screenNames.ToArray()));
         }
 
+        public bool Contains(String name)
+        {
+            foreach(GameScreen screen in screens) {
+                if(screens.GetType().Name.Equals(name)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
 
         /// <summary>
         /// Tells each screen to draw itself.
