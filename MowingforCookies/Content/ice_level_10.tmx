@@ -175,7 +175,7 @@
  </objectgroup>
  <objectgroup name="branch"/>
  <objectgroup name="mower">
-  <object id="124" name="150,70,137" gid="10" x="150" y="100"/>
+  <object id="124" name="150,70,13" gid="10" x="150" y="100"/>
  </objectgroup>
  <objectgroup name="fence bottom">
   <object id="142" gid="12" x="650" y="50"/>
