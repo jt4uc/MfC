@@ -63,7 +63,7 @@ namespace MowingforCookies
         void PlayGameMenuEntrySelected(object sender, PlayerIndexEventArgs e)
         {
             LoadingScreen.Load(ScreenManager, true, e.PlayerIndex,
-                               new GameplayScreen(graphics, "intro level 1A"));
+                               new GameplayScreen(graphics, "The Owner's Quick Guide to a Cookie-Powered Mower"));
         }
 
         void LevelSelectionEntrySelected(object sender, PlayerIndexEventArgs e)

@@ -90,7 +90,7 @@ namespace MowingforCookies
         void Level1Selected(object sender, PlayerIndexEventArgs e)
         {
             LoadingScreen.Load(ScreenManager, true, e.PlayerIndex,
-                               new GameplayScreen(graphics, "intro level 1A"));
+                               new GameplayScreen(graphics, "The Owner's Quick Guide to a Cookie-Powered Mower"));
         }
 
 
@@ -98,19 +98,19 @@ namespace MowingforCookies
         void Level3Selected(object sender, PlayerIndexEventArgs e)
         {
             LoadingScreen.Load(ScreenManager, true, e.PlayerIndex,
-                               new GameplayScreen(graphics, "intro level 3A"));
+                               new GameplayScreen(graphics, "Oh Gnome! America's Lastest Pestilence"));
         }
 
         void Level4Selected(object sender, PlayerIndexEventArgs e)
         {
             LoadingScreen.Load(ScreenManager, true, e.PlayerIndex,
-                               new GameplayScreen(graphics, "level 1A"));
+                               new GameplayScreen(graphics, "The Dreaded 41"));
         }
 
         void Level5Selected(object sender, PlayerIndexEventArgs e)
         {
             LoadingScreen.Load(ScreenManager, true, e.PlayerIndex,
-                               new GameplayScreen(graphics, "ice_level_10"));
+                               new GameplayScreen(graphics, "This is not Mowing for Inheritance"));
         }
 
         protected override void OnCancel(PlayerIndex playerIndex)

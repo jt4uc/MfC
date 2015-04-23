@@ -46,6 +46,7 @@ namespace MowingforCookies
         List<Obstacle> obstacles;
         private SpriteFont font;
         private Texture2D menu;
+        private Texture2D levelRect;
         public int win_Num;
         public int startingFuel;
         public int optimalFuel;
@@ -53,26 +54,11 @@ namespace MowingforCookies
         public bool youDoneYet;
         public int mowablePatches;
         public bool narrativeGiven;
-        // for Tiled
         TmxMap map;
-        //Texture2D[] tiles;
 
-        String[] levels = new String[] {"intro level 1A", "intro level 3A", "level 1A", "ice_level_10"};
+        String[] levels;
         String level;
-        String[] narrative = new String[] {
-             "Grandma: Hello, hello, can you hear me?",
-             "You: Yes, Grandma.",
-             "Grandma: Sweetie, could you come over and mow the lawn for me?",
-             "You: Ok...",
-             "Grandma: Eh? Could you say that again? I'll bake some cookies for you!",
-             "You: YES!",
-             "Grandma: No need to yell! I can hear just fine.",
-             "You: ...",
-             "Grandma: Just so you know, I've bought a powerful mower.",
-             "Grandma: It's a little hard to control.",
-             "Grandma: You can only change directions once you've hit something.",
-             "You: ...?"
-        };
+        String[][] narrative;
        int line;
         
 
@@ -100,9 +86,47 @@ namespace MowingforCookies
             graphics.PreferredBackBufferHeight = map.Height * 50+100; // set this value to the desired height of your window
             graphics.ApplyChanges();
 
+            levels = new String[] { 
+                "The Owner's Quick Guide to a Cookie-Powered Mower",
+                "Oh Gnome! America's Lastest Pestilence",
+                "The Dreaded 41",
+                "This is not Mowing for Inheritance"
+            };
+            narrative = new String[][] {
+                new String[] {
+                    "(On the phone) Grandma: Hello, hello, can you hear me?",
+                    "You: Yes, Grandma.",
+                    "Grandma: Sweetie, could you come over and mow the lawn for me?",
+                    "You: Ok...",
+                    "Grandma: Eh? Could you say that again?...", 
+                    "Grandma: I'll bake some cookies for you!",
+                    "You: YES!",
+                    "Grandma: No need to yell! I can hear just fine.",
+                    "You: ...",
+                    "Grandma: Just so you know, I've bought a cookie-powered mower...",
+                    "Grandma: It's a little hard to control...",
+                    "Grandma: You can only change directions once you've hit something.",
+                    "You: ...?"
+                },
+                new String[] {
+                    "Grandma: Always be prepared, my dear.",
+                    "You: Prepared for...?",
+                    "Grandma: Anything. That's why I planted land mines in the yard.",
+                    "You: ...WHAT?",
+                    "You: ...But I'm here to mow the yard...",
+                    "Grandma: Don't worry. The cookies I made you and the mower...",
+                    "Grandma: will protect you.",
+                    "You: ...It's not like I had my whole life ahead of me or anything..."
+                },
+                new String[] {},
+                new String[] {}
+            };
             
             ticks = 0;
             mowablePatches = 0;
+            levelRect = new Texture2D(graphics.GraphicsDevice, 1, 1);
+            levelRect.SetData(new[] { Color.ForestGreen });
+
 
         }
 
@@ -251,7 +275,7 @@ namespace MowingforCookies
                 o.LoadContent(content);
             }
             font = content.Load<SpriteFont>("spriteFont");
-
+            
 
         }
 
@@ -392,17 +416,18 @@ namespace MowingforCookies
                 }
                 
                 if (narrativeGiven == false) {
-                    if (Keyboard.GetState().IsKeyDown(Keys.Enter) && line < narrative.Length && ticks > (tickCount + 25))
+                    //System.Diagnostics.Debug.WriteLine(narrative[Array.IndexOf(levels, level)].Length);
+                    if (Keyboard.GetState().IsKeyDown(Keys.Enter) && line < narrative[Array.IndexOf(levels, level)].Length && ticks > (tickCount + 25))
                     {
                         line++;
                         
                         tickCount = ticks;
-                        if (line == narrative.Length)
+                        if (line == narrative[Array.IndexOf(levels, level)].Length)
                         {
                             narrativeGiven = true;
                         }
                     }
-                    if (Keyboard.GetState().IsKeyDown(Keys.Space) && line < narrative.Length && ticks > (tickCount + 25))
+                    if (Keyboard.GetState().IsKeyDown(Keys.Space) && line < narrative[Array.IndexOf(levels, level)].Length && ticks > (tickCount + 25))
                     {
                         narrativeGiven = true;
                     }
@@ -479,15 +504,18 @@ namespace MowingforCookies
             spriteBatch.Draw(menu, new Rectangle(0, map.Height*50, map.Width*50, 100), Color.White);
             if (narrativeGiven == false)
             {
-                spriteBatch.DrawString(font, narrative[line], new Vector2(15, map.Height * 50 + 20), Color.Black);
-                spriteBatch.DrawString(font, "(Enter to Continue, Space to Skip)", new Vector2(15, map.Height * 50 + 60), Color.Black);
+                spriteBatch.DrawString(font, narrative[Array.IndexOf(levels, level)][line], new Vector2(15, map.Height * 50 + 20), Color.Black);
+                spriteBatch.DrawString(font, "(Enter to Continue, Space to Skip)", new Vector2(400, map.Height * 50 + 60), Color.Black);
             }
             else
             {
+                // Level Name rectangle
+                spriteBatch.Draw(levelRect, new Rectangle(10, 20, (int)(level.Length * 11.2), 30), Color.YellowGreen); // find a better color
+                spriteBatch.DrawString(font, level, new Vector2(15, 20), Color.White);
                 if (!youWinYet)
                 {
                     spriteBatch.DrawString(font, "Grass mowed:" + mower.totalMowed + "/" + win_Num, new Vector2(15, map.Height * 50 + 20), Color.Black);
-                    spriteBatch.DrawString(font, "Fuel:" + mower.cookies, new Vector2(15, map.Height * 50 + 50), Color.Black);
+                    spriteBatch.DrawString(font, "Fuel Remaining:" + mower.cookies + ", Optimal Fuel Remaining: " + optimalFuel, new Vector2(15, map.Height * 50 + 50), Color.Black);
                 }
                 else
                 {
@@ -496,6 +524,8 @@ namespace MowingforCookies
                     spriteBatch.DrawString(font, "(Press Enter for next level)", new Vector2(15, map.Height * 50 + 60), Color.Black);
                 }
             }
+            
+            
 
         }
 
