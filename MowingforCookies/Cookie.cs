@@ -39,15 +39,15 @@ namespace MowingforCookies
         public void LoadContent(ContentManager content)
         {
             if (this.type.Equals("chocolatechip")){
-                image = content.Load<Texture2D>("chocolatechip.png");
+                image = content.Load<Texture2D>("chocolatecookie.png");
             }
             else if (this.type.Equals("bombcookie"))
             {
-                image = content.Load<Texture2D>("water.png");
+                image = content.Load<Texture2D>("bombcookie.png");
             }
             else if (this.type.Equals("healthcookie"))
             {
-                image = content.Load<Texture2D>("branch.png");
+                image = content.Load<Texture2D>("heartcookie.png");
             }
         }
         public void Draw(SpriteBatch sb)

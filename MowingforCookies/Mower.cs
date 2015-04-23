@@ -23,6 +23,10 @@ namespace MowingforCookies
         public Spot currentLocation;
         public int cookies;
         public bool alive;
+        public Texture2D leftMower;
+        public Texture2D rightMower;
+        public Texture2D upMower;
+        public Texture2D downMower;
         public Texture2D deadMower;
         public int totalMowed;
         public int arrayRowX;
@@ -52,7 +56,11 @@ namespace MowingforCookies
 
         public void LoadContent(ContentManager content)
         {
-            image = content.Load<Texture2D>("MiniMower.png");
+            image = content.Load<Texture2D>("MiniMower-right.png");
+            leftMower = content.Load<Texture2D>("MiniMower-left.png");
+            rightMower = content.Load<Texture2D>("MiniMower-right.png");
+            upMower = content.Load<Texture2D>("MiniMower-up.png");
+            downMower = content.Load<Texture2D>("MiniMower-down.png");
             deadMower = content.Load<Texture2D>("DeadMiniMower.png");
         }
         public void Draw(SpriteBatch sb)
@@ -127,6 +135,7 @@ namespace MowingforCookies
             int patchesCols = patches.GetLength(1);
             if (curDir == Direction.East)//right
             {
+                image = rightMower;
                 if ((arrayRowX + 1 == patchesRows) || (collisionObject(patches[arrayRowX + 1, arrayColY]) == false))
                 {
                     curDir = nextDir;
@@ -174,6 +183,7 @@ namespace MowingforCookies
             }
             else if (curDir == Direction.West)//left
             {
+                image = leftMower;
                 if ((arrayRowX - 1 == -1) || (collisionObject(patches[arrayRowX - 1, arrayColY]) == false))
                 {
                     curDir = nextDir;
@@ -221,6 +231,7 @@ namespace MowingforCookies
             }
             else if (curDir == Direction.South)//down
             {
+                image = downMower;
                 if ((arrayColY + 1 == patchesCols) || (collisionObject(patches[arrayRowX, arrayColY + 1]) == false))
                 {
                     curDir = nextDir;
@@ -268,6 +279,7 @@ namespace MowingforCookies
             }
             else if (curDir == Direction.North)//up
             {
+                image = upMower;
                 if ((arrayColY - 1 == -1) || (collisionObject(patches[arrayRowX, arrayColY - 1]) == false))
                 {
                     curDir = nextDir;
