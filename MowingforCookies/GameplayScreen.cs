@@ -118,7 +118,11 @@ namespace MowingforCookies
                     "Grandma: will protect you.",
                     "You: ...It's not like I had my whole life ahead of me or anything..."
                 },
-                new String[] {},
+                new String[] {
+                    "Grandma: *cackles*",
+                    "You: ...!?",
+                    "(Remember you can press Space to retry the level)"
+                },
                 new String[] {}
             };
             
@@ -305,10 +309,9 @@ namespace MowingforCookies
             if (IsActive)
             {
                 ticks++;
+                controls.Update();
                 if (narrativeGiven && !youDoneYet)
                 {
-                    
-                    controls.Update();
                     if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                         Environment.Exit(0); 
 
@@ -416,21 +419,31 @@ namespace MowingforCookies
                 }
                 
                 if (narrativeGiven == false) {
-                    //System.Diagnostics.Debug.WriteLine(narrative[Array.IndexOf(levels, level)].Length);
-                    if (Keyboard.GetState().IsKeyDown(Keys.Enter) && line < narrative[Array.IndexOf(levels, level)].Length && ticks > (tickCount + 25))
+                    if (narrative[Array.IndexOf(levels, level)].Length == 0)
+                    {
+                        narrativeGiven = true;
+                    }
+                    if (Keyboard.GetState().IsKeyDown(Keys.Enter) && line < narrative[Array.IndexOf(levels, level)].Length && ticks > (tickCount + 15))
                     {
                         line++;
-                        
                         tickCount = ticks;
                         if (line == narrative[Array.IndexOf(levels, level)].Length)
                         {
                             narrativeGiven = true;
                         }
                     }
-                    if (Keyboard.GetState().IsKeyDown(Keys.Space) && line < narrative[Array.IndexOf(levels, level)].Length && ticks > (tickCount + 25))
+
+                    if (Keyboard.GetState().IsKeyDown(Keys.Space) && line < narrative[Array.IndexOf(levels, level)].Length && ticks > (tickCount + 15))
                     {
                         narrativeGiven = true;
                     }
+                    if (Keyboard.GetState().IsKeyDown(Keys.P))
+                    {
+                        ScreenManager.AddScreen(new BackgroundScreen(), null);
+                        ScreenManager.AddScreen(new PauseScreen(graphics), null);
+                    }
+                    if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+                        Environment.Exit(0); 
                 }
             }
         }
@@ -502,7 +515,7 @@ namespace MowingforCookies
         {
             SpriteBatch spriteBatch = ScreenManager.SpriteBatch;
             spriteBatch.Draw(menu, new Rectangle(0, map.Height*50, map.Width*50, 100), Color.White);
-            if (narrativeGiven == false)
+            if (narrativeGiven == false && narrative[Array.IndexOf(levels, level)].Length != 0)
             {
                 spriteBatch.DrawString(font, narrative[Array.IndexOf(levels, level)][line], new Vector2(15, map.Height * 50 + 20), Color.Black);
                 spriteBatch.DrawString(font, "(Enter to Continue, Space to Skip)", new Vector2(400, map.Height * 50 + 60), Color.Black);
@@ -510,8 +523,9 @@ namespace MowingforCookies
             else
             {
                 // Level Name rectangle
-                spriteBatch.Draw(levelRect, new Rectangle(10, 20, (int)(level.Length * 11.2), 30), Color.YellowGreen); // find a better color
-                spriteBatch.DrawString(font, level, new Vector2(15, 20), Color.White);
+                int levelRectSize = (int)(level.Length * 11.2);
+                spriteBatch.Draw(levelRect, new Rectangle(400-(levelRectSize/2), 0, levelRectSize, 30), Color.YellowGreen); // find a better color
+                spriteBatch.DrawString(font, level, new Vector2(400-(levelRectSize/2)+5, 0), Color.White);
                 if (!youWinYet)
                 {
                     spriteBatch.DrawString(font, "Grass mowed:" + mower.totalMowed + "/" + win_Num, new Vector2(15, map.Height * 50 + 20), Color.Black);
