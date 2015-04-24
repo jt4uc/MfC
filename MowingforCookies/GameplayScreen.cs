@@ -91,8 +91,9 @@ namespace MowingforCookies
                 "Oh Gnome! America's Lastest Pestilence",
                 "Once You Go Gnome...",
                 "...You Can't Go Home",
-                "The Dreaded 41",
                 "This is not Mowing for Inheritance",
+                "The Dreaded 41",
+                
                 "water test",
                 "Maybe Grandma Should Go Apartment Hunting",
                 "Perfection is the Enemy of Good Enough"
@@ -118,19 +119,33 @@ namespace MowingforCookies
                     "You: Prepared for...?",
                     "Grandma: Anything. That's why I planted land mines in the yard.",
                     "You: ...WHAT?",
+                    "Grandma: I had a lot leftover from 'Nam.",
                     "You: ...But I'm here to mow the yard...",
                     "Grandma: Don't worry. The cookies I made you and the mower...",
                     "Grandma: will protect you.",
                     "You: ...It's not like I had my whole life ahead of me or anything..."
                 },
                 new String[] {
+                    "Grandma: You're doing such a good job with my lawn!",
+                    "You: I have yet to see any of those cookies you promised me, Grandma...",
+                    "Grandma: Oh. I'm sure you'll see one sooner or later."
+                    
+                },
+                new String[] {
+                    "Grandma: It's so nice to see my landscaping again.",
+                    "Grandma: Oh, but be careful of those bushes, dearie.",
+                    "Grandma: They're also from 'Nam.",
+                    "You: Grandma. Why.",
+                    "Grandma: Also, I'm going to take a walk outside. Be sure not to hit me!",
+                    "You: !!!"
+                },
+                new String[] {                   
+                    
+                    },
+                new String[] {
                     "Grandma: *cackles*",
                     "You: ...!?",
-                    "(Remember you can press Space to retry the level)"
                 },
-                new String[] {},
-                new String[] {},
-                new String[] {},
                 new String[] {},
                 new String[] {},
                 new String[]{}

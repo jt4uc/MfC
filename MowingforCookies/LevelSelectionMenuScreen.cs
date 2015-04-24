@@ -77,8 +77,9 @@ namespace MowingforCookies
             MenuEntries.Add(level3);
             MenuEntries.Add(level3B);
             MenuEntries.Add(level3C);
-            MenuEntries.Add(level4);
+            
             MenuEntries.Add(level5);
+            MenuEntries.Add(level4);
             MenuEntries.Add(level6);
             MenuEntries.Add(level7);
             MenuEntries.Add(level8);
