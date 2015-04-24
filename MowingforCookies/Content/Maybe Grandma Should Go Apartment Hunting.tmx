@@ -42,7 +42,7 @@
   </data>
  </layer>
  <objectgroup name="mower">
-  <object id="40" name="220,25,16" gid="5" x="600" y="500"/>
+  <object id="40" name="250,70,16" gid="5" x="600" y="500"/>
  </objectgroup>
  <objectgroup name="fence bottom">
   <object id="1" gid="6" x="200" y="100"/>
