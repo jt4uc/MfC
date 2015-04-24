@@ -138,7 +138,8 @@ namespace MowingforCookies
                 new String[] {
                     "You: Grandma, where are the cookies you promised?",
                     "Grandma: Don't you see them?",
-                    "You: The thing that looks like a mushroom that's bigger than the tree?",
+                    "You: ...The thing that looks like a mushroom...",
+                    "You: that's bigger than the tree?",
                     "Grandma: Yes. It's strange they've never won at the state fair..."
                     
                 },
