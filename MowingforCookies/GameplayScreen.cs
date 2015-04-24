@@ -136,21 +136,22 @@ namespace MowingforCookies
                     "You: ...It's not like I had my whole life ahead of me or anything..."
                 },
                 new String[] {
-                    "Grandma: You're doing such a good job with my lawn!",
-                    "You: I have yet to see any of those cookies you promised me, Grandma...",
-                    "Grandma: Oh. I'm sure you'll see one sooner or later."
+                    "You: Grandma, where are the cookies you promised?",
+                    "Grandma: Don't you see them?",
+                    "You: The thing that looks like a mushroom that's bigger than the tree?",
+                    "Grandma: Yes. It's strange they've never won at the state fair..."
                     
                 },
                 new String[] {
+                    
+                },
+                new String[] {                   
                     "Grandma: It's so nice to see my landscaping again.",
                     "Grandma: Oh, but be careful of those bushes, dearie.",
                     "Grandma: They're also from 'Nam.",
                     "You: Grandma. Why.",
                     "Grandma: Also, I'm going to take a walk outside. Be sure not to hit me!",
                     "You: !!!"
-                },
-                new String[] {                   
-                    
                     },
                 new String[] {
                     "Grandma: *cackles*",
@@ -245,7 +246,7 @@ namespace MowingforCookies
                     else if (name.Equals("cookies"))
                     {
                         String type = map.ObjectGroups[i].Objects[j].Name;
-                        Cookie c = new Cookie(patches[x, y], "bombcookie", x, y);
+                        Cookie c = new Cookie(patches[x, y], type, x, y);
                         cookies.Add(c);
                     }
                     else if (name.Equals("water"))
@@ -336,8 +337,9 @@ namespace MowingforCookies
             {
                 backgroundMusic = content.Load<SoundEffect>("tiny_forest");
                 myBgMusic = backgroundMusic.CreateInstance();
-                myBgMusic.IsLooped = true;
-                myBgMusic.Play();
+                //backgroundMusic.Play();
+               myBgMusic.IsLooped = true;
+               myBgMusic.Play();
                 musicToggle = false;
             }
             winSound = content.Load<SoundEffect>("guitar-wang");
@@ -419,14 +421,13 @@ namespace MowingforCookies
                     {
                         if (!o.obstacleType.Equals("water"))
                         {
-                            o.Update(patches, mower, enemies, ticks);
+
                         }
-                        
-                    }
-                    foreach (Obstacle o in obstacles)
-                    {
-                        if (o.obstacleType.Equals("water"))
+                        else
                         {
+                            //if (o.obstacleType.Equals("water"))
+                            //{
+                            //System.Diagnostics.Debug.WriteLine("-->" + o.getArrayRowX() + ", " + o.getArrayColY()); //o.isWaterTraversed()
                             o.Update(patches, mower, enemies, ticks);
                             if (patches[mower.arrayRowX, mower.arrayColY].ob == null || !patches[mower.arrayRowX, mower.arrayColY].ob.obstacleType.Equals("water"))
                             {
@@ -437,10 +438,25 @@ namespace MowingforCookies
                                 waterTickCount = ticks;
                                 break;
                             }
-                            
+
+                            //                            }
                         }
+
+                    }
+                    foreach (Obstacle o in obstacles)
+                    {
+                        if (!o.obstacleType.Equals("water"))
+                        {
+                            o.Update(patches, mower, enemies, ticks);
+                        }
+                        else
+                        {
+                            System.Diagnostics.Debug.WriteLine(o.getArrayRowX() + ", " + o.getArrayColY() + ", " + o.obstacleType);
+                        }
+                        
                     }
                     
+                    //System.Diagnostics.Debug.WriteLine("-----------------------------------");
       
                     foreach (Cookie c in cookies)
                     {

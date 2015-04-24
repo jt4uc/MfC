@@ -31,7 +31,7 @@
   <image source="oak-tree-50x50-transparent.gif" width="50" height="50"/>
  </tileset>
  <tileset firstgid="14" name="grandma" tilewidth="50" tileheight="50">
-  <image source="grandma.png" width="80" height="81"/>
+  <image source="grandma.png" width="50" height="50"/>
  </tileset>
  <tileset firstgid="15" name="chocolatechip50x50" tilewidth="50" tileheight="50">
   <image source="chocolatechip50x50.gif" width="50" height="50"/>
@@ -42,7 +42,7 @@
   </data>
  </layer>
  <objectgroup name="mower">
-  <object id="40" name="220,25,16" gid="5" x="600" y="500"/>
+  <object id="40" name="250,70,16" gid="5" x="600" y="500"/>
  </objectgroup>
  <objectgroup name="fence bottom">
   <object id="1" gid="6" x="200" y="100"/>
@@ -122,6 +122,6 @@
   <object id="39" gid="14" x="150" y="200"/>
  </objectgroup>
  <objectgroup name="cookies">
-  <object id="60" gid="15" x="300" y="150"/>
+  <object id="60" name="bombcookie" gid="15" x="300" y="150"/>
  </objectgroup>
 </map>
