@@ -44,6 +44,7 @@ namespace MowingforCookies
             MenuEntry level3 = new MenuEntry("Oh Gnome! America's Lastest Pestilence");
             MenuEntry level4 = new MenuEntry("The Dreaded 41"); //Maybe Grandma Should Go Apartment Hunting
             MenuEntry level5 = new MenuEntry("This is not Mowing for Inheritance");  //Watch for the Roamin' Gnomes
+            MenuEntry level6 = new MenuEntry("water test");
 
            
 
@@ -58,6 +59,7 @@ namespace MowingforCookies
             level3.Selected += Level3Selected;
             level4.Selected += Level4Selected;
             level5.Selected += Level5Selected;
+            level6.Selected += Level6Selected;
             backMenuEntry.Selected += OnCancel;
             exitEntry.Selected += OnExit;
 
@@ -67,6 +69,7 @@ namespace MowingforCookies
             MenuEntries.Add(level3);
             MenuEntries.Add(level4);
             MenuEntries.Add(level5);
+            MenuEntries.Add(level6);
             MenuEntries.Add(backMenuEntry);
             MenuEntries.Add(exitEntry);
 
@@ -111,6 +114,12 @@ namespace MowingforCookies
         {
             LoadingScreen.Load(ScreenManager, true, e.PlayerIndex,
                                new GameplayScreen(graphics, "This is not Mowing for Inheritance"));
+        }
+
+        void Level6Selected(object sender, PlayerIndexEventArgs e)
+        {
+            LoadingScreen.Load(ScreenManager, true, e.PlayerIndex,
+                               new GameplayScreen(graphics, "water test"));
         }
 
         protected override void OnCancel(PlayerIndex playerIndex)

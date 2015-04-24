@@ -90,7 +90,8 @@ namespace MowingforCookies
                 "The Owner's Quick Guide to a Cookie-Powered Mower",
                 "Oh Gnome! America's Lastest Pestilence",
                 "The Dreaded 41",
-                "This is not Mowing for Inheritance"
+                "This is not Mowing for Inheritance",
+                "water test"
             };
             narrative = new String[][] {
                 new String[] {
@@ -123,7 +124,8 @@ namespace MowingforCookies
                     "You: ...!?",
                     "(Remember you can press Space to retry the level)"
                 },
-                new String[] {}
+                new String[] {},
+                new String[]{}
             };
             
             ticks = 0;
@@ -212,12 +214,27 @@ namespace MowingforCookies
                         Cookie c = new Cookie(patches[x, y], x, y);
                         cookies.Add(c);
                     }
+                    else if (name.Equals("water"))
+                    {
+                        String path = map.ObjectGroups[i].Objects[j].Name;
+                        int[] targetCoords = new int[] { };
+
+                        if (!path.Equals(""))
+                        {
+                            targetCoords = Array.ConvertAll(path.Split(','), int.Parse);
+                        }
+
+                        Obstacle water = new Obstacle(patches[x, y], name, x, y, targetCoords[0], targetCoords[1]);
+                        obstacles.Add(water);
+                        patches[x, y].setObstacle(water);
+                    }
                     else if (!name.Equals("grass"))
                     {
                         Obstacle o = new Obstacle(patches[x, y], name, x, y);
                         obstacles.Add(o);
                         patches[x, y].setObstacle(o);
                     }
+                    
 
 
                 }
@@ -308,6 +325,7 @@ namespace MowingforCookies
 
             if (IsActive)
             {
+                
                 ticks++;
                 controls.Update();
                 if (narrativeGiven && !youDoneYet)
@@ -349,13 +367,6 @@ namespace MowingforCookies
                             }
                         }
                     }
-
-                    //base.Update(gameTime);
-                    if (mower.alive == false)
-                    {
-
-                    }
-
                     foreach (Spot s in patches)
                     {
                         s.Update(content, patches, mower, enemies, ticks);
@@ -367,14 +378,12 @@ namespace MowingforCookies
                     }
                     foreach (Cookie c in cookies)
                     {
-                        //if (c.alive)
-                        //{
-                            c.Update(mower, grandma, ticks);
-                        //}
+                        c.Update(mower, grandma, ticks);
                     }
 
                     if (mower.totalMowed >= win_Num)
                     {
+                        //mower.Update(controls, patches, gameTime);//no good here
                         youWinYet = true;
                         youDoneYet = true;
                         win_Num = mowablePatches; // mowable patches isn't even close to being accurate... can't calculate it - it will have to be included in the maps

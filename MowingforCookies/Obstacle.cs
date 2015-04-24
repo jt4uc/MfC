@@ -25,8 +25,8 @@ namespace MowingforCookies
 
         public Rectangle cbox;
         public Rectangle backupCbox;
-        public int recX = 45;
-        public int recY = 45;
+        public int recX = 50;
+        public int recY = 50;
         public Boolean exploding = false;
         public int tickCount = 99999;
         public int cookieCost;
@@ -118,6 +118,7 @@ namespace MowingforCookies
             }
             else if (obstacleType.Equals("water"))
             {
+
                 image = content.Load<Texture2D>("water.png");
             }
             else if (obstacleType.Equals("house"))
@@ -155,8 +156,6 @@ namespace MowingforCookies
             Rectangle result;
             switch (this.obstacleType)
             {
-                case "water":
-                    break;
                 case "gravel":
                     int xMin = mower.arrayRowX;
                     int xMax = mower.arrayRowX;
@@ -206,7 +205,21 @@ namespace MowingforCookies
 
         public void Update(Spot[,] patches, Mower mower, List<Enemy> enemies, int ticks)
         {
-            
+            if (obstacleType == "water")
+            {
+                if (mower.x == this.x && mower.y == this.y) { 
+                    int targetSpotXCoord = patches[this.targetArrayRowX, this.targetArrayColY].x;
+                    int targetSpotYCoord = patches[this.targetArrayRowX, this.targetArrayColY].y;
+
+                    mower.arrayRowX = this.targetArrayRowX;
+                    mower.arrayColY = this.targetArrayColY;
+                    mower.x = targetSpotXCoord;
+                    mower.y = targetSpotYCoord;
+                    mower.collisionBox.X = targetSpotXCoord;
+                    mower.collisionBox.Y = targetSpotYCoord;
+                 }
+                   
+            }
             if (obstacleType == "gravel")
             {
                 Rectangle r = obRec(patches, mower);
