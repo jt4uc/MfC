@@ -130,8 +130,8 @@ namespace MowingforCookies
                     "You: ...WHAT?",
                     "Grandma: I had a lot leftover from 'Nam.",
                     "You: ...But I'm here to mow the yard...",
-                    "Grandma: Don't worry. The cookies I made you and the mower...",
-                    "Grandma: will protect you.",
+                    "Grandma: Don't worry.",
+                    "Grandma: The cookies I made you and the mower will protect you.",
                     "You: ...It's not like I had my whole life ahead of me or anything..."
                 },
                 new String[] {
@@ -143,8 +143,10 @@ namespace MowingforCookies
                     
                 },
                 new String[] {
-                    "Grandma: It's so nice to see my landscaping again.",
-                    "Grandma: Also, I'm going to take a walk outside. Be sure not to hit me!"
+                    "Grandma: I absolutely love landscaping.",
+                    "Grandma: I think I'll take a stroll to appreciate...",
+                    "Grandma: my conveniently placed vegetation. Be sure not to hit me!",
+                    "You: Grandma, WHY?"
                     
                 },
                 new String[] {                   
@@ -153,9 +155,9 @@ namespace MowingforCookies
                 new String[] {
                    
                 },
-                new String[] {},
                 new String[] {"Grandma: *cackles*",
-                    "You: ...!?",},
+                    "You: ...!?"},
+                new String[] {},
                 new String[]{}
             };
             
@@ -509,9 +511,12 @@ namespace MowingforCookies
                             ScreenManager.RemoveScreen(this);
                         }
                         else
+                        {
                             myBgMusic.Stop();
                             LoadingScreen.Load(ScreenManager, true, 0,
                               new GameplayScreen(graphics, levels[Array.IndexOf(levels, level) + 1]));
+                        }
+                            
                     }
                 }
                 
