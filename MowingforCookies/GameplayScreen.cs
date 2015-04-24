@@ -332,8 +332,9 @@ namespace MowingforCookies
             {
                 backgroundMusic = content.Load<SoundEffect>("tiny_forest");
                 myBgMusic = backgroundMusic.CreateInstance();
-                myBgMusic.IsLooped = true;
-                myBgMusic.Play();
+                //backgroundMusic.Play();
+               myBgMusic.IsLooped = true;
+               myBgMusic.Play();
                 musicToggle = false;
             }
         }
