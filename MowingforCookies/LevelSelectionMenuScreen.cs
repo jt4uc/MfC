@@ -47,7 +47,7 @@ namespace MowingforCookies
             MenuEntry level4 = new MenuEntry("The Dreaded 41"); //Maybe Grandma Should Go Apartment Hunting
             MenuEntry level5 = new MenuEntry("This is not Mowing for Inheritance");  //Watch for the Roamin' Gnomes
            // MenuEntry level6 = new MenuEntry("water test");
-            MenuEntry level7 = new MenuEntry("Maybe Grandma Should Go Apartment Hunting");
+            MenuEntry level7 = new MenuEntry("Grandma Got Run Over By A Mower");
             MenuEntry level8 = new MenuEntry("Perfection is the Enemy of Good Enough");
 
            
@@ -77,12 +77,12 @@ namespace MowingforCookies
             MenuEntries.Add(level3);
             MenuEntries.Add(level3B);
             MenuEntries.Add(level3C);
-            
+            MenuEntries.Add(level8);
             MenuEntries.Add(level5);
             MenuEntries.Add(level4);
           //  MenuEntries.Add(level6);
             MenuEntries.Add(level7);
-            MenuEntries.Add(level8);
+
             MenuEntries.Add(backMenuEntry);
             MenuEntries.Add(exitEntry);
 
@@ -147,7 +147,7 @@ namespace MowingforCookies
         void Level7Selected(object sender, PlayerIndexEventArgs e)
         {
             LoadingScreen.Load(ScreenManager, true, e.PlayerIndex,
-                               new GameplayScreen(graphics, "Maybe Grandma Should Go Apartment Hunting"));
+                               new GameplayScreen(graphics, "Grandma Got Run Over By A Mower"));
         }
         void Level8Selected(object sender, PlayerIndexEventArgs e)
         {

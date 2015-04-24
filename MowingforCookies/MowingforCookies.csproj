@@ -219,7 +219,7 @@
     <Content Include="Content\spriteFont2.xnb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="Content\Maybe Grandma Should Go Apartment Hunting.tmx">
+    <None Include="Content\Grandma Got Run Over By A Mower.tmx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Content\Once You Go Gnome....tmx">

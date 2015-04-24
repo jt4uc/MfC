@@ -97,12 +97,11 @@ namespace MowingforCookies
                 "Oh Gnome! America's Lastest Pestilence",
                 "Once You Go Gnome...",
                 "...You Can't Go Home",
+                "Perfection is the Enemy of Good Enough",
                 "This is not Mowing for Inheritance",
                 "The Dreaded 41",
+                "Grandma Got Run Over By A Mower"
                 
-                "water test",
-                "Maybe Grandma Should Go Apartment Hunting",
-                "Perfection is the Enemy of Good Enough"
             };
             narrative = new String[][] {
                 new String[] {
@@ -139,22 +138,19 @@ namespace MowingforCookies
                     
                 },
                 new String[] {
+                    "Grandma: It's so nice to see my landscaping again.",
+                    "Grandma: Also, I'm going to take a walk outside. Be sure not to hit me!"
                     
                 },
                 new String[] {                   
-                    "Grandma: It's so nice to see my landscaping again.",
-                    "Grandma: Oh, but be careful of those bushes, dearie.",
-                    "Grandma: They're also from 'Nam.",
-                    "You: Grandma. Why.",
-                    "Grandma: Also, I'm going to take a walk outside. Be sure not to hit me!",
-                    "You: !!!"
+
                     },
                 new String[] {
-                    "Grandma: *cackles*",
-                    "You: ...!?",
+                   
                 },
                 new String[] {},
-                new String[] {},
+                new String[] {"Grandma: *cackles*",
+                    "You: ...!?",},
                 new String[]{}
             };
             
