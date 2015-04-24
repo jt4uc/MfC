@@ -241,7 +241,7 @@ namespace MowingforCookies
                     else if (name.Equals("cookies"))
                     {
                         String type = map.ObjectGroups[i].Objects[j].Name;
-                        Cookie c = new Cookie(patches[x, y], "bombcookie", x, y);
+                        Cookie c = new Cookie(patches[x, y], type, x, y);
                         cookies.Add(c);
                     }
                     else if (name.Equals("water"))

@@ -46,7 +46,7 @@ namespace MowingforCookies
             MenuEntry level3C = new MenuEntry("...You Can't Go Home");
             MenuEntry level4 = new MenuEntry("The Dreaded 41"); //Maybe Grandma Should Go Apartment Hunting
             MenuEntry level5 = new MenuEntry("This is not Mowing for Inheritance");  //Watch for the Roamin' Gnomes
-            MenuEntry level6 = new MenuEntry("water test");
+           // MenuEntry level6 = new MenuEntry("water test");
             MenuEntry level7 = new MenuEntry("Maybe Grandma Should Go Apartment Hunting");
             MenuEntry level8 = new MenuEntry("Perfection is the Enemy of Good Enough");
 
@@ -65,7 +65,7 @@ namespace MowingforCookies
             level3C.Selected += Level3CSelected;
             level4.Selected += Level4Selected;
             level5.Selected += Level5Selected;
-            level6.Selected += Level6Selected;
+           // level6.Selected += Level6Selected;
             level7.Selected += Level7Selected;
             level8.Selected += Level8Selected;
             backMenuEntry.Selected += OnCancel;
@@ -80,7 +80,7 @@ namespace MowingforCookies
             
             MenuEntries.Add(level5);
             MenuEntries.Add(level4);
-            MenuEntries.Add(level6);
+          //  MenuEntries.Add(level6);
             MenuEntries.Add(level7);
             MenuEntries.Add(level8);
             MenuEntries.Add(backMenuEntry);
@@ -139,11 +139,11 @@ namespace MowingforCookies
                                new GameplayScreen(graphics, "This is not Mowing for Inheritance"));
         }
 
-        void Level6Selected(object sender, PlayerIndexEventArgs e)
-        {
-            LoadingScreen.Load(ScreenManager, true, e.PlayerIndex,
-                               new GameplayScreen(graphics, "water test"));
-        }
+//        void Level6Selected(object sender, PlayerIndexEventArgs e)
+//        {
+//            LoadingScreen.Load(ScreenManager, true, e.PlayerIndex,
+//                               new GameplayScreen(graphics, "water test"));
+//        }
         void Level7Selected(object sender, PlayerIndexEventArgs e)
         {
             LoadingScreen.Load(ScreenManager, true, e.PlayerIndex,
