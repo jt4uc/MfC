@@ -32,7 +32,7 @@ namespace MowingforCookies
         public int cookieCost;
         public int targetArrayRowX; //to be used to set a water target
         public int targetArrayColY;
-
+        private bool waterTraversed;
         //used for water!
         public Obstacle(Spot currentLocation, String obstacleType, int arrayRowX, int arrayColY, int targetArrayRowX, int targetArrayColY)
         {
@@ -49,6 +49,8 @@ namespace MowingforCookies
             this.cbox = new Rectangle(this.x, this.y, recX, recY);
             this.backupCbox = this.cbox;
             this.cookieCost = 5;
+
+            waterTraversed = false;
         }
 
 
@@ -202,27 +204,42 @@ namespace MowingforCookies
             this.cbox = this.backupCbox;
             image = gravel;
         }
+        public bool isWaterTraversed()
+        {
+            return waterTraversed;
+        }
+        public void setWaterTraversedFalse()
+        {
+            waterTraversed = false;
+        }
+        public int getArrayRowX()
+        {
+            return arrayRowX;
+        }
+        public int getArrayColY()
+        {
+            return arrayColY;
+        }
 
         public void Update(Spot[,] patches, Mower mower, List<Enemy> enemies, int ticks)
         {
+
             if (obstacleType == "water")
             {
-                
-                    if (mower.x == this.x && mower.y == this.y)
-                    {
-                        int targetSpotXCoord = patches[this.targetArrayRowX, this.targetArrayColY].x;
-                        int targetSpotYCoord = patches[this.targetArrayRowX, this.targetArrayColY].y;
+                if (mower.x == this.x && mower.y == this.y && waterTraversed == false)
+                {
+                    int targetSpotXCoord = patches[this.targetArrayRowX, this.targetArrayColY].x;
+                    int targetSpotYCoord = patches[this.targetArrayRowX, this.targetArrayColY].y;
 
-                        mower.arrayRowX = this.targetArrayRowX;
-                        mower.arrayColY = this.targetArrayColY;
-                        mower.x = targetSpotXCoord;
-                        mower.y = targetSpotYCoord;
-                        mower.collisionBox.X = targetSpotXCoord;
-                        mower.collisionBox.Y = targetSpotYCoord;
-                        
-                    
+                    mower.arrayRowX = this.targetArrayRowX;
+                    mower.arrayColY = this.targetArrayColY;
+                    mower.x = targetSpotXCoord;
+                    mower.y = targetSpotYCoord;
+                    mower.collisionBox.X = targetSpotXCoord;
+                    mower.collisionBox.Y = targetSpotYCoord;
+                    waterTraversed = true;
                 }
-                   
+
             }
             if (obstacleType == "gravel")
             {
