@@ -38,6 +38,7 @@ namespace MowingforCookies
 
         int ticks;
         int tickCount;
+        int waterTickCount;
 
         Controls controls;
         Spot[,] patches;
@@ -94,8 +95,14 @@ namespace MowingforCookies
             levels = new String[] { 
                 "The Owner's Quick Guide to a Cookie-Powered Mower",
                 "Oh Gnome! America's Lastest Pestilence",
+                "Once You Go Gnome...",
+                "...You Can't Go Home",
+                "This is not Mowing for Inheritance",
                 "The Dreaded 41",
-                "This is not Mowing for Inheritance"
+                
+                "water test",
+                "Maybe Grandma Should Go Apartment Hunting",
+                "Perfection is the Enemy of Good Enough"
             };
             narrative = new String[][] {
                 new String[] {
@@ -118,17 +125,36 @@ namespace MowingforCookies
                     "You: Prepared for...?",
                     "Grandma: Anything. That's why I planted land mines in the yard.",
                     "You: ...WHAT?",
+                    "Grandma: I had a lot leftover from 'Nam.",
                     "You: ...But I'm here to mow the yard...",
                     "Grandma: Don't worry. The cookies I made you and the mower...",
                     "Grandma: will protect you.",
                     "You: ...It's not like I had my whole life ahead of me or anything..."
                 },
                 new String[] {
+                    "Grandma: You're doing such a good job with my lawn!",
+                    "You: I have yet to see any of those cookies you promised me, Grandma...",
+                    "Grandma: Oh. I'm sure you'll see one sooner or later."
+                    
+                },
+                new String[] {
+                    "Grandma: It's so nice to see my landscaping again.",
+                    "Grandma: Oh, but be careful of those bushes, dearie.",
+                    "Grandma: They're also from 'Nam.",
+                    "You: Grandma. Why.",
+                    "Grandma: Also, I'm going to take a walk outside. Be sure not to hit me!",
+                    "You: !!!"
+                },
+                new String[] {                   
+                    
+                    },
+                new String[] {
                     "Grandma: *cackles*",
                     "You: ...!?",
-                    "(Remember you can press Space to retry the level)"
                 },
-                new String[] {}
+                new String[] {},
+                new String[] {},
+                new String[]{}
             };
             
             ticks = 0;
@@ -218,12 +244,28 @@ namespace MowingforCookies
                         Cookie c = new Cookie(patches[x, y], type, x, y);
                         cookies.Add(c);
                     }
+                    else if (name.Equals("water"))
+                    {
+                        String path = map.ObjectGroups[i].Objects[j].Name;
+                        int[] targetCoords = new int[] { };
+
+                        if (!path.Equals(""))
+                        {
+                            targetCoords = Array.ConvertAll(path.Split(','), int.Parse);
+                        }
+
+                        Obstacle water = new Obstacle(patches[x, y], name, x, y, targetCoords[0], targetCoords[1]);
+                        System.Diagnostics.Debug.WriteLine("water: " + targetCoords[0] + ", " + targetCoords[1]);
+                        obstacles.Add(water);
+                        patches[x, y].setObstacle(water);
+                    }
                     else if (!name.Equals("grass"))
                     {
                         Obstacle o = new Obstacle(patches[x, y], name, x, y);
                         obstacles.Add(o);
                         patches[x, y].setObstacle(o);
                     }
+                    
 
 
                 }
@@ -321,6 +363,7 @@ namespace MowingforCookies
 
             if (IsActive)
             {
+                
                 ticks++;
                 controls.Update();
                 if (narrativeGiven && !youDoneYet)
@@ -337,7 +380,8 @@ namespace MowingforCookies
                         ScreenManager.AddScreen(new BackgroundScreen(), null);
                         ScreenManager.AddScreen(new PauseScreen(graphics), null);
                     }
-                    mower.Update(controls, patches, gameTime);
+
+                        mower.Update(controls, patches, gameTime);
                     if (grandma != null)
                     {
                         grandma.Update(mower, controls, patches, gameTime);
@@ -362,34 +406,47 @@ namespace MowingforCookies
                             }
                         }
                     }
-
-                    //base.Update(gameTime);
-                    if (mower.alive == false)
-                    {
-
-                    }
-
                     foreach (Spot s in patches)
                     {
                         s.Update(content, patches, mower, enemies, ticks);
                     }
                     foreach (Obstacle o in obstacles)
                     {
-
-                        o.Update(patches, mower, enemies, ticks);
+                        if (!o.obstacleType.Equals("water"))
+                        {
+                            o.Update(patches, mower, enemies, ticks);
+                        }
+                        
                     }
+                    foreach (Obstacle o in obstacles)
+                    {
+                        if (o.obstacleType.Equals("water"))
+                        {
+                            o.Update(patches, mower, enemies, ticks);
+                            if (patches[mower.arrayRowX, mower.arrayColY].ob == null || !patches[mower.arrayRowX, mower.arrayColY].ob.obstacleType.Equals("water"))
+                            {
+                                o.setWaterTraversedFalse();
+                            }
+                            if (o.isWaterTraversed() == true)
+                            {
+                                waterTickCount = ticks;
+                                break;
+                            }
+                            
+                        }
+                    }
+                    
+      
                     foreach (Cookie c in cookies)
                     {
-                        //if (c.alive)
-                        //{
-                            c.Update(mower, grandma, ticks, patches);
-                        //}
+                        c.Update(mower, grandma, ticks, patches);
                     }
 
                     if (mower.totalMowed >= win_Num)
                     {
+                        //mower.Update(controls, patches, gameTime);//no good here
                         youWinYet = true;
-                        youDoneYet = true;
+                        youDoneYet = false;
                         win_Num = mowablePatches; // mowable patches isn't even close to being accurate... can't calculate it - it will have to be included in the maps
                     }
 
