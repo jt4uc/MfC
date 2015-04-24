@@ -36,6 +36,7 @@ namespace MowingforCookies
 
         int ticks;
         int tickCount;
+        int waterTickCount;
 
         Controls controls;
         Spot[,] patches;
@@ -225,6 +226,7 @@ namespace MowingforCookies
                         }
 
                         Obstacle water = new Obstacle(patches[x, y], name, x, y, targetCoords[0], targetCoords[1]);
+                        System.Diagnostics.Debug.WriteLine("water: " + targetCoords[0] + ", " + targetCoords[1]);
                         obstacles.Add(water);
                         patches[x, y].setObstacle(water);
                     }
@@ -374,9 +376,31 @@ namespace MowingforCookies
                     }
                     foreach (Obstacle o in obstacles)
                     {
-
-                        o.Update(patches, mower, enemies, ticks);
+                        if (!o.obstacleType.Equals("water"))
+                        {
+                            o.Update(patches, mower, enemies, ticks);
+                        }
+                        
                     }
+                    foreach (Obstacle o in obstacles)
+                    {
+                        if (o.obstacleType.Equals("water"))
+                        {
+                            o.Update(patches, mower, enemies, ticks);
+                            if (patches[mower.arrayRowX, mower.arrayColY].ob == null || !patches[mower.arrayRowX, mower.arrayColY].ob.obstacleType.Equals("water"))
+                            {
+                                o.setWaterTraversedFalse();
+                            }
+                            if (o.isWaterTraversed() == true)
+                            {
+                                waterTickCount = ticks;
+                                break;
+                            }
+                            
+                        }
+                    }
+                    
+      
                     foreach (Cookie c in cookies)
                     {
                         c.Update(mower, grandma, ticks);
