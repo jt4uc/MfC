@@ -89,9 +89,13 @@ namespace MowingforCookies
             levels = new String[] { 
                 "The Owner's Quick Guide to a Cookie-Powered Mower",
                 "Oh Gnome! America's Lastest Pestilence",
+                "Once You Go Gnome...",
+                "...You Can't Go Home",
                 "The Dreaded 41",
                 "This is not Mowing for Inheritance",
-                "water test"
+                "water test",
+                "Maybe Grandma Should Go Apartment Hunting",
+                "Perfection is the Enemy of Good Enough"
             };
             narrative = new String[][] {
                 new String[] {
@@ -124,6 +128,10 @@ namespace MowingforCookies
                     "You: ...!?",
                     "(Remember you can press Space to retry the level)"
                 },
+                new String[] {},
+                new String[] {},
+                new String[] {},
+                new String[] {},
                 new String[] {},
                 new String[]{}
             };

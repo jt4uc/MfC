@@ -171,6 +171,9 @@
     <Content Include="TiledSharp.dll" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Content\...You Can%27t Go Home.tmx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Content\10x10checkpoint_map.tmx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -183,8 +186,17 @@
     <None Include="Content\gravel_in_corner_test.tmx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Content\Maybe Grandma Should Go Apartment Hunting.tmx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Content\Oh Gnome! America%27s Lastest Pestilence.tmx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\Once You Go Gnome....tmx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\Perfection is the Enemy of Good Enough.tmx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Content\The Dreaded 41.tmx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
