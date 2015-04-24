@@ -103,6 +103,7 @@ namespace MowingforCookies
 
             if (controls.onPress(Keys.Enter, Buttons.Start))
             {
+                
                 OnSelectEntry(selectedEntry, playerIndex);
             }
             else if (controls.onPress(Keys.Escape, Buttons.Back))
