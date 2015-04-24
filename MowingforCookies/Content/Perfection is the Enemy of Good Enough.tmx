@@ -86,7 +86,7 @@
   <object id="34" gid="10" x="250" y="200"/>
  </objectgroup>
  <objectgroup name="gnome">
-  <object id="35" name="2,2,3,3,3,4,4,4,1,1,1,4,3,2," gid="11" x="300" y="300"/>
+  <object id="35" name="2,2,3,3,3,4,4,4,1,1,1,4,3,2" gid="11" x="300" y="300"/>
  </objectgroup>
  <objectgroup name="gravel">
   <object id="36" gid="12" x="350" y="350"/>
