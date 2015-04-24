@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
+using Microsoft.Xna.Framework.Audio;
 using System.Diagnostics;
 
 namespace MowingforCookies
@@ -31,6 +32,9 @@ namespace MowingforCookies
         public int totalMowed;
         public int arrayRowX;
         public int arrayColY;
+        public SoundEffect boom;
+        public SoundEffectInstance boomInstance;
+        public bool boomLimit = true;
 
         public int recX = 50;
         public int recY = 50;
@@ -64,6 +68,7 @@ namespace MowingforCookies
             upMower = content.Load<Texture2D>("MiniMower-up.png");
             downMower = content.Load<Texture2D>("MiniMower-down.png");
             deadMower = content.Load<Texture2D>("DeadMiniMower.png");
+            boom = content.Load<SoundEffect>("blast");
         }
         public void Draw(SpriteBatch sb)
         {
@@ -125,6 +130,13 @@ namespace MowingforCookies
             {
                 nextDir = Direction.Stop;
                 image = deadMower;
+                if (boomLimit == true)
+                {
+                    boomInstance = boom.CreateInstance();
+                    boomInstance.IsLooped = false;
+                    boomInstance.Play();
+                    boomLimit = false;
+                }
             }
             else
             {
@@ -179,6 +191,13 @@ namespace MowingforCookies
                         if (cookies <= 0)
                         {
                             alive = false;
+                            if (boomLimit == true)
+                            {
+                                boomInstance = boom.CreateInstance();
+                                boomInstance.IsLooped = false;
+                                boomInstance.Play();
+                                boomLimit = false;
+                            }
                         }
                     }
                 } 
@@ -227,6 +246,13 @@ namespace MowingforCookies
                         if (cookies <= 0)
                         {
                             alive = false;
+                            if (boomLimit == true)
+                            {
+                                boomInstance = boom.CreateInstance();
+                                boomInstance.IsLooped = false;
+                                boomInstance.Play();
+                                boomLimit = false;
+                            }
                         }
                     }
                 }
@@ -275,6 +301,13 @@ namespace MowingforCookies
                         if (cookies <= 0)
                         {
                             alive = false;
+                            if (boomLimit == true)
+                            {
+                                boomInstance = boom.CreateInstance();
+                                boomInstance.IsLooped = false;
+                                boomInstance.Play();
+                                boomLimit = false;
+                            }
                         }
                     }
                 }             
@@ -324,6 +357,13 @@ namespace MowingforCookies
                         if (cookies <= 0)
                         {
                             alive = false;
+                            if (boomLimit == true)
+                            {
+                                boomInstance = boom.CreateInstance();
+                                boomInstance.IsLooped = false;
+                                boomInstance.Play();
+                                boomLimit = false;
+                            }
                         }
                     }
                 }

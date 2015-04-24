@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
+using Microsoft.Xna.Framework.Audio;
 
 namespace MowingforCookies
 {
@@ -23,6 +24,9 @@ namespace MowingforCookies
         public int recY = 50;
         public int tickCount = 9999999;
         public Boolean alive = true;
+        public SoundEffect munch;
+        public SoundEffectInstance munchInstance;
+        public bool munchLimit = true;
 
         public Cookie(Spot s, String type, int arrayRowX, int arrayColY)
         {
@@ -49,6 +53,7 @@ namespace MowingforCookies
             {
                 image = content.Load<Texture2D>("heartcookie.png");
             }
+            munch = content.Load<SoundEffect>("bite");
         }
         public void Draw(SpriteBatch sb)
         {
@@ -63,6 +68,13 @@ namespace MowingforCookies
                     tickCount = ticks;
                     g.SPEED = 3;
                     this.alive = false;
+                    if (munchLimit == true)
+                    {
+                        munchInstance = munch.CreateInstance();
+                        munchInstance.IsLooped = false;
+                        munchInstance.Play();
+                        munchLimit = false;
+                    }
                 }
                 if (type.Equals("bombcookie"))
                 {
@@ -120,11 +132,25 @@ namespace MowingforCookies
                     }
                     m.totalMowed--;
                     this.alive = false;
+                    if (munchLimit == true)
+                    {
+                        munchInstance = munch.CreateInstance();
+                        munchInstance.IsLooped = false;
+                        munchInstance.Play();
+                        munchLimit = false;
+                    }
                 }
                 if (type.Equals("healthcookie"))
                 {
                     m.cookies += 5;
                     this.alive = false;
+                    if (munchLimit == true)
+                    {
+                        munchInstance = munch.CreateInstance();
+                        munchInstance.IsLooped = false;
+                        munchInstance.Play();
+                        munchLimit = false;
+                    }
                 }
             }
             else
