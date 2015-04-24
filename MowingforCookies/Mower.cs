@@ -30,6 +30,7 @@ namespace MowingforCookies
 
         public int recX = 50;
         public int recY = 50;
+        public Boolean teleported;
 
         public int SPEED = 5;
 
@@ -45,6 +46,7 @@ namespace MowingforCookies
             this.arrayRowX = currentLocation.arrayRowX;
             this.arrayColY = currentLocation.arrayColY;
             this.totalMowed = 1;
+            this.teleported = false;
 
             collisionBox = new Rectangle(x, y, recX, recY);
         }
@@ -148,7 +150,7 @@ namespace MowingforCookies
                 {
                     this.x = this.x + SPEED;
                     this.collisionBox.X = this.x;
-                    if (this.x >= patches[arrayRowX + 1, arrayColY].x)
+                    if (this.x  >= patches[arrayRowX + 1, arrayColY].x)
                     {
                         this.arrayRowX = this.arrayRowX + 1;
                         curDir = nextDir;

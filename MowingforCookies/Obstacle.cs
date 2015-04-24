@@ -207,17 +207,21 @@ namespace MowingforCookies
         {
             if (obstacleType == "water")
             {
-                if (mower.x == this.x && mower.y == this.y) { 
-                    int targetSpotXCoord = patches[this.targetArrayRowX, this.targetArrayColY].x;
-                    int targetSpotYCoord = patches[this.targetArrayRowX, this.targetArrayColY].y;
+                
+                    if (mower.x == this.x && mower.y == this.y)
+                    {
+                        int targetSpotXCoord = patches[this.targetArrayRowX, this.targetArrayColY].x;
+                        int targetSpotYCoord = patches[this.targetArrayRowX, this.targetArrayColY].y;
 
-                    mower.arrayRowX = this.targetArrayRowX;
-                    mower.arrayColY = this.targetArrayColY;
-                    mower.x = targetSpotXCoord;
-                    mower.y = targetSpotYCoord;
-                    mower.collisionBox.X = targetSpotXCoord;
-                    mower.collisionBox.Y = targetSpotYCoord;
-                 }
+                        mower.arrayRowX = this.targetArrayRowX;
+                        mower.arrayColY = this.targetArrayColY;
+                        mower.x = targetSpotXCoord;
+                        mower.y = targetSpotYCoord;
+                        mower.collisionBox.X = targetSpotXCoord;
+                        mower.collisionBox.Y = targetSpotYCoord;
+                        
+                    
+                }
                    
             }
             if (obstacleType == "gravel")

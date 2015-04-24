@@ -342,7 +342,8 @@ namespace MowingforCookies
                         ScreenManager.AddScreen(new BackgroundScreen(), null);
                         ScreenManager.AddScreen(new PauseScreen(graphics), null);
                     }
-                    mower.Update(controls, patches, gameTime);
+
+                        mower.Update(controls, patches, gameTime);
                     if (grandma != null)
                     {
                         grandma.Update(mower, controls, patches, gameTime);
@@ -385,7 +386,7 @@ namespace MowingforCookies
                     {
                         //mower.Update(controls, patches, gameTime);//no good here
                         youWinYet = true;
-                        youDoneYet = true;
+                        youDoneYet = false;
                         win_Num = mowablePatches; // mowable patches isn't even close to being accurate... can't calculate it - it will have to be included in the maps
                     }
 
