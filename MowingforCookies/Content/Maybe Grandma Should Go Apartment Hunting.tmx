@@ -97,10 +97,10 @@
   <object id="34" gid="10" x="250" y="200"/>
  </objectgroup>
  <objectgroup name="gnome">
-  <object id="35" gid="11" x="450" y="500"/>
-  <object id="57" gid="11" x="550" y="200"/>
-  <object id="58" gid="11" x="150" y="300"/>
-  <object id="59" gid="11" x="200" y="500"/>
+  <object id="35" name="4,4,1,1,2,2,3,3" gid="11" x="450" y="500"/>
+  <object id="57" name="3,3,3,3,2,1,4,4,4,4" gid="11" x="550" y="200"/>
+  <object id="58" name="3,1,1,2,2,4,4,4,4,3,3,3" gid="11" x="150" y="300"/>
+  <object id="59" name="2,2,1,1,4,4,3,3,1,2" gid="11" x="200" y="500"/>
  </objectgroup>
  <objectgroup name="gravel">
   <object id="36" gid="12" x="500" y="350"/>
