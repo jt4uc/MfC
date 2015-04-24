@@ -447,7 +447,7 @@ namespace MowingforCookies
                     {
                         //mower.Update(controls, patches, gameTime);//no good here
                         youWinYet = true;
-                        youDoneYet = false;
+                        youDoneYet = true;
                         win_Num = mowablePatches; // mowable patches isn't even close to being accurate... can't calculate it - it will have to be included in the maps
                     }
 
