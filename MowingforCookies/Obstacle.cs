@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
+using Microsoft.Xna.Framework.Audio;
 
 namespace MowingforCookies
 {
@@ -34,6 +35,9 @@ namespace MowingforCookies
         public int targetArrayRowX; //to be used to set a water target
         public int targetArrayColY;
         private bool waterTraversed;
+        public SoundEffect boomSound;
+        public SoundEffectInstance boomInstance;
+        public bool boomLimit = true;
 
         //used for water!
         public Obstacle(Spot currentLocation, String obstacleType, int arrayRowX, int arrayColY, int targetArrayRowX, int targetArrayColY)
@@ -94,6 +98,7 @@ namespace MowingforCookies
             {
                 gravel = content.Load<Texture2D>("gravel.png");
                 boom = content.Load<Texture2D>("boom.png");
+                boomSound = content.Load<SoundEffect>("blast");
                 image =  gravel;    
             }
             else if (obstacleType.Equals("bush"))
@@ -200,6 +205,13 @@ namespace MowingforCookies
         {
             this.cbox = lol;
             image = boom;
+            if (boomLimit == true)
+            {
+                boomInstance = boomSound.CreateInstance();
+                boomInstance.IsLooped = false;
+                boomInstance.Play();
+                boomLimit = false;
+            }
         }
         public void changeBoxBack()
         {

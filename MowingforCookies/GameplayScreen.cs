@@ -68,6 +68,10 @@ namespace MowingforCookies
         public SoundEffect backgroundMusic;
         public SoundEffectInstance myBgMusic;
 
+        public SoundEffect winSound;
+        public SoundEffectInstance winSoundInstance;
+        public bool winSoundToggle = true;
+
         ContentManager content;
         SpriteFont gameFont;
 
@@ -336,6 +340,7 @@ namespace MowingforCookies
                 myBgMusic.Play();
                 musicToggle = false;
             }
+            winSound = content.Load<SoundEffect>("guitar-wang");
         }
 
 
@@ -446,8 +451,15 @@ namespace MowingforCookies
                     {
                         //mower.Update(controls, patches, gameTime);//no good here
                         youWinYet = true;
-                        youDoneYet = false;
+                        youDoneYet = true;
                         win_Num = mowablePatches; // mowable patches isn't even close to being accurate... can't calculate it - it will have to be included in the maps
+                        if (winSoundToggle == true)
+                        {
+                            winSoundInstance = winSound.CreateInstance();
+                            winSoundInstance.IsLooped = false;
+                            winSoundInstance.Play();
+                            winSoundToggle = false;
+                        }
                     }
 
                     if (Keyboard.GetState().IsKeyDown(Keys.Enter) && youWinYet)
@@ -456,9 +468,10 @@ namespace MowingforCookies
                         {
                             ScreenManager.AddScreen(new BackgroundScreen(), null);
                             ScreenManager.AddScreen(new LevelSelectionMenuScreen(graphics), 0);
-                            
+                            ScreenManager.RemoveScreen(this);
                         } 
                         else
+                            myBgMusic.Stop();
                             LoadingScreen.Load(ScreenManager, true, 0,
                               new GameplayScreen(graphics, levels[Array.IndexOf(levels, level) + 1]));
                     }
@@ -480,9 +493,10 @@ namespace MowingforCookies
                         {
                             ScreenManager.AddScreen(new BackgroundScreen(), null);
                             ScreenManager.AddScreen(new LevelSelectionMenuScreen(graphics), 0);
-
+                            ScreenManager.RemoveScreen(this);
                         }
                         else
+                            myBgMusic.Stop();
                             LoadingScreen.Load(ScreenManager, true, 0,
                               new GameplayScreen(graphics, levels[Array.IndexOf(levels, level) + 1]));
                     }

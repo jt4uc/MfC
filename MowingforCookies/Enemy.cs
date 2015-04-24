@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
+using Microsoft.Xna.Framework.Audio;
 
 namespace MowingforCookies
 {
@@ -25,6 +26,9 @@ namespace MowingforCookies
         public Rectangle cbox;
         public int recX = 45;
         public int recY = 45;
+        public SoundEffect laugh;
+        public SoundEffectInstance laughInstance;
+        public bool laughLimit = true;
 
         //Content Manager?
         public Enemy(Spot currentLocation, int arrayRowX, int arrayColY, int[] sequence)
@@ -45,6 +49,7 @@ namespace MowingforCookies
         public void LoadContent(ContentManager content)
         {
             gnome = content.Load<Texture2D>("gnome.png");
+            laugh = content.Load<SoundEffect>("gnome-laugh");
             image = gnome;
         }
 
@@ -57,6 +62,13 @@ namespace MowingforCookies
             if (mower.arrayRowX > this.arrayRowX - 3 && mower.arrayRowX < this.arrayRowX + 3 && mower.arrayColY > this.arrayColY - 3 && mower.arrayColY < this.arrayColY + 3)
             {
                 this.visible = true;
+                if (laughLimit == true)
+                {
+                    laughInstance = laugh.CreateInstance();
+                    laughInstance.IsLooped = false;
+                    laughInstance.Play();
+                    laughLimit = false;
+                }
             }
             if (this.visible)
             {
