@@ -415,14 +415,13 @@ namespace MowingforCookies
                     {
                         if (!o.obstacleType.Equals("water"))
                         {
-                            o.Update(patches, mower, enemies, ticks);
+
                         }
-                        
-                    }
-                    foreach (Obstacle o in obstacles)
-                    {
-                        if (o.obstacleType.Equals("water"))
+                        else
                         {
+                            //if (o.obstacleType.Equals("water"))
+                            //{
+                            //System.Diagnostics.Debug.WriteLine("-->" + o.getArrayRowX() + ", " + o.getArrayColY()); //o.isWaterTraversed()
                             o.Update(patches, mower, enemies, ticks);
                             if (patches[mower.arrayRowX, mower.arrayColY].ob == null || !patches[mower.arrayRowX, mower.arrayColY].ob.obstacleType.Equals("water"))
                             {
@@ -433,10 +432,25 @@ namespace MowingforCookies
                                 waterTickCount = ticks;
                                 break;
                             }
-                            
+
+                            //                            }
                         }
+
+                    }
+                    foreach (Obstacle o in obstacles)
+                    {
+                        if (!o.obstacleType.Equals("water"))
+                        {
+                            o.Update(patches, mower, enemies, ticks);
+                        }
+                        else
+                        {
+                            System.Diagnostics.Debug.WriteLine(o.getArrayRowX() + ", " + o.getArrayColY() + ", " + o.obstacleType);
+                        }
+                        
                     }
                     
+                    //System.Diagnostics.Debug.WriteLine("-----------------------------------");
       
                     foreach (Cookie c in cookies)
                     {
