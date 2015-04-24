@@ -132,9 +132,10 @@ namespace MowingforCookies
                     "You: ...It's not like I had my whole life ahead of me or anything..."
                 },
                 new String[] {
-                    "Grandma: You're doing such a good job with my lawn!",
-                    "You: I have yet to see any of those cookies you promised me, Grandma...",
-                    "Grandma: Oh. I'm sure you'll see one sooner or later."
+                    "You: Grandma, where are the cookies you promised?",
+                    "Grandma: Don't you see them?",
+                    "You: ...The thing that looks like a mushroom that's bigger than the tree?",
+                    "Grandma: Yes. It's strange they've never won at the state fair..."
                     
                 },
                 new String[] {
