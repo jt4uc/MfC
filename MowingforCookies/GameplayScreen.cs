@@ -17,6 +17,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.GamerServices;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Media;
 using TiledSharp;
 #endregion
 
@@ -54,13 +56,16 @@ namespace MowingforCookies
         public bool youDoneYet;
         public int mowablePatches;
         public bool narrativeGiven;
+        public bool musicToggle = true;
         TmxMap map;
 
         String[] levels;
         String level;
         String[][] narrative;
-       int line;
-        
+        int line;
+
+        public SoundEffect backgroundMusic;
+        public SoundEffectInstance myBgMusic;
 
         ContentManager content;
         SpriteFont gameFont;
@@ -243,7 +248,7 @@ namespace MowingforCookies
             if (content == null)
                 content = new ContentManager(ScreenManager.Game.Services, "Content");
 
-            gameFont = content.Load<SpriteFont>("spriteFont");
+            gameFont = content.Load<SpriteFont>("spriteFont2");
 
             // A real game would probably have more content than this sample, so
             // it would take longer to load. We simulate that by delaying for a
@@ -280,8 +285,15 @@ namespace MowingforCookies
                 o.LoadContent(content);
             }
             font = content.Load<SpriteFont>("spriteFont");
-            
 
+            if (musicToggle == true)
+            {
+                backgroundMusic = content.Load<SoundEffect>("tiny_forest");
+                myBgMusic = backgroundMusic.CreateInstance();
+                myBgMusic.IsLooped = true;
+                myBgMusic.Play();
+                musicToggle = false;
+            }
         }
 
 

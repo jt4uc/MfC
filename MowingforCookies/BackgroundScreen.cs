@@ -27,6 +27,7 @@ namespace MowingforCookies
 
         ContentManager content;
         Texture2D backgroundTexture;
+        Texture2D backgroundTexture2;
 
         #endregion
 
@@ -55,7 +56,9 @@ namespace MowingforCookies
             if (content == null)
                 content = new ContentManager(ScreenManager.Game.Services, "Content");
 
-            backgroundTexture = content.Load<Texture2D>("grandmabackground");
+            backgroundTexture = content.Load<Texture2D>("mowingforcookiesepic");
+            backgroundTexture2 = content.Load<Texture2D>("mowingforcookiesepic2");
+
         }
 
 
@@ -99,7 +102,7 @@ namespace MowingforCookies
 
             spriteBatch.Begin();
 
-            spriteBatch.Draw(backgroundTexture, fullscreen,
+            spriteBatch.Draw(backgroundTexture2, fullscreen,
                              new Color(fade, fade, fade));
 
             spriteBatch.End();

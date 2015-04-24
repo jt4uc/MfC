@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
+
 namespace MowingforCookies
 {
     class Obstacle : Sprite
@@ -32,6 +33,7 @@ namespace MowingforCookies
         public int cookieCost;
         public int targetArrayRowX; //to be used to set a water target
         public int targetArrayColY;
+
 
         //used for water!
         public Obstacle(Spot currentLocation, String obstacleType, int arrayRowX, int arrayColY, int targetArrayRowX, int targetArrayColY)

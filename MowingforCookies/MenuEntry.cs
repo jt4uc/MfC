@@ -137,6 +137,9 @@ namespace MowingforCookies
 
             Vector2 origin = new Vector2(0, font.LineSpacing / 2);
 
+            position.X -= 25;
+            position.Y += 25;
+
             spriteBatch.DrawString(font, text, position, color, 0,
                                    origin, scale, SpriteEffects.None, 0);
         }
