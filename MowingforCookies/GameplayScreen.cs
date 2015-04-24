@@ -105,7 +105,6 @@ namespace MowingforCookies
                 "This is not Mowing for Inheritance",
                 "The Dreaded 41",
                 "Grandma Got Run Over By A Mower"
-                
             };
             narrative = new String[][] {
                 new String[] {
@@ -381,6 +380,7 @@ namespace MowingforCookies
                     }
                     if (Keyboard.GetState().IsKeyDown(Keys.P))
                     {
+                        myBgMusic.Stop();
                         ScreenManager.AddScreen(new BackgroundScreen(), null);
                         ScreenManager.AddScreen(new PauseScreen(graphics), null);
                     }
@@ -482,11 +482,12 @@ namespace MowingforCookies
                             ScreenManager.AddScreen(new BackgroundScreen(), null);
                             ScreenManager.AddScreen(new LevelSelectionMenuScreen(graphics), 0);
                             ScreenManager.RemoveScreen(this);
-                        } 
-                        else
+                        }
+                        else { 
                             myBgMusic.Stop();
                             LoadingScreen.Load(ScreenManager, true, 0,
                               new GameplayScreen(graphics, levels[Array.IndexOf(levels, level) + 1]));
+                        }
                     }
                 }
                 else
@@ -508,10 +509,11 @@ namespace MowingforCookies
                             ScreenManager.AddScreen(new LevelSelectionMenuScreen(graphics), 0);
                             ScreenManager.RemoveScreen(this);
                         }
-                        else
+                        else { 
                             myBgMusic.Stop();
                             LoadingScreen.Load(ScreenManager, true, 0,
                               new GameplayScreen(graphics, levels[Array.IndexOf(levels, level) + 1]));
+                        }
                     }
                 }
                 
@@ -536,6 +538,7 @@ namespace MowingforCookies
                     }
                     if (Keyboard.GetState().IsKeyDown(Keys.P))
                     {
+                        myBgMusic.Stop();
                         ScreenManager.AddScreen(new BackgroundScreen(), null);
                         ScreenManager.AddScreen(new PauseScreen(graphics), null);
                     }
